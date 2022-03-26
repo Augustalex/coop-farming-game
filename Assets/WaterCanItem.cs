@@ -14,6 +14,7 @@ public class WaterCanItem : MonoBehaviour
     public GameObject noWaterStyle;
     private CountData _countData;
     private UseOnSoil _useOnSoil;
+    private float _lastRecharge;
 
     void Start()
     {
@@ -58,6 +59,11 @@ public class WaterCanItem : MonoBehaviour
 
     public void OnWaterZone()
     {
+        if (Time.time - _lastRecharge < 1f) return;
+        if (_countData.count == _countData.max) return;
+
+        _lastRecharge = Time.time;
+
         _countData.count = _countData.max;
         Sounds.Instance.PlayerWaterRechargeSound(transform.position);
         SetHasWaterStyle();
