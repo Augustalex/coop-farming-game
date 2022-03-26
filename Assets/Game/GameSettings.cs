@@ -12,9 +12,6 @@ namespace Game
         public float truckTimeBetweenDeliveries = 60f;
         
         public int fullWaterCharge = 3;
-        public float seedsDryDeathTime = 10f;
-        public float waterChargeTime = 6f;
-        public float seedTimeToGrow = 10f;
         public int fullTilePile = 10;
     }
 }

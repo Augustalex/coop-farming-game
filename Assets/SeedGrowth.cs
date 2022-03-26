@@ -16,7 +16,6 @@ public class SeedGrowth : MonoBehaviour
     public float waterLevels = 4f;
     public float healthLevels = 4f;
 
-    public bool hasNutrients = false;
 
     public Func<bool> CanGrowFunc;
 
@@ -30,6 +29,8 @@ public class SeedGrowth : MonoBehaviour
         public int healthLevel;
         public int waterLevel;
         public WaterLevelIndicator.WaterLevelIndicatorState waterState;
+        public float maxWaterLevels;
+        public float maxHealthLevels;
     }
 
     private const float WaterLevelsRefillAmount = 2.5f;
@@ -38,11 +39,17 @@ public class SeedGrowth : MonoBehaviour
     private float _waterLevel = 0f;
     private bool _grownUp;
 
+    // private bool _hasNutrients = false;
+    // private bool _hasSpeedNutrients = false;
+
+    private int _waterNutrients = 0;
+    private int _speedNutrients = 0;
+
     public void Update()
     {
         if (_grownUp) return;
 
-        if (_growthTime >= timeToGrow)
+        if (_growthTime >= GetTimeToGrow())
         {
             if (CanGrow())
             {
@@ -98,8 +105,17 @@ public class SeedGrowth : MonoBehaviour
             waterLevel = GetWaterLevel(),
             waterState = IsWet()
                 ? WaterLevelIndicator.WaterLevelIndicatorState.Wet
-                : WaterLevelIndicator.WaterLevelIndicatorState.Dry
+                : WaterLevelIndicator.WaterLevelIndicatorState.Dry,
+            maxWaterLevels = GetWaterLevels(),
+            maxHealthLevels = GetHealthLevels()
         };
+    }
+
+    private float GetHealthLevels()
+    {
+        // if (_hasSpeedNutrients) return Mathf.Round(healthLevels * .75f);
+        if (_speedNutrients > 0) return Mathf.Round(healthLevels * Mathf.Pow(.75f, _speedNutrients));
+        return healthLevels;
     }
 
     private void Die()
@@ -116,23 +132,57 @@ public class SeedGrowth : MonoBehaviour
     public void Water()
     {
         if (_waterLevel < 0) _waterLevel = 0;
-        
-        _waterLevel = Mathf.Clamp(_waterLevel + ((waterChargeTime / waterLevels) * WaterLevelsRefillAmount), 0,
-            waterChargeTime);
+
+        _waterLevel = Mathf.Clamp(_waterLevel + ((GetWaterChargeTime() / GetWaterLevels()) * WaterLevelsRefillAmount),
+            0,
+            GetWaterChargeTime());
     }
 
     public int GetHealthLevel()
     {
-        return Mathf.RoundToInt((_growthTime / timeToGrow) * healthLevels);
+        return Mathf.RoundToInt((_growthTime / GetTimeToGrow()) * GetHealthLevels());
+    }
+
+    public float GetTimeToGrow()
+    {
+        // if (_hasSpeedNutrients) return timeToGrow * .75f;
+        if (_speedNutrients > 0) return timeToGrow * Mathf.Pow(.75f, _speedNutrients);
+        return timeToGrow;
     }
 
     public int GetWaterLevel()
     {
-        return Mathf.RoundToInt(Mathf.Abs(_waterLevel) / (waterChargeTime / waterLevels));
+        return Mathf.RoundToInt(Mathf.Abs(_waterLevel) / (GetWaterChargeTime() / GetWaterLevels()));
+    }
+
+    public float GetWaterChargeTime()
+    {
+        // if (_hasNutrients) return waterChargeTime * 2f;
+        if (_waterNutrients > 0) return waterChargeTime + ((waterChargeTime / waterLevels) * (_waterNutrients * 2f));
+        return waterChargeTime;
+    }
+
+    public float GetWaterLevels()
+    {
+        // if (_hasNutrients) return waterLevels * 2f;
+        if (_waterNutrients > 0) return waterLevels + (_waterNutrients * 2f);
+        return waterLevels;
     }
 
     public bool IsWet()
     {
         return _waterLevel > 0;
+    }
+
+    public void AddNutrient()
+    {
+        _waterNutrients += 1;
+        // _hasNutrients = true;
+    }
+
+    public void AddSpeedNutrient()
+    {
+        _speedNutrients += 1;
+        // _hasSpeedNutrients = true;
     }
 }

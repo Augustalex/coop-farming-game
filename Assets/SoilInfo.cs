@@ -33,15 +33,18 @@ public class SoilInfo : MonoBehaviour
     private void OnBlockStateChanged(SoilBlock.BlockState blockState)
     {
         _soilState = blockState.soilState;
-        _healthInfo.OnChange(blockState.levelData.healthLevel, HealthIndicator.HealthLevelIndicatorSize.Large);
-        _waterInfo.OnChange(blockState.levelData.waterLevel, blockState.levelData.waterState,
-            WaterLevelIndicator.WaterLevelIndicatorSize.Large);
+        _healthInfo.OnChange(blockState.levelData.healthLevel, (int) blockState.levelData.maxHealthLevels,
+            HealthIndicator.HealthLevelIndicatorSize.Large);
+        _waterInfo.OnChange(blockState.levelData.waterLevel, (int) blockState.levelData.maxWaterLevels, blockState.levelData.waterState,
+            blockState.levelData.maxWaterLevels > 4
+                ? WaterLevelIndicator.WaterLevelIndicatorSize.Small
+                : WaterLevelIndicator.WaterLevelIndicatorSize.Large);
     }
 
     private void Start()
     {
-        _healthInfo.OnChange(4, HealthIndicator.HealthLevelIndicatorSize.Large);
-        _waterInfo.OnChange(4, WaterLevelIndicator.WaterLevelIndicatorState.Wet,
+        _healthInfo.OnChange(4, 4,HealthIndicator.HealthLevelIndicatorSize.Large);
+        _waterInfo.OnChange(4, 4, WaterLevelIndicator.WaterLevelIndicatorState.Wet,
             WaterLevelIndicator.WaterLevelIndicatorSize.Large);
     }
 

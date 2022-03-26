@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1262063478597480787}
   - component: {fileID: 1262063478597480797}
   - component: {fileID: 1262063478597480786}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,14 +179,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262063479371964838}
-  - component: {fileID: 1262063479371964833}
-  - component: {fileID: 1262063479371964832}
-  - component: {fileID: 649059987}
-  - component: {fileID: 4715908547219211488}
-  - component: {fileID: 4020972413423313688}
-  m_Layer: 7
-  m_Name: NutrientBag
-  m_TagString: Item
+  m_Layer: 0
+  m_Name: NutrientBagShopItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,73 +203,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 6.155, z: 0}
---- !u!65 &1262063479371964833
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7839899, y: 1, z: 0.59777355}
-  m_Center: {x: 0.018621922, y: 0, z: 0.0074486732}
---- !u!54 &1262063479371964832
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
---- !u!114 &649059987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0257b33920b47774cbbfb6c8787b1f61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 2
---- !u!65 &4715908547219211488
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 5, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4020972413423313688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b954e9587c3481340ba54e902fd7cb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1262063480045602216
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +214,7 @@ GameObject:
   - component: {fileID: 1262063480045602219}
   - component: {fileID: 1262063480045602196}
   - component: {fileID: 1262063480045602197}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +295,7 @@ GameObject:
   - component: {fileID: 1262063480404576056}
   - component: {fileID: 1262063480404576037}
   - component: {fileID: 1262063480404576058}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Moist+
+  m_text: Grow+
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2abec0ddd8d04c745ad2958277365e1e, type: 2}
   m_sharedMaterial: {fileID: -4102988207588305323, guid: 2abec0ddd8d04c745ad2958277365e1e, type: 2}
@@ -183,9 +183,9 @@ GameObject:
   - component: {fileID: 1262063479371964832}
   - component: {fileID: 649059987}
   - component: {fileID: 4715908547219211488}
-  - component: {fileID: 4020972413423313688}
+  - component: {fileID: 6793506594655977373}
   m_Layer: 7
-  m_Name: NutrientBag
+  m_Name: SpeedNutrientBag
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4020972413423313688
+--- !u!114 &6793506594655977373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1262063479371964839}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b954e9587c3481340ba54e902fd7cb27, type: 3}
+  m_Script: {fileID: 11500000, guid: bcbe15127f2fe284bb9e10231d9028fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1262063480045602216
@@ -334,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9cf2a4380061f094caf78ec417dbd3fa, type: 2}
+  - {fileID: 2100000, guid: 8483d0ebc44a64d428e406a6b52b1014, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -415,7 +415,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f64e29a0979c8a543855ea40fb0481a9, type: 2}
+  - {fileID: 2100000, guid: a74b94c7921d9d4429e54b79ec6f4a44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

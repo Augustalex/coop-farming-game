@@ -23,6 +23,7 @@ namespace Game
         public struct BlockState
         {
             public SoilState soilState;
+            
             public SeedGrowth.LevelData levelData;
         }
 
@@ -207,6 +208,21 @@ namespace Game
         public bool IsFree()
         {
             return !_seedInGround && !_unharvestedPlant;
+        }
+
+        public bool HasSeed()
+        {
+            return _seedInGround;
+        }
+
+        public void AddNutrient()
+        {
+            _seedInGround.AddNutrient();
+        }
+
+        public void AddSpeedNutrient()
+        {
+            _seedInGround.AddSpeedNutrient();
         }
     }
 }

@@ -16,7 +16,6 @@ public class HealthIndicator : MonoBehaviour
     public HealthLevelIndicatorSize size = HealthLevelIndicatorSize.Large;
 
 
-    public int indicatorCount;
     public int level;
 
     public Material empty;
@@ -24,10 +23,12 @@ public class HealthIndicator : MonoBehaviour
 
     public Transform leftAlignedPivot;
 
+    private int _indicatorCount;
     private readonly List<GameObject> _activeIndicators = new List<GameObject>();
 
-    public void OnChange(int newLevel, HealthLevelIndicatorSize newSize)
+    public void OnChange(int newLevel, int maxLevels, HealthLevelIndicatorSize newSize)
     {
+        _indicatorCount = maxLevels;
         level = newLevel;
         size = newSize;
 
@@ -43,7 +44,7 @@ public class HealthIndicator : MonoBehaviour
 
         _activeIndicators.Clear();
 
-        for (int i = 0; i < indicatorCount; i++)
+        for (int i = 0; i < _indicatorCount; i++)
         {
             var position = leftAlignedPivot.position + GetOffset(i);
             var indicator = Instantiate(

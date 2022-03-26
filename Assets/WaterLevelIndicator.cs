@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class WaterLevelIndicator : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class WaterLevelIndicator : MonoBehaviour
     public WaterLevelIndicatorSize size = WaterLevelIndicatorSize.Large;
 
 
-    public int indicatorCount;
     public int level;
 
     public Material empty;
@@ -32,10 +32,13 @@ public class WaterLevelIndicator : MonoBehaviour
 
     public Transform leftAlignedPivot;
 
+    private int _indicatorCount;
     private readonly List<GameObject> _activeIndicators = new List<GameObject>();
 
-    public void OnChange(int newLevel, WaterLevelIndicatorState newState, WaterLevelIndicatorSize newSize)
+    public void OnChange(int newLevel, int levelDataMaxWaterLevels, WaterLevelIndicatorState newState,
+        WaterLevelIndicatorSize newSize)
     {
+        _indicatorCount = levelDataMaxWaterLevels;
         level = newLevel;
         state = newState;
         size = newSize;
@@ -52,7 +55,7 @@ public class WaterLevelIndicator : MonoBehaviour
 
         _activeIndicators.Clear();
 
-        for (int i = 0; i < indicatorCount; i++)
+        for (int i = 0; i < _indicatorCount; i++)
         {
             var position = leftAlignedPivot.position + GetOffset(i);
             var indicator = Instantiate(
