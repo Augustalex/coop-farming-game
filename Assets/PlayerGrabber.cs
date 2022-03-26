@@ -17,7 +17,10 @@ public class PlayerGrabber : MonoBehaviour
         {
             if (_grabbing)
             {
-                Drop();
+                if (!CanUseWithGrabAction())
+                {
+                    Drop();
+                }
             }
             else
             {
@@ -76,6 +79,14 @@ public class PlayerGrabber : MonoBehaviour
     public void UseItem()
     {
         _grabbing.GetComponent<PlayerItem>().Use(highlight.transform.position);
+    }
+
+    public bool CanUseWithGrabAction()
+    {
+        if (!HasItem()) return false;
+
+        var useOnSoil = _grabbing.GetComponent<UseOnSoil>();
+        return useOnSoil && useOnSoil.HoveringSoil(highlight.transform.position);
     }
 
     public void StealGrabbedItem()

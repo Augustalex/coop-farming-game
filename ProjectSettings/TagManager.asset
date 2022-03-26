@@ -12,6 +12,7 @@ TagManager:
   - Tile
   - NPC
   - PlayerInfoTarget
+  - River
   layers:
   - Default
   - TransparentFX

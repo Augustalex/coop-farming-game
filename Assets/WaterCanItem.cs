@@ -4,6 +4,7 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(UseOnSoil))]
 [RequireComponent(typeof(CountData))]
 public class WaterCanItem : MonoBehaviour
 {
@@ -12,13 +13,14 @@ public class WaterCanItem : MonoBehaviour
     public GameObject hasWaterStyle;
     public GameObject noWaterStyle;
     private CountData _countData;
+    private UseOnSoil _useOnSoil;
 
     void Start()
     {
         _countData = GetComponent<CountData>();
+        _useOnSoil = GetComponent<UseOnSoil>();
 
         _playerItem = GetComponent<PlayerItem>();
-
         _playerItem.UseItem += OnUseItem;
 
         noWaterStyle.SetActive(false);
@@ -28,16 +30,12 @@ public class WaterCanItem : MonoBehaviour
     {
         if (_countData.count > 0)
         {
-            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
-                .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
-            if (hits.Length > 0)
+            var soil = _useOnSoil.HoveringSoil(highlightPosition);
+
+            if (soil)
             {
-                var hit = hits[0];
-                if (hit.collider.CompareTag("Soil"))
-                {
-                    WaterSoil(hit.collider.gameObject);
-                    Sounds.Instance.PlayWaterSound(transform.position);
-                }
+                WaterSoil(soil);
+                Sounds.Instance.PlayWaterSound(transform.position);
             }
         }
         else

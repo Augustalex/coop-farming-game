@@ -21,15 +21,13 @@ public class RockPile : MonoBehaviour
         _countData = GetComponent<CountData>();
         _rockTileTemplate = AssetLibrary.Instance.rockTile;
         
-        for (int i = 0; i < _countData.max; i++)
+        for (int i = 0; i < _countData.count; i++)
         {
             var tile = Instantiate(_rockTileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 transform.rotation, transform);
             
             _tiles.Push(tile);
-            _countData.count = _tiles.Count;
         }
-
 
         if (!forShow)
         {

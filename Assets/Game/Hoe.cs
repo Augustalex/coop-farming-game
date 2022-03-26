@@ -17,7 +17,8 @@ namespace Game
 
         public void OnUse(Vector3 highlightPosition)
         {
-            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f).Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
+            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
+                .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
             if (hits.Length > 0)
             {
                 var raycastHit = hits[0];
@@ -29,7 +30,7 @@ namespace Game
                     var rotation = colliderTransform.rotation;
                     Destroy(raycastHit.collider.gameObject);
                     Instantiate(soilTemplate, position, rotation, parent);
-                
+
                     Sounds.Instance.PlayHoeSound(transform.position);
                 }
             }

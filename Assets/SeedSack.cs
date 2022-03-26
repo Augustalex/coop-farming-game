@@ -4,6 +4,7 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(UseOnSoil))]
 [RequireComponent(typeof(CountData))]
 public class SeedSack : MonoBehaviour
 {
@@ -12,46 +13,39 @@ public class SeedSack : MonoBehaviour
     public MeshRenderer itemLabel;
     private Material _emptyMaterial;
     private CountData _countData;
+    private UseOnSoil _useOnSoil;
 
     void Start()
     {
-        GetComponent<PlayerItem>().UseItem += OnUse;
         _countData = GetComponent<CountData>();
-
+        _useOnSoil = GetComponent<UseOnSoil>();
         _emptyMaterial = itemLabel.material;
+
+        GetComponent<PlayerItem>().UseItem += OnUse;
     }
 
     public void OnUse(Vector3 highlightPosition)
     {
         if (_seeds.Count > 0)
         {
-            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
-                .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
-            if (hits.Length > 0)
+            var soil = _useOnSoil.HoveringSoil(highlightPosition);
+            if (soil)
             {
-                var hit = hits[0];
-                if (hit.collider.CompareTag("Soil"))
+                var soilBlock = soil.GetComponent<SoilBlock>();
+                if (soilBlock.IsFree())
                 {
-                    var soil = hit.collider.gameObject;
-                    var soilBlock = soil.GetComponent<SoilBlock>();
-                    Debug.Log($"({Time.time}) Seed?");
-                    if (soilBlock.IsFree())
+                    var item = _seeds.Pop();
+                    _countData.count = _seeds.Count;
+
+                    item.SetActive(true);
+
+                    item.GetComponent<SeedItem>().OnUseOnSoil(soilBlock);
+
+                    Sounds.Instance.PlayUseBucketSound(transform.position);
+
+                    if (_seeds.Count == 0)
                     {
-                        var item = _seeds.Pop();
-                        _countData.count = _seeds.Count;
-                        
-                        item.SetActive(true);
-                        
-                        Debug.Log($"({Time.time}) Seed YES!");
-                        
-                        item.GetComponent<SeedItem>().OnUseOnSoil(soilBlock);
-
-                        Sounds.Instance.PlayUseBucketSound(transform.position);
-
-                        if (_seeds.Count == 0)
-                        {
-                            itemLabel.materials = new[] {_emptyMaterial};
-                        }
+                        itemLabel.materials = new[] {_emptyMaterial};
                     }
                 }
             }
@@ -87,7 +81,7 @@ public class SeedSack : MonoBehaviour
 
                     var item = seedItem.gameObject;
                     item.SetActive(false);
-                    
+
                     _seeds.Push(item);
                     _countData.count = _seeds.Count;
 

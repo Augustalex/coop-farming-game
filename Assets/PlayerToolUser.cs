@@ -20,4 +20,15 @@ public class PlayerToolUser : MonoBehaviour
             }
         }
     }
+
+    void OnGrab(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            if (_grabber.CanUseWithGrabAction())
+            {
+                _grabber.UseItem();
+            }
+        }
+    }
 }

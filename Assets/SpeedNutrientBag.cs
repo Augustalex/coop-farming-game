@@ -4,38 +4,35 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(UseOnSoil))]
 [RequireComponent(typeof(CountData))]
 public class SpeedNutrientBag : MonoBehaviour
 {
     private CountData _countData;
+    private UseOnSoil _useOnSoil;
 
     void Start()
     {
-        GetComponent<PlayerItem>().UseItem += OnUse;
         _countData = GetComponent<CountData>();
+        _useOnSoil = GetComponent<UseOnSoil>();
+        GetComponent<PlayerItem>().UseItem += OnUse;
     }
 
     public void OnUse(Vector3 highlightPosition)
     {
         if (!gameObject) return;
 
-        var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
-            .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
-        if (hits.Length > 0)
+        var soil = _useOnSoil.HoveringSoil(highlightPosition);
+        if (soil)
         {
-            var hit = hits[0];
-            if (hit.collider.CompareTag("Soil"))
+            var soilBlock = soil.GetComponent<SoilBlock>();
+            if (soilBlock.HasSeed())
             {
-                var soil = hit.collider.gameObject;
-                var soilBlock = soil.GetComponent<SoilBlock>();
-                if (soilBlock.HasSeed())
-                {
-                    _countData.count -= 1;
+                _countData.count -= 1;
 
-                    soilBlock.AddSpeedNutrient();
+                soilBlock.AddSpeedNutrient();
 
-                    Sounds.Instance.PlayUseBucketSound(transform.position);
-                }
+                Sounds.Instance.PlayUseBucketSound(transform.position);
             }
         }
 
