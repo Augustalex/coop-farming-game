@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822fc65e3c5d4aa3b0fca6156610ee96, type: 3}
+  m_Name: Game Settings
+  m_EditorClassIdentifier: 
+  truckStartDelay: 1
+  truckTimeToMove: 20
+  truckTimeToMoveAway: 10
+  deliveryTime: 60
+  truckTimeBetweenDeliveries: 60
+  fullWaterCharge: 5
+  seedsDryDeathTime: 60
+  waterChargeTime: 20
+  seedTimeToGrow: 30
+  fullTilePile: 12
