@@ -4,30 +4,32 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(CountData))]
 public class WaterCanItem : MonoBehaviour
 {
     private PlayerItem _playerItem;
-    private int _water = 3;
 
     public GameObject hasWaterStyle;
     public GameObject noWaterStyle;
-    
+    private CountData _countData;
+
     void Start()
     {
-        _water = GameManager.Instance.gameSettings.fullWaterCharge;
-        
+        _countData = GetComponent<CountData>();
+
         _playerItem = GetComponent<PlayerItem>();
 
         _playerItem.UseItem += OnUseItem;
-        
+
         noWaterStyle.SetActive(false);
     }
 
     private void OnUseItem(Vector3 highlightPosition)
     {
-        if (_water > 0)
+        if (_countData.count > 0)
         {
-            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f).Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
+            var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
+                .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
             if (hits.Length > 0)
             {
                 var hit = hits[0];
@@ -36,28 +38,29 @@ public class WaterCanItem : MonoBehaviour
                     WaterSoil(hit.collider.gameObject);
                     Sounds.Instance.PlayWaterSound(transform.position);
                 }
-            }   
+            }
         }
         else
         {
             Sounds.Instance.PlayFailedWaterSound(transform.position);
         }
     }
+
     private void WaterSoil(GameObject soil)
     {
         var soilBlock = soil.GetComponent<SoilBlock>();
         soilBlock.Water();
 
-        _water -= 1;
-        if (_water <= 0)
+        _countData.count -= 1;
+        if (_countData.count <= 0)
         {
-            SetNoWaterStyle(); 
+            SetNoWaterStyle();
         }
     }
 
     public void OnWaterZone()
     {
-        _water = GameManager.Instance.gameSettings.fullWaterCharge;
+        _countData.count = _countData.max;
         Sounds.Instance.PlayerWaterRechargeSound(transform.position);
         SetHasWaterStyle();
     }
@@ -67,7 +70,7 @@ public class WaterCanItem : MonoBehaviour
         noWaterStyle.SetActive(true);
         hasWaterStyle.SetActive(false);
     }
-    
+
     private void SetHasWaterStyle()
     {
         noWaterStyle.SetActive(false);

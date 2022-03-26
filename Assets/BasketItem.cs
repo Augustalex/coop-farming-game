@@ -5,18 +5,20 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(CountData))]
 public class BasketItem : MonoBehaviour
 {
-    private const int MaxSize = 10;
     public MeshRenderer itemLabel;
     private Material _emptyMaterial;
     private readonly Stack<GameObject> _plants = new Stack<GameObject>();
     private List<Tuple<GameObject, float>> _droppedRecently = new List<Tuple<GameObject, float>>();
     private Vector3 _originalScale;
+    private CountData _countData;
 
     void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
+        _countData = GetComponent<CountData>();
 
         _emptyMaterial = itemLabel.material;
 
@@ -54,6 +56,8 @@ public class BasketItem : MonoBehaviour
                 if (hit.collider.CompareTag("Grass"))
                 {
                     var item = _plants.Pop();
+                    _countData.count = _plants.Count;
+                    
                     item.SetActive(true);
                     item.transform.position = hit.transform.position + Vector3.up * 1f;
 
@@ -76,7 +80,7 @@ public class BasketItem : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (_plants.Count >= MaxSize) return;
+        if (_plants.Count >= _countData.max) return;
         if (_plants.Contains(other.gameObject) || _droppedRecently.Any(pair => pair.Item1 == other.gameObject)) return;
 
         if (other.CompareTag("Goods"))
@@ -105,7 +109,9 @@ public class BasketItem : MonoBehaviour
 
                     var item = plantItem.gameObject;
                     item.SetActive(false);
+                    
                     _plants.Push(item);
+                    _countData.count = _plants.Count;
 
                     Sounds.Instance.PlayAddedToSeedSack(transform.position);
                 }

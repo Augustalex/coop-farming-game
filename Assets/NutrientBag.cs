@@ -4,23 +4,20 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(CountData))]
 public class NutrientBag : MonoBehaviour
 {
-    private int _uses = 10;
+    private CountData _countData;
 
     void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
+        _countData = GetComponent<CountData>();
     }
 
     public void OnUse(Vector3 highlightPosition)
     {
         if (!gameObject) return;
-        if (_uses <= 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
         var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
             .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
@@ -33,13 +30,18 @@ public class NutrientBag : MonoBehaviour
                 var soilBlock = soil.GetComponent<SoilBlock>();
                 if (soilBlock.HasSeed())
                 {
-                    _uses -= 1;
+                    _countData.count -= 1;
 
                     soilBlock.AddNutrient();
 
                     Sounds.Instance.PlayUseBucketSound(transform.position);
                 }
             }
+        }
+        
+        if (_countData.count <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -5,26 +5,29 @@ using Game;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(CountData))]
 public class RockPile : MonoBehaviour
 {
     private GameObject _rockTileTemplate;
 
-    private int _count = 10;
-    private Stack<GameObject> _tiles = new Stack<GameObject>();
+    private readonly Stack<GameObject> _tiles = new Stack<GameObject>();
 
-    public int startingCount = 10;
     public bool removeWhenDepleted = false;
     public bool forShow = false;
+    private CountData _countData;
 
     void Start()
     {
+        _countData = GetComponent<CountData>();
         _rockTileTemplate = AssetLibrary.Instance.rockTile;
-
-        for (int i = 0; i < startingCount; i++)
+        
+        for (int i = 0; i < _countData.max; i++)
         {
             var tile = Instantiate(_rockTileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 transform.rotation, transform);
+            
             _tiles.Push(tile);
+            _countData.count = _tiles.Count;
         }
 
 
@@ -55,6 +58,8 @@ public class RockPile : MonoBehaviour
                         var rotation = colliderTransform.rotation;
 
                         var tile = _tiles.Pop();
+                        _countData.count = _tiles.Count;
+                        
                         tile.transform.SetParent(parent);
                         tile.transform.position = position + Vector3.up * .5f;
                         tile.transform.rotation = rotation;
@@ -86,7 +91,9 @@ public class RockPile : MonoBehaviour
         {
             var tile = Instantiate(_rockTileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 Quaternion.identity, transform);
+            
             _tiles.Push(tile);
+            _countData.count = _tiles.Count;
         }
     }
 }

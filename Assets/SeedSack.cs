@@ -4,16 +4,19 @@ using System.Linq;
 using Game;
 using UnityEngine;
 
+[RequireComponent(typeof(CountData))]
 public class SeedSack : MonoBehaviour
 {
     private readonly Stack<GameObject> _seeds = new Stack<GameObject>();
 
     public MeshRenderer itemLabel;
     private Material _emptyMaterial;
+    private CountData _countData;
 
     void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
+        _countData = GetComponent<CountData>();
 
         _emptyMaterial = itemLabel.material;
     }
@@ -35,6 +38,8 @@ public class SeedSack : MonoBehaviour
                     if (soilBlock.IsFree())
                     {
                         var item = _seeds.Pop();
+                        _countData.count = _seeds.Count;
+                        
                         item.SetActive(true);
                         
                         Debug.Log($"({Time.time}) Seed YES!");
@@ -82,7 +87,9 @@ public class SeedSack : MonoBehaviour
 
                     var item = seedItem.gameObject;
                     item.SetActive(false);
+                    
                     _seeds.Push(item);
+                    _countData.count = _seeds.Count;
 
                     Sounds.Instance.PlayAddedToSeedSack(transform.position);
                 }

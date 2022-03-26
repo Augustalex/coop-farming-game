@@ -14,7 +14,7 @@ public class SoilInfo : MonoBehaviour
     private GameObject _waterInfoRoot;
     private SoilBlock _soil;
     private SoilBlock.SoilState _soilState;
-    private const float HideDelay = 1f;
+    private const float HideDelay = 2f;
 
     void Awake()
     {

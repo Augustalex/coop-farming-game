@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5266349469926994011}
   - component: {fileID: 6113168987967774540}
   - component: {fileID: 1256167254}
+  - component: {fileID: 8933406208985095334}
   m_Layer: 7
   m_Name: OneTimeTilePile
   m_TagString: Item
@@ -47,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9096906c4a85954eac6eb12f7da429f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCount: 20
   removeWhenDepleted: 1
   forShow: 0
 --- !u!65 &5266349469926994011
@@ -92,6 +92,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
+--- !u!114 &8933406208985095334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290975437621296295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6bcbc1020e409685536567ccb2298c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 10
+  max: 0
 --- !u!1001 &3340334530633135292
 PrefabInstance:
   m_ObjectHideFlags: 0
