@@ -46,9 +46,14 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
         return deliveryRequest.requests.All(request => request.satisfied >= request.need);
     }
 
-    public void OnDelivery(Goods goods)
+    public void OnDelivery(Goods.GoodsType goods)
     {
         deliveryRequest.Provide(goods);
+    }
+
+    public bool Fulfilling(Goods.GoodsType goodsType)
+    {
+        return deliveryRequest.Fulfilling(goodsType);
     }
 
     public void EndDelivery()
@@ -79,6 +84,13 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
             {
                 goodsType = Goods.GoodsType.WaterPlant,
                 need = job.waterSeeds,
+                satisfied = 0
+            });
+        if (job.rodSeeds > 0)
+            requests.Add(new DeliveryRequest.Request
+            {
+                goodsType = Goods.GoodsType.RodPlant,
+                need = job.rodSeeds,
                 satisfied = 0
             });
 

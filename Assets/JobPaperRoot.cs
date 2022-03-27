@@ -11,6 +11,8 @@ public class JobPaperRoot : MonoBehaviour
     private Job _job;
     private GameManager _gameManager;
 
+    public bool waterJob = false;
+
     void Awake()
     {
         _itemGenerator = GetComponentInChildren<JobPaperItemGenerator>();
@@ -33,20 +35,33 @@ public class JobPaperRoot : MonoBehaviour
 
     public void SetupWithRandomJob()
     {
-        var redSeedCount = Random.value < RedBerryChance() ? Random.Range(0, GetUpperRange()) * 2 : 0;
-        var waterSeeds = Random.value < WaterPlantChance() ? Random.Range(0, GetUpperRange()) * 2 : 0;
-        var yellowSeeds = redSeedCount == 0 && waterSeeds == 0
-            ? Random.Range(1, GetUpperRange()) * 2
-            : Random.Range(0, GetUpperRange()) * 2;
-        SetupForJob(
-            new Job
-            {
-                redSeeds = redSeedCount,
-                waterSeeds = waterSeeds,
-                yellowSeeds = yellowSeeds,
-                time = Deadline(),
-            }
-        );
+        if (waterJob)
+        {
+            SetupForJob(
+                new Job
+                {
+                    rodSeeds = Random.Range(1, 6) * 10,
+                    time = Deadline(),
+                }
+            );
+        }
+        else
+        {
+            var redSeedCount = Random.value < RedBerryChance() ? Random.Range(0, GetUpperRange()) * 2 : 0;
+            var waterSeeds = Random.value < WaterPlantChance() ? Random.Range(0, GetUpperRange()) * 2 : 0;
+            var yellowSeeds = redSeedCount == 0 && waterSeeds == 0
+                ? Random.Range(1, GetUpperRange()) * 2
+                : Random.Range(0, GetUpperRange()) * 2;
+            SetupForJob(
+                new Job
+                {
+                    redSeeds = redSeedCount,
+                    waterSeeds = waterSeeds,
+                    yellowSeeds = yellowSeeds,
+                    time = Deadline(),
+                }
+            );
+        }
     }
 
     public float Deadline()

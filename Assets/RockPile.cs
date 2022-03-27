@@ -9,22 +9,20 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(CountData))]
 public class RockPile : MonoBehaviour
 {
-    private GameObject _rockTileTemplate;
+    public GameObject tileTemplate;
 
     private readonly Stack<GameObject> _tiles = new Stack<GameObject>();
-
-    public bool removeWhenDepleted = false;
+    
     public bool forShow = false;
     private CountData _countData;
 
     void Start()
     {
         _countData = GetComponent<CountData>();
-        _rockTileTemplate = AssetLibrary.Instance.rockTile;
         
         for (int i = 0; i < _countData.count; i++)
         {
-            var tile = Instantiate(_rockTileTemplate, transform.position + Vector3.up * .05f * (i + 1),
+            var tile = Instantiate(tileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 transform.rotation, transform);
             
             _tiles.Push(tile);
@@ -42,14 +40,6 @@ public class RockPile : MonoBehaviour
         
         if (_tiles.Count > 0)
         {
-            // TODO: Make so that you can build a bridge!
-            // TODO: Add new "RiverSoil" component - that does not have to deal with watering of plants
-            // TODO: Add new "RodPlant"
-            // TODO: Add shovel to the store
-            // TODO: Add plant in the river in the forrest
-            // TODO: Add so that you can punch players into the ground
-            // TODO: Add so you can pick players up
-            
             var rawHits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 4f);
             if (!rawHits.Any(hit => hit.collider.CompareTag("Item")))
             {
@@ -96,7 +86,7 @@ public class RockPile : MonoBehaviour
     
         for (int i = _tiles.Count; i < GameManager.Instance.gameSettings.fullTilePile; i++)
         {
-            var tile = Instantiate(_rockTileTemplate, transform.position + Vector3.up * .05f * (i + 1),
+            var tile = Instantiate(tileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 Quaternion.identity, transform);
             
             _tiles.Push(tile);

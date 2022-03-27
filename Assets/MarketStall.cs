@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -8,6 +9,8 @@ public class MarketStall : MonoBehaviour
     private CinemachineVirtualCamera _camera;
     private bool _on;
     private MarketItemPicker _itemPicker;
+
+    public event Action<bool> Toggled;
 
     private void Awake()
     {
@@ -30,6 +33,8 @@ public class MarketStall : MonoBehaviour
         GameManager.Instance.ResetCameraFocus();
 
         _itemPicker.DeactivateUI();
+        
+        Toggled?.Invoke(_on);
     }
 
     void Start()
@@ -57,6 +62,8 @@ public class MarketStall : MonoBehaviour
             GameManager.Instance.FocusCamera(_camera);
 
             _itemPicker.ActivateUI();
+            
+            Toggled?.Invoke(_on);
         }
     }
 }

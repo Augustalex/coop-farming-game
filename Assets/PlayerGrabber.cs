@@ -94,6 +94,9 @@ public class PlayerGrabber : MonoBehaviour
         _grabbing.transform.rotation = Quaternion.identity;
         _grabbing.GetComponentInChildren<Rigidbody>().isKinematic = false;
 
+        var playerItem = _grabbing.GetComponent<PlayerItem>();
+        playerItem.WasDropped();
+
         _grabbing = null;
         _ghost = null;
 

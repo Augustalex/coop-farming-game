@@ -8,6 +8,8 @@ using UnityEngine;
 public class PlayerItem : MonoBehaviour
 {
     public event Action<Vector3> UseItem;
+    public event Action Dropped;
+    public event Action Grabbed;
     
     public enum ItemType
     {
@@ -24,7 +26,7 @@ public class PlayerItem : MonoBehaviour
         UseItem?.Invoke(highlightPosition);
     }
 
-    public bool Grabbed()
+    public bool IsGrabbed()
     {
         return _grabber != null;
     }
@@ -38,5 +40,11 @@ public class PlayerItem : MonoBehaviour
     public void GrabbedBy(PlayerGrabber playerGrabber)
     {
         _grabber = playerGrabber;
+        Grabbed?.Invoke();
+    }
+
+    public void WasDropped()
+    {
+        Dropped?.Invoke();
     }
 }

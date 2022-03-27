@@ -16,17 +16,14 @@ namespace Game
         public Request[] requests;
         public float deadline;
 
-        public void Provide(Goods goods)
+        public void Provide(Goods.GoodsType goodsType)
         {
             requests = requests.Select(request =>
             {
-                if (request.goodsType == goods.goodsType)
+                if (request.goodsType == goodsType)
                 {
                     if (request.satisfied < request.need)
                     {
-                        // WARNING, SIDE EFFECTS
-                        goods.Consume();
-
                         return new Request
                         {
                             goodsType = request.goodsType,
@@ -38,6 +35,22 @@ namespace Game
 
                 return request;
             }).ToArray();
+        }
+
+        public bool Fulfilling(Goods.GoodsType goodsType)
+        {
+            return requests.Any(request =>
+            {
+                if (request.goodsType == goodsType)
+                {
+                    if (request.satisfied < request.need)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
         }
     }
 }

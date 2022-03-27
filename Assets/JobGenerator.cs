@@ -20,8 +20,14 @@ public class JobGenerator : MonoBehaviour
                 leftTopPivot.transform.rotation,
                 leftTopPivot.transform);
             _index += 1;
-            
-            job.GetComponent<JobPaperRoot>().SetupWithRandomJob();
+
+            var jobPaperRoot = job.GetComponent<JobPaperRoot>();
+            if (i == 3)
+            {
+                jobPaperRoot.waterJob = true;
+            }
+
+            jobPaperRoot.SetupWithRandomJob();
         }
     }
 }

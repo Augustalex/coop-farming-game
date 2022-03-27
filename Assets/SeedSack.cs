@@ -74,7 +74,7 @@ public class SeedSack : MonoBehaviour
                     }
 
                     var playerItem = seedItem.GetComponent<PlayerItem>();
-                    if (playerItem.Grabbed())
+                    if (playerItem.IsGrabbed())
                     {
                         playerItem.Steal();
                     }

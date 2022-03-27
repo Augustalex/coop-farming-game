@@ -135,5 +135,15 @@ namespace Game
         {
             PlaySound(plop, transformPosition, PlopVolume * 1.5f);
         }
+
+        public void PlayRemoveFlowerSound(Vector3 transformPosition)
+        {
+            PlaySound(poof, transformPosition, 1f);
+        }
+
+        public void PlayDestroyTileSound(Vector3 transformPosition)
+        {
+            PlaySound(poof, transformPosition, 1f);
+        }
     }
 }

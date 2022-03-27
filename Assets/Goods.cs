@@ -9,7 +9,8 @@ public class Goods : MonoBehaviour
         Plant,
         YellowFlower,
         RedBerry,
-        WaterPlant
+        WaterPlant,
+        RodPlant
     }
 
     public GoodsType goodsType = GoodsType.Plant;

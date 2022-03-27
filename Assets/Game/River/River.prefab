@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 7429101750935116667}
   - component: {fileID: 7429101750935116664}
   - component: {fileID: 7429101750935116612}
+  - component: {fileID: 7412126354487465567}
   m_Layer: 0
   m_Name: River
   m_TagString: River
@@ -211,6 +212,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 065e7fbaac1e4870a5ff7f6a228f026e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7412126354487465567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6033cf3d8b6f0df4c9c17a66470fc42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8780974566922725396
@@ -288,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8260088959540686242
 Transform:
   m_ObjectHideFlags: 0

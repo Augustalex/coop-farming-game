@@ -20,11 +20,6 @@ public class BridgePlacer : MonoBehaviour
 
     public void OnUse(Vector3 highlightPosition)
     {
-        // TODO: Make so that you can build a bridge!
-        // TODO: Add new "RiverSoil" component - that does not have to deal with watering of plants
-        // TODO: Add new "RodPlant"
-        // TODO: Add shovel to the store
-        // TODO: Add plant in the river in the forrest
         // TODO: Add so that you can punch players into the ground
         // TODO: Add so you can pick players up
 

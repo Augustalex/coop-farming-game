@@ -46,4 +46,6 @@ MonoBehaviour:
   yellowSeedTemplate: {fileID: 313880747200444770, guid: d83fe31fcd97039469bc20c0c79215b1, type: 3}
   redSeedTemplate: {fileID: 5280780988269426984, guid: dacf893bc1995834fae9f234d862004c, type: 3}
   waterSeedTemplate: {fileID: 313880747200444770, guid: d83fe31fcd97039469bc20c0c79215b1, type: 3}
+  rodSeedTemplate: {fileID: 5253099415391276906, guid: 0f382c8b543c81d4c8c9f82bd1fbd2a1, type: 3}
+  deadlineTemplate: {fileID: 2829808194749868671, guid: 1f4c2ab35dc25cc479a7726600f5c20a, type: 3}
   listPivot: {fileID: 0}

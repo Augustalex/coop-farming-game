@@ -15,6 +15,8 @@ public class BasketItem : MonoBehaviour
     private Vector3 _originalScale;
     private CountData _countData;
 
+    public bool carryWaterItems = false;
+
     void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
@@ -41,7 +43,7 @@ public class BasketItem : MonoBehaviour
             }
         }
 
-        transform.localScale = _originalScale + Vector3.one * _plants.Count * .08f;
+        transform.localScale = _originalScale + Vector3.one * (((float) _plants.Count / (float) _countData.max) * .8f);
     }
 
     public void OnUse(Vector3 highlightPosition)
@@ -57,7 +59,7 @@ public class BasketItem : MonoBehaviour
                 {
                     var item = _plants.Pop();
                     _countData.count = _plants.Count;
-                    
+
                     item.SetActive(true);
                     item.transform.position = hit.transform.position + Vector3.up * 1f;
 
@@ -83,37 +85,74 @@ public class BasketItem : MonoBehaviour
         if (_plants.Count >= _countData.max) return;
         if (_plants.Contains(other.gameObject) || _droppedRecently.Any(pair => pair.Item1 == other.gameObject)) return;
 
-        if (other.CompareTag("Goods"))
+        if (carryWaterItems)
         {
-            var plantItem = other.GetComponent<Plant>();
-            if (plantItem)
+            if (other.CompareTag("Item"))
             {
-                if (_plants.Count == 0 || _plants.Peek().GetComponent<Plant>().CompareToPlant(plantItem))
+                var waterSeedItem = other.GetComponent<WaterSeedItem>();
+                if (waterSeedItem)
                 {
-                    if (_plants.Count == 0)
+                    if (_plants.Any(plant => plant.GetComponent<Plant>())) return;
+                    if (_plants.Count == 0 ||
+                        _plants.Peek().GetComponent<WaterSeedItem>().CompareToSeedItem(waterSeedItem))
                     {
-                        itemLabel.materials = new[]
-                            {plantItem.GetPlantIdentifier().materialLabel};
-                    }
+                        if (_plants.Count == 0)
+                        {
+                            itemLabel.materials = new[]
+                                {waterSeedItem.materialLabel};
+                        }
 
-                    var playerItem = plantItem.GetComponent<PlayerItem>();
-                    if (playerItem.Grabbed())
+                        var playerItem = waterSeedItem.GetComponent<PlayerItem>();
+                        if (playerItem.IsGrabbed())
+                        {
+                            playerItem.Steal();
+                        }
+
+                        var item = waterSeedItem.gameObject;
+                        item.SetActive(false);
+
+                        _plants.Push(item);
+                        _countData.count = _plants.Count;
+
+                        Sounds.Instance.PlayAddedToSeedSack(transform.position);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (other.CompareTag("Goods"))
+            {
+                var plantItem = other.GetComponent<Plant>();
+                if (plantItem)
+                {
+                    if (_plants.Count == 0 || _plants.Peek().GetComponent<Plant>().CompareToPlant(plantItem))
                     {
-                        playerItem.Steal();
+                        if (_plants.Count == 0)
+                        {
+                            itemLabel.materials = new[]
+                                {plantItem.GetPlantIdentifier().materialLabel};
+                        }
+
+                        var playerItem = plantItem.GetComponent<PlayerItem>();
+                        if (playerItem.IsGrabbed())
+                        {
+                            playerItem.Steal();
+                        }
+
+                        if (plantItem.InSoil())
+                        {
+                            plantItem.Harvest();
+                        }
+
+                        var item = plantItem.gameObject;
+                        item.SetActive(false);
+
+                        _plants.Push(item);
+                        _countData.count = _plants.Count;
+
+                        Sounds.Instance.PlayAddedToSeedSack(transform.position);
                     }
-
-                    if (plantItem.InSoil())
-                    {
-                        plantItem.Harvest();
-                    }
-
-                    var item = plantItem.gameObject;
-                    item.SetActive(false);
-                    
-                    _plants.Push(item);
-                    _countData.count = _plants.Count;
-
-                    Sounds.Instance.PlayAddedToSeedSack(transform.position);
                 }
             }
         }

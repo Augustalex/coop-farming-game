@@ -10,6 +10,7 @@ public class JobPaperItemGenerator : MonoBehaviour
     public GameObject yellowSeedTemplate;
     public GameObject redSeedTemplate;
     public GameObject waterSeedTemplate;
+    public GameObject rodSeedTemplate;
     public GameObject deadlineTemplate;
 
     public GameObject listPivot;
@@ -42,6 +43,7 @@ public class JobPaperItemGenerator : MonoBehaviour
         if (job.yellowSeeds > 0) AddToList(job.yellowSeeds.ToString(), yellowSeedTemplate);
         if (job.redSeeds > 0) AddToList(job.redSeeds.ToString(), redSeedTemplate);
         if (job.waterSeeds > 0) AddToList(job.waterSeeds.ToString(), waterSeedTemplate);
+        if (job.rodSeeds > 0) AddToList(job.rodSeeds.ToString(), rodSeedTemplate);
         if (job.time > 0) AddToList($"{Mathf.Ceil((job.time - Time.time) / 60)}min", deadlineTemplate);
     }
 
