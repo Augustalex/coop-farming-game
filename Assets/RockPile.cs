@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CountData))]
@@ -41,7 +42,15 @@ public class RockPile : MonoBehaviour
         
         if (_tiles.Count > 0)
         {
-            var rawHits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f);
+            // TODO: Make so that you can build a bridge!
+            // TODO: Add new "RiverSoil" component - that does not have to deal with watering of plants
+            // TODO: Add new "RodPlant"
+            // TODO: Add shovel to the store
+            // TODO: Add plant in the river in the forrest
+            // TODO: Add so that you can punch players into the ground
+            // TODO: Add so you can pick players up
+            
+            var rawHits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 4f);
             if (!rawHits.Any(hit => hit.collider.CompareTag("Item")))
             {
                 var hits = rawHits.Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();

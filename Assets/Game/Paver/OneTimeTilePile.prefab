@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6113168987967774540}
   - component: {fileID: 1256167254}
   - component: {fileID: 8933406208985095334}
+  - component: {fileID: 874628023066365085}
+  - component: {fileID: 3377385141891726226}
   m_Layer: 7
   m_Name: OneTimeTilePile
   m_TagString: Item
@@ -106,6 +108,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 10
   max: 0
+--- !u!114 &874628023066365085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290975437621296295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844384b75c377d249abf87e9b8992afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bridgeTemplate: {fileID: 138498373638655692, guid: ab483a3d07698a2449f52199ff22267f, type: 3}
+--- !u!114 &3377385141891726226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290975437621296295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c25b448c1d4627897a83cc30847440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 138498373638655692, guid: cfbb6be04621c1d4e8087ad15a9b1066, type: 3}
 --- !u!1001 &3340334530633135292
 PrefabInstance:
   m_ObjectHideFlags: 0

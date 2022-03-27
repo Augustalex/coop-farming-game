@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,27 @@ public class PlayerGrabber : MonoBehaviour
     public Highlight highlight;
     public PlayerLooker body;
     private GameObject _grabbing;
+    private ItemGhost _ghost;
+
+    private void Update()
+    {
+        if (_ghost)
+        {
+            var highlightPosition = highlight.transform.position;
+            _ghost.Move(highlightPosition);
+        }
+    }
+
+    void OnRotate(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            if (_ghost)
+            {
+                _ghost.Rotate();
+            }
+        }
+    }
 
     void OnGrab(InputValue value)
     {
@@ -45,6 +67,12 @@ public class PlayerGrabber : MonoBehaviour
                         plant.Grabbed();
                     }
 
+                    var ghost = _grabbing.GetComponent<ItemGhost>();
+                    if (ghost)
+                    {
+                        _ghost = ghost;
+                    }
+
                     Sounds.Instance.PlayPickupItemSound(transform.position);
                 }
             }
@@ -67,6 +95,7 @@ public class PlayerGrabber : MonoBehaviour
         _grabbing.GetComponentInChildren<Rigidbody>().isKinematic = false;
 
         _grabbing = null;
+        _ghost = null;
 
         Sounds.Instance.PlayDropItemSound(transform.position);
     }
