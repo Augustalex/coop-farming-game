@@ -20,7 +20,16 @@ public class Shovel : MonoBehaviour
         if (tileHits.Length > 0)
         {
             var tileHit = tileHits[0];
-            Destroy(tileHit.collider.gameObject);
+            var bridge = tileHit.collider.GetComponent<BrigdeIdentifier>();
+            if (bridge)
+            {
+                bridge.Demolish();
+            }
+            else
+            {
+                Destroy(tileHit.collider.gameObject);
+            }
+
             Sounds.Instance.PlayDestroyTileSound(transform.position);
         }
         else

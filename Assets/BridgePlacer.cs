@@ -43,6 +43,8 @@ public class BridgePlacer : MonoBehaviour
                         currentRotationEuler.z);
 
                     var tile = Instantiate(bridgeTemplate);
+                    var bridge = tile.GetComponent<BrigdeIdentifier>();
+                    bridge.SetRiver(raycastHit.collider.GetComponent<RiverSoil>());
 
                     tile.transform.SetParent(parent);
                     tile.transform.position = position + Vector3.up * .5f;

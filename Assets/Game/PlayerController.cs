@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             _rigibody.drag = 1f;
 
-            _rigibody.AddForce(_move.normalized * 14f, ForceMode.Impulse);
+            _rigibody.AddForce(_move.normalized * 20f, ForceMode.Impulse);
 
             Sounds.Instance.PlayWooshSound(transform.position);
 

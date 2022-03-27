@@ -6,93 +6,106 @@ using UnityEngine;
 
 public class RiverSoil : MonoBehaviour
 {
-        private RiverSeedGrowth _seedInGround;
+    private RiverSeedGrowth _seedInGround;
+    private GameObject _blockers;
 
-        public event Action<RiverSoil.RiverState> BlockStateChanged;
+    public event Action<RiverSoil.RiverState> BlockStateChanged;
 
-        public enum RiverSoilState
+    public enum RiverSoilState
+    {
+        Free,
+        Occupied,
+    }
+
+    public struct RiverState
+    {
+        public RiverSoilState soilState;
+        public RiverSeedGrowth.RiverLevelData levelData;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.UpPrestige(2);
+
+        _blockers = GetComponentInChildren<RiverBlockers>().gameObject;
+    }
+
+    public void SeedWithTemplate(GameObject seedTemplate)
+    {
+        if (_seedInGround) return;
+
+        SeedUp(seedTemplate);
+
+        BlockStateChanged?.Invoke(new RiverState
         {
-            Free,
-            Occupied,
-        }
-        
-        public struct RiverState
-        {
-            public RiverSoilState soilState;
-            public RiverSeedGrowth.RiverLevelData levelData;
-        }
+            soilState = RiverSoilState.Occupied,
+            levelData = _seedInGround.GetLevelData()
+        });
+    }
 
-        private void Start()
-        {
-            GameManager.Instance.UpPrestige(2);
-        }
+    private void SeedUp(GameObject seedTemplate)
+    {
+        var seed = Instantiate(seedTemplate);
+        seed.transform.position = transform.position + Vector3.up * 2f;
 
-        public void SeedWithTemplate(GameObject seedTemplate)
-        {
-            if (_seedInGround) return;
+        _seedInGround = seed.GetComponent<RiverSeedGrowth>();
 
-            SeedUp(seedTemplate);
-            
-            BlockStateChanged?.Invoke(new RiverState
+        _seedInGround.Died += OnSeedsDied;
+        _seedInGround.LevelsUpdated += OnLevelsUpdated;
+    }
+
+    private void OnLevelsUpdated(RiverSeedGrowth.RiverLevelData levelData)
+    {
+        BlockStateChanged?.Invoke(new RiverState
+        {
+            soilState = RiverSoilState.Occupied,
+            levelData = levelData
+        });
+    }
+
+    private void RemoveSeedState()
+    {
+        _seedInGround.Died -= OnSeedsDied;
+        _seedInGround.LevelsUpdated -= OnLevelsUpdated;
+        _seedInGround = null;
+    }
+
+    private void OnSeedsDied()
+    {
+        RemoveSeedState();
+
+        BlockStateChanged?.Invoke(new RiverState
+        {
+            soilState = RiverSoilState.Free,
+            levelData = new RiverSeedGrowth.RiverLevelData
             {
-                soilState = RiverSoilState.Occupied,
-                levelData = _seedInGround.GetLevelData()
-            });
-        }
+                healthLevel = 0,
+            }
+        });
+    }
 
-        private void SeedUp(GameObject seedTemplate)
-        {
-            var seed = Instantiate(seedTemplate);
-            seed.transform.position = transform.position + Vector3.up * 2f;
+    public bool IsFree()
+    {
+        return !_seedInGround;
+    }
 
-            _seedInGround = seed.GetComponent<RiverSeedGrowth>();
+    public bool HasSeed()
+    {
+        return _seedInGround;
+    }
 
-            _seedInGround.Died += OnSeedsDied;
-            _seedInGround.LevelsUpdated += OnLevelsUpdated;
-        }
-        
-        private void OnLevelsUpdated(RiverSeedGrowth.RiverLevelData levelData)
-        {
-            BlockStateChanged?.Invoke(new RiverState
-            {
-                soilState = RiverSoilState.Occupied,
-                levelData = levelData
-            });
-        }
+    public void AddSpeedNutrient()
+    {
+        _seedInGround.AddSpeedNutrient();
+    }
 
-        private void RemoveSeedState()
-        {
-            _seedInGround.Died -= OnSeedsDied;
-            _seedInGround.LevelsUpdated -= OnLevelsUpdated;
-            _seedInGround = null;
-        }
+    public void DisableBlockers()
+    {
+        _blockers.SetActive(false);
+    }
 
-        private void OnSeedsDied()
-        {
-            RemoveSeedState();
-            
-            BlockStateChanged?.Invoke(new RiverState
-            {
-                soilState = RiverSoilState.Free,
-                levelData = new RiverSeedGrowth.RiverLevelData
-                {
-                    healthLevel = 0,
-                }
-            });
-        }
-
-        public bool IsFree()
-        {
-            return !_seedInGround;
-        }
-
-        public bool HasSeed()
-        {
-            return _seedInGround;
-        }
-
-        public void AddSpeedNutrient()
-        {
-            _seedInGround.AddSpeedNutrient();
-        }
+    public void EnableBlockers()
+    {
+        _blockers.SetActive(true);
+    }
 }
