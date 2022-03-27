@@ -47,6 +47,8 @@ public class BridgePlacer : MonoBehaviour
                     tile.transform.SetParent(parent);
                     tile.transform.position = position + Vector3.up * .5f;
                     tile.transform.rotation = rotation;
+
+                    GameManager.Instance.UpPrestige(2);
                 }
             }
         }

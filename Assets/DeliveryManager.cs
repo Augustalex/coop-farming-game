@@ -20,12 +20,29 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
 
             if (timeLeftOfDelivery == 0f)
             {
+                GameManager.Instance.DownPrestige(10);
+
                 EndDelivery();
                 TruckMover.Instance.DeliveryEnded();
             }
             else if (DeliveryIsSatisfied())
             {
                 GameManager.Instance.money += Reward();
+
+                var prestigeEarned = 0;
+                foreach (var request in deliveryRequest.requests)
+                {
+                    if (request.goodsType == Goods.GoodsType.YellowFlower)
+                        prestigeEarned += 1;
+                    if (request.goodsType == Goods.GoodsType.RedBerry)
+                        prestigeEarned += 2;
+                    if (request.goodsType == Goods.GoodsType.WaterPlant)
+                        prestigeEarned += 3;
+                    if (request.goodsType == Goods.GoodsType.RodPlant)
+                        prestigeEarned += 5;
+                }
+                GameManager.Instance.UpPrestige(prestigeEarned);
+
                 EndDelivery();
                 TruckMover.Instance.DeliveryEnded();
 

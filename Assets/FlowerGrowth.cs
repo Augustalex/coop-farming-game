@@ -59,6 +59,7 @@ public class FlowerGrowth : MonoBehaviour
 
             _progress = 0;
             _stage -= 1;
+            GameManager.Instance.DownPrestige(1);
 
             if (_stage == 0)
             {
@@ -83,11 +84,15 @@ public class FlowerGrowth : MonoBehaviour
 
     public void Water()
     {
+        _progress = 0f;
+        if (_stage >= stages.Length - 1) return;
+
         var currentStage = stages[_stage];
         currentStage.item.SetActive(false);
         _progress = 0f;
 
-        _stage = Mathf.Clamp(_stage + 1, 0, stages.Length - 1);
+        _stage += 1;
         stages[_stage].item.SetActive(true);
+        GameManager.Instance.UpPrestige(1);
     }
 }

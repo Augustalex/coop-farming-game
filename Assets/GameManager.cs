@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -7,10 +8,26 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public CinemachineVirtualCamera mainVirtualCamera;
-    
+
     public GameSettings gameSettings;
+    public int prestige = 0;
     public int money = 0;
     public int jobsDone = 0;
+    public int starLevel = 0;
+
+    public bool cheatUpgrade;
+
+    public event Action<int> PrestigeChanged;
+    public event Action<int> StarLevelChanged;
+
+    private void Update()
+    {
+        if (cheatUpgrade)
+        {
+            cheatUpgrade = false;
+            UpPrestige(10);
+        }
+    }
 
     public void FocusCamera(CinemachineVirtualCamera virtualCamera)
     {
@@ -26,7 +43,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             cinemachineVirtualCamera.Priority = 10;
         }
-        
+
         mainVirtualCamera.Priority = 20;
     }
 
@@ -38,5 +55,49 @@ public class GameManager : MonoSingleton<GameManager>
     public void UseMoney(int cost)
     {
         money -= cost;
+    }
+
+    public void UpPrestige(int count)
+    {
+        prestige += count;
+
+        UpdateStarLevel();
+
+        PrestigeChanged?.Invoke(prestige);
+    }
+
+    private void UpdateStarLevel()
+    {
+        if (prestige >= 100)
+        {
+            starLevel = 4;
+        }
+        else if (prestige >= 60)
+        {
+            starLevel = 3;
+        }
+        else if (prestige >= 10)
+        {
+            starLevel = 2;
+        }
+        else if (prestige >= 2)
+        {
+            starLevel = 1;
+        }
+        else
+        {
+            starLevel = 0;
+        }
+
+        StarLevelChanged?.Invoke(starLevel);
+    }
+
+    public void DownPrestige(int count)
+    {
+        prestige = Mathf.Max(prestige - count, 0);
+
+        UpdateStarLevel();
+
+        PrestigeChanged?.Invoke(prestige);
     }
 }

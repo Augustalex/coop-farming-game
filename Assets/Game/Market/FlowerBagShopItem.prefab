@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1262063478597480787}
   - component: {fileID: 1262063478597480797}
   - component: {fileID: 1262063478597480786}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,14 +179,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262063479371964838}
-  - component: {fileID: 1262063479371964833}
-  - component: {fileID: 1262063479371964832}
-  - component: {fileID: 649059987}
-  - component: {fileID: 6728687445319340666}
-  - component: {fileID: 3524035055323702807}
-  m_Layer: 7
+  - component: {fileID: 4160528629528912673}
+  m_Layer: 0
   m_Name: FlowerBagShopItem
-  m_TagString: Item
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,36 +205,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1262063479371964833
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7915287, y: 0.9208148, z: 1.1027621}
-  m_Center: {x: -0.0077638626, y: 0.45042905, z: -0.031670153}
---- !u!54 &1262063479371964832
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
---- !u!114 &649059987
+--- !u!114 &4160528629528912673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,37 +214,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1262063479371964839}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0257b33920b47774cbbfb6c8787b1f61, type: 3}
+  m_Script: {fileID: 11500000, guid: d34a64af67ceb4342a864a9836cdc8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 2
---- !u!114 &6728687445319340666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f6bcbc1020e409685536567ccb2298c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  count: 0
-  max: 0
---- !u!114 &3524035055323702807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262063479371964839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96ee55ae6c5331147bd7ae185ae85736, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flowerTemplate: {fileID: 1365374561313740346, guid: 49433964917d98d4d97763fa963bf87d, type: 3}
+  cost: 100
+  itemTemplate: {fileID: 1262063479371964839, guid: 1a0ac96ae1eaa044581fe09eef762b1e, type: 3}
 --- !u!1 &1262063480045602216
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +230,7 @@ GameObject:
   - component: {fileID: 1262063480045602219}
   - component: {fileID: 1262063480045602196}
   - component: {fileID: 1262063480045602197}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +311,7 @@ GameObject:
   - component: {fileID: 1262063480404576056}
   - component: {fileID: 1262063480404576037}
   - component: {fileID: 1262063480404576058}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: hole
   m_TagString: Untagged
   m_Icon: {fileID: 0}

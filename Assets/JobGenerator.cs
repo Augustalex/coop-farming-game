@@ -11,23 +11,45 @@ public class JobGenerator : MonoBehaviour
 
     private float _index;
 
+    private int _maxJobs = 3;
+
     void Start()
     {
-        for (int i = 0; i < 4; i++)
+        GameManager.Instance.StarLevelChanged += UpdateJobCount;
+
+        for (int i = 0; i < _maxJobs; i++)
         {
-            var job = Instantiate(jobTemplate,
-                leftTopPivot.transform.position + Vector3.right * Offset * _index,
-                leftTopPivot.transform.rotation,
-                leftTopPivot.transform);
-            _index += 1;
+            CreateJobPaper(i);
+        }
+    }
 
-            var jobPaperRoot = job.GetComponent<JobPaperRoot>();
-            if (i == 3)
+    private void CreateJobPaper(int i)
+    {
+        var job = Instantiate(jobTemplate,
+            leftTopPivot.transform.position + Vector3.right * Offset * _index,
+            leftTopPivot.transform.rotation,
+            leftTopPivot.transform);
+        _index += 1;
+
+        var jobPaperRoot = job.GetComponent<JobPaperRoot>();
+        if (i == 3)
+        {
+            jobPaperRoot.waterJob = true;
+        }
+
+        jobPaperRoot.SetupWithRandomJob();
+    }
+
+    private void UpdateJobCount(int starLevel)
+    {
+        if (starLevel == 3)
+        {
+            if (_maxJobs == 3)
             {
-                jobPaperRoot.waterJob = true;
+                var nextIndex = _maxJobs - 1;
+                CreateJobPaper(nextIndex);
+                _maxJobs = 4;
             }
-
-            jobPaperRoot.SetupWithRandomJob();
         }
     }
 }

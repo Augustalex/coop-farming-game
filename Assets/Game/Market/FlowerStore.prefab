@@ -757,10 +757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1367000302685921706}
     m_Modifications:
-    - target: {fileID: 1262063478597480784, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1262063479371964838, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -809,61 +805,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBagShopItem
       objectReference: {fileID: 0}
-    - target: {fileID: 1262063479371964839, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1262063479371964839, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1262063480045602216, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1262063480404576057, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3627404080530129042, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674859665314951959, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1262063479371964833, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-    - {fileID: 1262063479371964832, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-    - {fileID: 649059987, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-    - {fileID: 6728687445319340666, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-    - {fileID: 3524035055323702807, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
---- !u!1 &2296329116323457597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1262063479371964839, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
-  m_PrefabInstance: {fileID: 1035250834070113178}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2296329116323457596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1262063479371964838, guid: f121323e2390a3c45940875aa9453fc5, type: 3}
   m_PrefabInstance: {fileID: 1035250834070113178}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4160528629528912673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2296329116323457597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34a64af67ceb4342a864a9836cdc8d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 100
-  itemTemplate: {fileID: 1365374561313740346, guid: 49433964917d98d4d97763fa963bf87d, type: 3}
 --- !u!1001 &1809761326214816056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,10 +1053,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NutrientBagShopItem
       objectReference: {fileID: 0}
-    - target: {fileID: 5896856043699964473, guid: 14c8f6d28ba283a49a877fa1fdc8a367, type: 3}
-      propertyPath: cost
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14c8f6d28ba283a49a877fa1fdc8a367, type: 3}
 --- !u!4 &3241466763980720139 stripped
@@ -1299,10 +1243,6 @@ PrefabInstance:
     - target: {fileID: 2459656585022862705, guid: 202389a9da72cfe46bc692b178cc62a7, type: 3}
       propertyPath: m_Name
       value: ShovelShopItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 2534856694223107000, guid: 202389a9da72cfe46bc692b178cc62a7, type: 3}
-      propertyPath: cost
-      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 202389a9da72cfe46bc692b178cc62a7, type: 3}
@@ -1525,10 +1465,6 @@ PrefabInstance:
     - target: {fileID: 1262063479371964839, guid: ba1ee9d6fedec4747a1d7738e25961a0, type: 3}
       propertyPath: m_Name
       value: SpeedNutrientBagShopItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 6731079891577009893, guid: ba1ee9d6fedec4747a1d7738e25961a0, type: 3}
-      propertyPath: cost
-      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1ee9d6fedec4747a1d7738e25961a0, type: 3}

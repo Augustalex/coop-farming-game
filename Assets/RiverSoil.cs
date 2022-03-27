@@ -22,6 +22,11 @@ public class RiverSoil : MonoBehaviour
             public RiverSeedGrowth.RiverLevelData levelData;
         }
 
+        private void Start()
+        {
+            GameManager.Instance.UpPrestige(2);
+        }
+
         public void SeedWithTemplate(GameObject seedTemplate)
         {
             if (_seedInGround) return;
