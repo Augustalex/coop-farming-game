@@ -47,7 +47,7 @@ public class WaterCanItem : MonoBehaviour
                 if (grass)
                 {
                     var grassBlock = grass.GetComponent<GrassBlock>();
-                    if (grassBlock.HasPlant())
+                    if (grassBlock && grassBlock.HasPlant())
                     {
                         WaterGrass(grassBlock);
                         Sounds.Instance.PlayWaterSound(transform.position);

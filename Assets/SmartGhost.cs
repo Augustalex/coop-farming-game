@@ -62,6 +62,8 @@ public class SmartGhost : MonoBehaviour
         _playerItem.Grabbed += OnGrabbed;
 
         _countData = GetComponent<CountData>();
+
+        Hide();
     }
 
     private void OnGrabbed()

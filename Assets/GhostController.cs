@@ -5,7 +5,7 @@ public class GhostController : MonoBehaviour
 {
     public GameObject goodGhost;
     public GameObject badGhost;
-
+    
     public void CanPlace()
     {
         goodGhost.SetActive(true);

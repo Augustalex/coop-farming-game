@@ -56,7 +56,6 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
                 prestigeEarned += 5;
         }
 
-        Debug.Log("PRESTIGE: " + prestigeEarned);
         GameManager.Instance.UpPrestige(prestigeEarned);
     }
 
@@ -77,6 +76,8 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
 
     public bool Fulfilling(Goods.GoodsType goodsType)
     {
+        if (deliveryRequest == null) return false;
+
         return deliveryRequest.Fulfilling(goodsType);
     }
 

@@ -34,6 +34,8 @@ public class ActionGhost : MonoBehaviour
         _playerItem.Dropped += OnDrop;
         _playerItem.Grabbed += OnGrabbed;
         _playerItem.Provoked += OnProvoked;
+
+        Hide();
     }
 
     private void OnGrabbed()

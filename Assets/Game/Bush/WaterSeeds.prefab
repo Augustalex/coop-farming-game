@@ -161,11 +161,10 @@ MonoBehaviour:
   bushTemplate: {fileID: 0}
   plantTemplate: {fileID: 7429101750935116671, guid: 98f5fd1efb0a4254085655b6f0a39b7e, type: 3}
   dryDeathTime: 10
-  waterChargeTime: 20
+  waterChargeTime: 30
   timeToGrow: 60
   waterLevels: 4
   healthLevels: 4
-  hasNutrients: 0
 --- !u!114 &8687542795492952
 MonoBehaviour:
   m_ObjectHideFlags: 0

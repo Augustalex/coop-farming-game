@@ -32,7 +32,7 @@ public class Spade : MonoBehaviour
                 if (raycastHit.CompareTag("Grass"))
                 {
                     var grass = raycastHit.GetComponent<GrassBlock>();
-                    if (grass.HasPlant())
+                    if (grass && grass.HasPlant())
                     {
                         grass.RemovePlant();
                         Sounds.Instance.PlayRemoveFlowerSound(transform.position);
