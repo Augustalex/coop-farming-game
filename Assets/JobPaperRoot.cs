@@ -37,6 +37,7 @@ public class JobPaperRoot : MonoBehaviour
     {
         if (waterJob)
         {
+            Debug.Log("ROD JOB!");
             SetupForJob(
                 new Job
                 {
@@ -103,10 +104,10 @@ public class JobPaperRoot : MonoBehaviour
         var jobsDone = _gameManager.jobsDone;
 
         if (jobsDone < 3) return 3;
-        if (jobsDone < 6) return 6;
-        if (jobsDone < 12) return 12;
-        if (jobsDone < 24) return 16;
-        return 21;
+        if (jobsDone < 6) return 4;
+        if (jobsDone < 12) return 6;
+        if (jobsDone < 24) return 8;
+        return 10;
     }
 
     public Job GetJob()

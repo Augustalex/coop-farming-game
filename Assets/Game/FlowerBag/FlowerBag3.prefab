@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6bcbc1020e409685536567ccb2298c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 10
+  count: 3
   max: 0
 --- !u!114 &3524035055323702807
 MonoBehaviour:
@@ -293,7 +293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
   toggles: 01000000
-  constraints: 00000000
+  grassConstraints: 
+  soilConstraints: 
 --- !u!1 &1262063480045602216
 GameObject:
   m_ObjectHideFlags: 0
