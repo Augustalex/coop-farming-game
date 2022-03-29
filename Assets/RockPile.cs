@@ -25,6 +25,7 @@ public class RockPile : MonoBehaviour
             var tile = Instantiate(tileTemplate, transform.position + Vector3.up * .05f * (i + 1),
                 transform.rotation, transform);
 
+            tile.layer = LayerMask.NameToLayer("PlayerItems");
             _tiles.Push(tile);
         }
 
@@ -55,9 +56,11 @@ public class RockPile : MonoBehaviour
                         var rotation = colliderTransform.rotation;
 
                         var tile = _tiles.Pop();
+                        tile.layer = LayerMask.NameToLayer("Default");
                         _countData.count = _tiles.Count;
 
-                        if (tile) // In case it was removed by some other code, it's just a game object in the wild after all
+                        if (tile
+                        ) // In case it was removed by some other code, it's just a game object in the wild after all
                         {
                             tile.transform.SetParent(parent);
                             tile.transform.position = position + Vector3.up * .5f;

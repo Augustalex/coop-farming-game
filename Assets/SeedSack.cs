@@ -28,7 +28,7 @@ public class SeedSack : MonoBehaviour
     {
         if (_seeds.Count > 0)
         {
-            var soil = _useOnSoil.HoveringSoil(highlightPosition);
+            var soil = _useOnSoil.HoverOnSoil(highlightPosition);
             if (soil)
             {
                 var soilBlock = soil.GetComponent<SoilBlock>();

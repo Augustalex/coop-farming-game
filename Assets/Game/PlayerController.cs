@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask IgnoreWhenSettingHeight;
+
     private Vector3 _move;
     private Rigidbody _rigibody;
     private float _speed = 1200f;
@@ -70,7 +72,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _rigibody.drag = 7f;
+            }
 
+            if (_move.magnitude > .6f)
+            {
                 var boostFactor = 1f;
 
                 var currentPosition = _rigibody.transform.position;
@@ -99,16 +104,17 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsWalking", false);
         }
 
-        if (_move.magnitude > .45f)
+        if (_move.magnitude > .25f)
         {
             _playerLooker.OrientWith(_move);
             _highlight.MoveAlong(_move);
         }
 
+
         if (!_rigibody.isKinematic)
         {
             RaycastHit hit;
-            if (Physics.Raycast(new Ray(_rigibody.position, Vector3.down), out hit, 2f))
+            if (Physics.Raycast(new Ray(_rigibody.position, Vector3.down), out hit, 2f, ~IgnoreWhenSettingHeight))
             {
                 var position = transform.position;
                 transform.position = new Vector3(
@@ -127,7 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_move.magnitude > .4f) _uiController.Move(_move);
         else _uiController.MoveReset();
-        
+
         if (_useThisFrame) _uiController.PlayerSubmit();
     }
 
@@ -207,6 +213,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetUIController(IUIController uiController)
     {
+        _animator.SetBool("IsWalking", false);
         _uiController = uiController;
     }
 

@@ -10,7 +10,7 @@ public class ItemGhost : MonoBehaviour
     void Start()
     {
         _ghost = Instantiate(ghostTemplate);
-
+        
         _playerItem = GetComponent<PlayerItem>();
         _playerItem.Dropped += OnDrop;
         _playerItem.Grabbed += OnGrabbed;

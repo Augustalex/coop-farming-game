@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1262063478597480787}
   - component: {fileID: 1262063478597480797}
   - component: {fileID: 1262063478597480786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 1.209, y: 3.754, z: -11.283}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.366, y: -0.07332516}
+  m_AnchoredPosition: {x: 0.366, y: 0.42667484}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1262063478597480797
@@ -185,7 +185,9 @@ GameObject:
   - component: {fileID: -4192631100411092527}
   - component: {fileID: 4715908547219211488}
   - component: {fileID: 6728687445319340666}
-  m_Layer: 0
+  - component: {fileID: 8549468635744328699}
+  - component: {fileID: 4883979838497782426}
+  m_Layer: 7
   m_Name: SeedSack
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -200,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262063479371964839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.162, y: 3.4426196, z: 5.206951}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1262063480045602219}
@@ -222,7 +224,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7839899, y: 1, z: 0.59777355}
-  m_Center: {x: 0.018621922, y: 0, z: 0.0074486732}
+  m_Center: {x: 0.018621922, y: 0.5, z: 0.0074486732}
 --- !u!54 &1262063479371964832
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,6 +294,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 0
   max: 0
+--- !u!114 &8549468635744328699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262063479371964839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91963fa992e14f439d4ef6fe0e671062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4883979838497782426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262063479371964839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e363617ab58544280b2cfc0c6d629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
+  toggles: 00000000
+  grassConstraints: 
+  soilConstraints: 
 --- !u!1 &1262063480045602216
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +333,7 @@ GameObject:
   - component: {fileID: 1262063480045602219}
   - component: {fileID: 1262063480045602196}
   - component: {fileID: 1262063480045602197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262063480045602216}
   m_LocalRotation: {x: 0, y: 0.05368672, z: 0, w: 0.99855787}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.73499995, y: 0.975, z: 0.5921175}
   m_Children: []
   m_Father: {fileID: 1262063479371964838}
@@ -384,6 +414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hole
       objectReference: {fileID: 0}
+    - target: {fileID: 2409141134171349566, guid: 22d539fdcfef11445954770c0d1d2752, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2409141134171349567, guid: 22d539fdcfef11445954770c0d1d2752, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -394,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2409141134171349567, guid: 22d539fdcfef11445954770c0d1d2752, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4419999
+      value: 0.9419999
       objectReference: {fileID: 0}
     - target: {fileID: 2409141134171349567, guid: 22d539fdcfef11445954770c0d1d2752, type: 3}
       propertyPath: m_LocalPosition.z
@@ -517,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 471727334283015333, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 471727334283015333, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -534,6 +568,14 @@ PrefabInstance:
     - target: {fileID: 1118551326958536617, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_Name
       value: Info
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118551326958536617, guid: 0451f2db114185045b1de0362b072d59, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021951932334142508, guid: 0451f2db114185045b1de0362b072d59, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0451f2db114185045b1de0362b072d59, type: 3}

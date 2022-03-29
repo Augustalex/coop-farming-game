@@ -19,7 +19,7 @@ public class SeedItem : MonoBehaviour
 
     private void OnUse(Vector3 highlightPosition)
     {
-        var soil = _useOnSoil.HoveringSoil(highlightPosition);
+        var soil = _useOnSoil.HoverOnSoil(highlightPosition);
         if (soil)
         {
             var soilBlock = soil.GetComponent<SoilBlock>();

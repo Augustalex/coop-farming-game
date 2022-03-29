@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1349820236164092818}
   - component: {fileID: 4341115595375237224}
   - component: {fileID: 7085220100722097134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ BoxCollider:
   m_GameObject: {fileID: 546137800457837236}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489274693306372259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WoodSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7389153839813438345}
   - component: {fileID: 8604821380263089030}
   - component: {fileID: 6321957671973858893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ BoxCollider:
   m_GameObject: {fileID: 1266381609443523462}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 1673556101393449330}
   - component: {fileID: 1609757056677947863}
   - component: {fileID: 7560699126799830499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ BoxCollider:
   m_GameObject: {fileID: 2440701297036016784}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 6714155863170472798}
   - component: {fileID: 7979381531508396864}
   - component: {fileID: 6136131207610280786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ BoxCollider:
   m_GameObject: {fileID: 2841365292802380889}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1911815922388537407}
   - component: {fileID: 3873094902207514507}
   - component: {fileID: 5413155826484132078}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ BoxCollider:
   m_GameObject: {fileID: 4459016172512550667}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 1532787863154033507}
   - component: {fileID: 1324916068030197715}
   - component: {fileID: 1810843869773282336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ BoxCollider:
   m_GameObject: {fileID: 7164717516941952461}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 4214765510947113605}
   - component: {fileID: 7411277598538799817}
   - component: {fileID: 6296747463950679918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ BoxCollider:
   m_GameObject: {fileID: 7318193459440940030}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 5446237705492777176}
   - component: {fileID: 3978946071781144949}
   - component: {fileID: 847256477227071295}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +794,7 @@ BoxCollider:
   m_GameObject: {fileID: 9217380766766256711}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class Boping : MonoBehaviour
 {
+    public float frequency = 1.8f;
+    public float height = .035f;
+
     private float _direction = 1f;
     private float _progress = 0f;
-    private float _frequency = 1.8f;
-    private float _height = .035f;
     private Vector3 _originalPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
-        _originalPosition = transform.position;
+        _originalPosition = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        _progress += (Time.deltaTime / _frequency) * _direction;
+        _progress += (Time.deltaTime / frequency) * _direction;
         if (_progress > 1 || _progress < 0)
         {
             _direction *= -1;
         }
 
-        transform.position = Vector3.Lerp(_originalPosition - Vector3.up * _height,
-            _originalPosition + Vector3.up * _height, _progress);
+        var currentPosition = transform.localPosition;
+        var newHeight = Vector3.Slerp(_originalPosition - Vector3.up * height,
+            _originalPosition + Vector3.up * height, _progress).y;
+        transform.localPosition = new Vector3(
+            currentPosition.x,
+            newHeight,
+            currentPosition.z
+        );
     }
 }

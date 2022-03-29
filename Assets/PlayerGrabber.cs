@@ -12,6 +12,15 @@ public class PlayerGrabber : MonoBehaviour
     public PlayerLooker body;
     private GameObject _grabbing;
     private ItemGhost _ghost;
+    private SmartGhost _smartGhots;
+
+    public static readonly Vector3 SelectColumn = new Vector3(
+        .4f,
+        5f,
+        .4f
+    );
+
+    private PlayerItem _playerItem;
 
     private void Update()
     {
@@ -19,6 +28,18 @@ public class PlayerGrabber : MonoBehaviour
         {
             var highlightPosition = highlight.transform.position;
             _ghost.Move(highlightPosition);
+        }
+
+        if (_smartGhots)
+        {
+            var highlightPosition = highlight.transform.position;
+            _smartGhots.OnMove(highlightPosition);
+        }
+
+        if (_playerItem)
+        {
+            var highlightPosition = highlight.transform.position;
+            _playerItem.Provoke(highlightPosition);
         }
     }
 
@@ -46,20 +67,17 @@ public class PlayerGrabber : MonoBehaviour
             }
             else
             {
-                var hits = Physics.OverlapSphere(highlight.transform.position, .5f)
-                    .Where(hit => hit.GetComponent<PlayerItem>()).ToArray();
-                if (hits.Length > 0)
+                if (highlight.HasHighlightedItem())
                 {
-                    var hit = hits[0];
-                    _grabbing = hit.gameObject;
+                    var item = highlight.GetHighlightedItem();
+                    // var hit = selfHits.Length > 0 ? selfHits[0] : highlightHits[0];
+                    _grabbing = item;
 
-                    var playerItem = _grabbing.GetComponent<PlayerItem>();
-                    playerItem.GrabbedBy(this);
+                    _playerItem = _grabbing.GetComponent<PlayerItem>();
+                    _playerItem.GrabbedBy(this);
 
                     _grabbing.transform.SetParent(body.transform);
-                    _grabbing.transform.position = body.transform.position + Vector3.up;
-
-                    _grabbing.GetComponent<Rigidbody>().isKinematic = true;
+                    _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
 
                     var plant = _grabbing.GetComponent<Plant>();
                     if (plant)
@@ -73,8 +91,60 @@ public class PlayerGrabber : MonoBehaviour
                         _ghost = ghost;
                     }
 
+                    var smartGhost = _grabbing.GetComponent<SmartGhost>();
+                    if (smartGhost)
+                    {
+                        _smartGhots = smartGhost;
+                    }
+
                     Sounds.Instance.PlayPickupItemSound(transform.position);
                 }
+
+                // var alignedBodyPosition = Highlight.AlignToGrid(body.transform.position);
+                // var selfHits = Physics
+                //     .OverlapBox(alignedBodyPosition, SelectColumn)
+                //     .Where(Highlight.ShouldHighlightItem)
+                //     .ToArray();
+                //
+                // var highlightHits = Physics
+                //     .OverlapBox(highlight.transform.position, SelectColumn)
+                //     .Where(Highlight.ShouldHighlightItem)
+                //     .ToArray();
+                //
+                // if (selfHits.Length > 0 || highlightHits.Length > 0)
+                // {
+                //     var hit = selfHits.Length > 0 ? selfHits[0] : highlightHits[0];
+                //     _grabbing = hit.gameObject;
+                //     _grabbingBody = hit.attachedRigidbody;
+                //     _grabbingBody.isKinematic = true;
+                //
+                //     _playerItem = _grabbing.GetComponent<PlayerItem>();
+                //     _playerItem.GrabbedBy(this);
+                //
+                //     _grabbing.transform.SetParent(body.transform);
+                //     _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
+                //
+                //
+                //     var plant = _grabbing.GetComponent<Plant>();
+                //     if (plant)
+                //     {
+                //         plant.Grabbed();
+                //     }
+                //
+                //     var ghost = _grabbing.GetComponent<ItemGhost>();
+                //     if (ghost)
+                //     {
+                //         _ghost = ghost;
+                //     }
+                //
+                //     var smartGhost = _grabbing.GetComponent<SmartGhost>();
+                //     if (smartGhost)
+                //     {
+                //         _smartGhots = smartGhost;
+                //     }
+                //
+                //     Sounds.Instance.PlayPickupItemSound(transform.position);
+                // }
             }
         }
     }
@@ -90,15 +160,20 @@ public class PlayerGrabber : MonoBehaviour
         }
 
         _grabbing.transform.SetParent(null);
-        _grabbing.transform.position = highlight.transform.position + Vector3.up;
-        _grabbing.transform.rotation = Quaternion.identity;
-        _grabbing.GetComponentInChildren<Rigidbody>().isKinematic = false;
 
-        var playerItem = _grabbing.GetComponent<PlayerItem>();
-        playerItem.WasDropped();
+        // Drop at highlight
+        // _grabbing.transform.position = highlight.transform.position + Vector3.up;
+
+        // Drop where player stands
+        _grabbing.transform.position = Highlight.AlignToGrid(body.transform.position) + Vector3.up;
+        _grabbing.transform.rotation = Quaternion.identity;
+        _playerItem = _grabbing.GetComponent<PlayerItem>();
+        _playerItem.WasDropped();
 
         _grabbing = null;
+        _playerItem = null;
         _ghost = null;
+        _smartGhots = null;
 
         Sounds.Instance.PlayDropItemSound(transform.position);
     }
@@ -118,7 +193,7 @@ public class PlayerGrabber : MonoBehaviour
         if (!HasItem()) return false;
 
         var useOnSoil = _grabbing.GetComponent<UseOnSoil>();
-        return useOnSoil && useOnSoil.HoveringSoil(highlight.transform.position);
+        return useOnSoil && useOnSoil.HoverOnSoil(highlight.transform.position);
     }
 
     public void StealGrabbedItem()

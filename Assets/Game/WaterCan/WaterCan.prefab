@@ -204,6 +204,9 @@ GameObject:
   - component: {fileID: 275681565271703018}
   - component: {fileID: -1657579566305115319}
   - component: {fileID: 3908348967538306175}
+  - component: {fileID: 2571259785155567607}
+  - component: {fileID: 1094338577539240421}
+  - component: {fileID: 3915995631803401756}
   m_Layer: 7
   m_Name: WaterCan
   m_TagString: Item
@@ -301,6 +304,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 5
   max: 5
+--- !u!114 &2571259785155567607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275681565271703014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6092208ed5a54a9aa2835a79a954a96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1094338577539240421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275681565271703014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91963fa992e14f439d4ef6fe0e671062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3915995631803401756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275681565271703014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e363617ab58544280b2cfc0c6d629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: c73f32df7a35516409a414b912e88297, type: 3}
+  toggles: 00000000
 --- !u!1 &275681565454249234
 GameObject:
   m_ObjectHideFlags: 0

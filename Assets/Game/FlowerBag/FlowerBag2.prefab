@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 649059987}
   - component: {fileID: 6728687445319340666}
   - component: {fileID: 3524035055323702807}
+  - component: {fileID: -6754315952231275935}
   m_Layer: 7
   m_Name: FlowerBag2
   m_TagString: Item
@@ -278,6 +279,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowerTemplate: {fileID: 1365374561313740346, guid: a0ab0346eba440a4b89431d6e395e707, type: 3}
+--- !u!114 &-6754315952231275935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262063479371964839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e363617ab58544280b2cfc0c6d629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
+  toggles: 01000000
+  constraints: 00000000
 --- !u!1 &1262063480045602216
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,11 +553,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1118551326958536617, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5021951932334142508, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0451f2db114185045b1de0362b072d59, type: 3}

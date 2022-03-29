@@ -47,7 +47,7 @@ namespace Game
 
         public void PlayFailedWaterSound(Vector3 position)
         {
-            PlaySound(blublub, position, BlubVolume);
+            PlaySound(poof, position, 1f);
         }
 
         public void PlayWaterSound(Vector3 transformPosition)

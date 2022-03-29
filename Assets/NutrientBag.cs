@@ -23,7 +23,7 @@ public class NutrientBag : MonoBehaviour
     {
         if (!gameObject) return;
 
-        var soil = _useOnSoil.HoveringSoil(highlightPosition);
+        var soil = _useOnSoil.HoverOnSoil(highlightPosition);
         if (soil)
         {
             var soilBlock = soil.GetComponent<SoilBlock>();

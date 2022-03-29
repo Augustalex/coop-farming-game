@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4047819888464962816}
   - component: {fileID: 5409925153096702810}
   - component: {fileID: 6792304352907476287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8693099563687585253}
   - component: {fileID: 5596402012140051167}
   - component: {fileID: 8728102496563850422}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4151998076881993315}
   - component: {fileID: 8873296641560311533}
   - component: {fileID: 3273512378674085122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 5876386825878327579}
   - component: {fileID: 3158955360206038656}
   - component: {fileID: 8332962255242194403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,9 +336,9 @@ GameObject:
   - component: {fileID: 1678163307654802412}
   - component: {fileID: 7081048416489276560}
   - component: {fileID: 3210271792720416847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WaterBush
-  m_TagString: Untagged
+  m_TagString: Bush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 7700073505755224256}
   - component: {fileID: 13834673628542797}
   - component: {fileID: 8980650434166276977}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

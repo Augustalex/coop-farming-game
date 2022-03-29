@@ -34,7 +34,7 @@ public class WaterCanItem : MonoBehaviour
     {
         if (_countData.count > 0)
         {
-            var soil = _useOnSoil.HoveringSoil(highlightPosition);
+            var soil = _useOnSoil.HoverOnSoil(highlightPosition);
 
             if (soil)
             {
@@ -65,7 +65,7 @@ public class WaterCanItem : MonoBehaviour
     {
         var flower = grassBlock.GetPlant().GetComponent<FlowerGrowth>();
         flower.Water();
-        
+
         UseWater();
     }
 
@@ -81,7 +81,7 @@ public class WaterCanItem : MonoBehaviour
         _countData.count -= 1;
         if (_countData.count <= 0)
         {
-            SetNoWaterStyle();
+            SetHasNoWater();
         }
     }
 
@@ -94,16 +94,16 @@ public class WaterCanItem : MonoBehaviour
 
         _countData.count = _countData.max;
         Sounds.Instance.PlayerWaterRechargeSound(transform.position);
-        SetHasWaterStyle();
+        SetHasWater();
     }
 
-    private void SetNoWaterStyle()
+    private void SetHasNoWater()
     {
         noWaterStyle.SetActive(true);
         hasWaterStyle.SetActive(false);
     }
 
-    private void SetHasWaterStyle()
+    private void SetHasWater()
     {
         noWaterStyle.SetActive(false);
         hasWaterStyle.SetActive(true);
