@@ -20,7 +20,8 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
 
             if (timeLeftOfDelivery == 0f)
             {
-                GameManager.Instance.DownPrestige(10);
+                GameManager.Instance.RegisterFail();
+                // GameManager.Instance.DownPrestige(10);
 
                 EndDelivery();
                 TruckMover.Instance.DeliveryEnded();

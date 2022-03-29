@@ -14,11 +14,14 @@ public class GameManager : MonoSingleton<GameManager>
     public int money = 0;
     public int jobsDone = 0;
     public int starLevel = 0;
+    public int fails = 0;
 
     public bool cheatUpgrade;
+    public bool failNow;
 
     public event Action<int> PrestigeChanged;
     public event Action<int> StarLevelChanged;
+    public event Action<int> FailAttemptsChanged;
 
     private void Update()
     {
@@ -26,6 +29,12 @@ public class GameManager : MonoSingleton<GameManager>
         {
             cheatUpgrade = false;
             UpPrestige(10);
+        }
+
+        if (failNow)
+        {
+            failNow = false;
+            RegisterFail();
         }
     }
 
@@ -99,5 +108,11 @@ public class GameManager : MonoSingleton<GameManager>
         UpdateStarLevel();
 
         PrestigeChanged?.Invoke(prestige);
+    }
+
+    public void RegisterFail()
+    {
+        fails += 1;
+        FailAttemptsChanged?.Invoke(fails);
     }
 }
