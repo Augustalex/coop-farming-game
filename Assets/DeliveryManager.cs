@@ -27,30 +27,36 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
             }
             else if (DeliveryIsSatisfied())
             {
-                GameManager.Instance.money += Reward();
-
-                var prestigeEarned = 0;
-                foreach (var request in deliveryRequest.requests)
-                {
-                    if (request.goodsType == Goods.GoodsType.YellowFlower)
-                        prestigeEarned += 1;
-                    if (request.goodsType == Goods.GoodsType.RedBerry)
-                        prestigeEarned += 2;
-                    if (request.goodsType == Goods.GoodsType.WaterPlant)
-                        prestigeEarned += 3;
-                    if (request.goodsType == Goods.GoodsType.RodPlant)
-                        prestigeEarned += 5;
-                }
-                GameManager.Instance.UpPrestige(prestigeEarned);
+                RewardPlayer();
+                Sounds.Instance.PlayKachingSound(GameManager.Instance.GetCameraPosition());
 
                 EndDelivery();
                 TruckMover.Instance.DeliveryEnded();
 
-                Sounds.Instance.PlayKachingSound(GameManager.Instance.GetCameraPosition());
-
                 GameManager.Instance.jobsDone += 1;
             }
         }
+    }
+
+    private void RewardPlayer()
+    {
+        GameManager.Instance.money += Reward();
+
+        var prestigeEarned = 0;
+        foreach (var request in deliveryRequest.requests)
+        {
+            if (request.goodsType == Goods.GoodsType.YellowFlower)
+                prestigeEarned += 1;
+            if (request.goodsType == Goods.GoodsType.RedBerry)
+                prestigeEarned += 2;
+            if (request.goodsType == Goods.GoodsType.WaterPlant)
+                prestigeEarned += 3;
+            if (request.goodsType == Goods.GoodsType.RodPlant)
+                prestigeEarned += 5;
+        }
+
+        Debug.Log("PRESTIGE: " + prestigeEarned);
+        GameManager.Instance.UpPrestige(prestigeEarned);
     }
 
     private int Reward()

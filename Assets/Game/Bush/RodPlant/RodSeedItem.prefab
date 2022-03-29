@@ -460,6 +460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c0d97a8ba39e1439a0317b05514b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goodsType: 4
+  goodsType: 3
   seedTemplate: {fileID: 4631108663544021688, guid: c0e551b6eaee4e94fa24456f1543c332, type: 3}
   materialLabel: {fileID: 2100000, guid: f61737e6eb67d5744abcb77b913724fa, type: 2}

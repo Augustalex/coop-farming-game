@@ -1816,7 +1816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2bdd4df2ae57e459e289d5087b5f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soil: {fileID: 0}
 --- !u!114 &6893298287656748135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,7 +1828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b94ad733f25b743843580300fa608c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goodsType: 2
+  goodsType: 1
   count: 1
 --- !u!114 &7619923373823858537
 MonoBehaviour:

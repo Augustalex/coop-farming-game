@@ -22316,8 +22316,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3809866, y: 1.8402818, z: 1.3099259}
-  m_Center: {x: 0.19049318, y: 0.42014092, z: -0.09009472}
+  m_Size: {x: 1.3809866, y: 3.6000412, z: 1.3099259}
+  m_Center: {x: 0.19049318, y: 1.3000202, z: -0.09009472}
 --- !u!65 &1082663011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44877,7 +44877,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 1.5525847e+30, z: 4.5904e-41, w: 9.403955e-38}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 3.1e-44, w: 3.2e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

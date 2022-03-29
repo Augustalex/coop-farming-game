@@ -56,10 +56,10 @@ public class DeliveryInfoText : MonoBehaviour
 
     private string GoodsName(Goods.GoodsType goodsType)
     {
-        if (goodsType == Goods.GoodsType.Plant) return "Plant";
         if (goodsType == Goods.GoodsType.YellowFlower) return "Yellow flower";
         if (goodsType == Goods.GoodsType.RedBerry) return "Red berry";
         if (goodsType == Goods.GoodsType.WaterPlant) return "Water plant";
+        if (goodsType == Goods.GoodsType.RodPlant) return "Rod plant";
         else return "Unknown";
     }
 }

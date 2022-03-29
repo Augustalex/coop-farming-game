@@ -6,14 +6,13 @@ public class Goods : MonoBehaviour
 {
     public enum GoodsType
     {
-        Plant,
         YellowFlower,
         RedBerry,
         WaterPlant,
         RodPlant
     }
 
-    public GoodsType goodsType = GoodsType.Plant;
+    public GoodsType goodsType = GoodsType.YellowFlower;
 
     public int count = 1;
 
