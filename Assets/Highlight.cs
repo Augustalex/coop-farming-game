@@ -8,8 +8,6 @@ public class Highlight : MonoBehaviour
     private PlayerLooker _playerBoody;
     private MeshRenderer _meshRenderer;
     private GameObject _lifted;
-    private Rigidbody _liftedBody;
-    private bool _liftedIsKinematic;
 
     public static readonly float HighlightLiftOffset = 1.5f;
     private GameObject _highlightedItem;
@@ -18,19 +16,6 @@ public class Highlight : MonoBehaviour
     {
         _playerBoody = transform.parent.GetComponentInChildren<PlayerLooker>();
         _meshRenderer = GetComponent<MeshRenderer>();
-    }
-
-    private void LateUpdate()
-    {
-        // if (_lifted)
-        // {
-        //     var currentItemPosition = _lifted.transform.position;
-        //     _lifted.transform.position = new Vector3(
-        //         currentItemPosition.x,
-        //         transform.position.y + .75f,
-        //         currentItemPosition.z
-        //     );
-        // }
     }
 
     public void MoveAlong(Vector3 move)
@@ -108,29 +93,16 @@ public class Highlight : MonoBehaviour
     {
         boxHit.GetComponent<PlayerItem>().LiftUp(PlayerItem.LifterIdentifier.Highlight, HighlightLiftOffset);
         _lifted = boxHit.gameObject;
-        // _liftedBody = boxHit.attachedRigidbody;
-        // if (_liftedBody)
-        // {
-        //     _liftedIsKinematic = _liftedBody.isKinematic;
-        //     _liftedBody.isKinematic = true;
-        // }
     }
 
     private void DisableLifting()
     {
-        // if (_liftedBody)
-        // {
-        //     _liftedBody.isKinematic = _liftedIsKinematic;
-        // }
-        //
-
         if (_lifted)
         {
             _lifted.GetComponent<PlayerItem>().StopLifting(PlayerItem.LifterIdentifier.Highlight);
         }
 
         _lifted = null;
-        // _liftedBody = null;
     }
 
     public static bool ShouldHighlightItem(Collider hit)
