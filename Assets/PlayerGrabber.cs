@@ -99,52 +99,6 @@ public class PlayerGrabber : MonoBehaviour
 
                     Sounds.Instance.PlayPickupItemSound(transform.position);
                 }
-
-                // var alignedBodyPosition = Highlight.AlignToGrid(body.transform.position);
-                // var selfHits = Physics
-                //     .OverlapBox(alignedBodyPosition, SelectColumn)
-                //     .Where(Highlight.ShouldHighlightItem)
-                //     .ToArray();
-                //
-                // var highlightHits = Physics
-                //     .OverlapBox(highlight.transform.position, SelectColumn)
-                //     .Where(Highlight.ShouldHighlightItem)
-                //     .ToArray();
-                //
-                // if (selfHits.Length > 0 || highlightHits.Length > 0)
-                // {
-                //     var hit = selfHits.Length > 0 ? selfHits[0] : highlightHits[0];
-                //     _grabbing = hit.gameObject;
-                //     _grabbingBody = hit.attachedRigidbody;
-                //     _grabbingBody.isKinematic = true;
-                //
-                //     _playerItem = _grabbing.GetComponent<PlayerItem>();
-                //     _playerItem.GrabbedBy(this);
-                //
-                //     _grabbing.transform.SetParent(body.transform);
-                //     _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
-                //
-                //
-                //     var plant = _grabbing.GetComponent<Plant>();
-                //     if (plant)
-                //     {
-                //         plant.Grabbed();
-                //     }
-                //
-                //     var ghost = _grabbing.GetComponent<ItemGhost>();
-                //     if (ghost)
-                //     {
-                //         _ghost = ghost;
-                //     }
-                //
-                //     var smartGhost = _grabbing.GetComponent<SmartGhost>();
-                //     if (smartGhost)
-                //     {
-                //         _smartGhots = smartGhost;
-                //     }
-                //
-                //     Sounds.Instance.PlayPickupItemSound(transform.position);
-                // }
             }
         }
     }
