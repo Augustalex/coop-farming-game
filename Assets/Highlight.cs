@@ -43,7 +43,8 @@ public class Highlight : MonoBehaviour
 
         var target = itemsBeneathPlayerBody.Length > 0
             ? alignedBodyPosition
-            : alignedBodyPosition + move.normalized * 1f;
+            : alignedBodyPosition + move.normalized * .75f;
+        
         // Move highlight to target
         transform.position = AlignToGrid(target);
 

@@ -12,5 +12,6 @@ namespace Game
         public GameObject plantTemplate;
         public GameObject rockTile;
         public GameObject grassTemplate;
+        public GameObject weedsTemplate;
     }
 }

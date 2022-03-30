@@ -161,4 +161,8 @@ public class SmartGhost : MonoBehaviour
                 || (_toggles.Contains(GhostToggles.Soil) && collider.CompareTag("Soil")))
                || (_toggles.Contains(GhostToggles.Bush) && collider.CompareTag("Bush"));
     }
+    
+    void OnDestroy() {
+        Destroy(_ghost);   
+    }
 }

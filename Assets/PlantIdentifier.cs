@@ -8,7 +8,8 @@ public class PlantIdentifier : MonoBehaviour
     {
         YellowFlower,
         RedBerry,
-        WaterBob
+        WaterBob,
+        Weeds,
     }
 
     public PlantType plantType;

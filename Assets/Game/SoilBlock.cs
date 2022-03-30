@@ -7,9 +7,11 @@ namespace Game
     {
         private GameObject _wateredSoil;
         private GameObject _drySoil;
+        private GameObject _corruptSoil;
         private SeedGrowth _seedInGround;
         private float _emptyTime;
         private Plant _unharvestedPlant;
+        private GameObject _weeds;
 
         public event Action<BlockState> BlockStateChanged;
 
@@ -19,16 +21,17 @@ namespace Game
             HasSeeds,
             ReadyToHarvest
         }
-        
+
         public struct BlockState
         {
             public SoilState soilState;
-            
+
             public SeedGrowth.LevelData levelData;
         }
 
         private void Awake()
         {
+            _corruptSoil = GetComponentInChildren<CorruptSoil>().gameObject;
             _wateredSoil = GetComponentInChildren<WateredSoil>().gameObject;
             _drySoil = GetComponentInChildren<DrySoil>().gameObject;
         }
@@ -36,6 +39,7 @@ namespace Game
         private void Start()
         {
             _wateredSoil.SetActive(false);
+            _corruptSoil.SetActive(false);
             _drySoil.SetActive(true);
         }
 
@@ -69,6 +73,7 @@ namespace Game
 
         private void WetUp()
         {
+            _corruptSoil.SetActive(false);
             _drySoil.SetActive(false);
             _wateredSoil.SetActive(true);
 
@@ -85,19 +90,33 @@ namespace Game
 
         private void DryUp()
         {
+            _corruptSoil.SetActive(false);
             _wateredSoil.SetActive(false);
             _drySoil.SetActive(true);
         }
 
+        public void AttachWeeds(GameObject weedTemplate)
+        {
+            if (!IsFree()) return;
+
+            _wateredSoil.SetActive(false);
+            _drySoil.SetActive(false);
+            _corruptSoil.SetActive(true);
+
+            var seed = Instantiate(weedTemplate);
+            seed.transform.position = transform.position + Vector3.up * 2f;
+
+            _weeds = seed;
+        }
+
         public void SeedWithTemplate(GameObject seedTemplate)
         {
-            if (_seedInGround) return;
-            if (_unharvestedPlant) return;
+            if (!IsFree()) return;
 
             DryUp();
 
             SeedUp(seedTemplate);
-            
+
             BlockStateChanged?.Invoke(new BlockState
             {
                 soilState = SoilState.HasSeeds,
@@ -116,6 +135,7 @@ namespace Game
             _seedInGround.Died += OnSeedsDied;
             _seedInGround.NoWater += OnWaterRanOut;
             _seedInGround.LevelsUpdated += OnLevelsUpdated;
+            _seedInGround.Corrupted += OnCorrupted;
         }
 
         private void OnWaterRanOut()
@@ -141,6 +161,7 @@ namespace Game
             _seedInGround.Died -= OnSeedsDied;
             _seedInGround.NoWater -= OnWaterRanOut;
             _seedInGround.LevelsUpdated -= OnLevelsUpdated;
+            _seedInGround.Corrupted -= OnCorrupted;
             _seedInGround = null;
         }
 
@@ -148,7 +169,7 @@ namespace Game
         {
             RemoveSeedState();
             DryUp();
-            
+
             BlockStateChanged?.Invoke(new BlockState
             {
                 soilState = SoilState.Free,
@@ -164,7 +185,7 @@ namespace Game
         private void OnSeedsGrownUp(Plant plant)
         {
             RemoveSeedState();
-            
+
             _unharvestedPlant = plant;
             _unharvestedPlant.SetAsInSoil();
             _unharvestedPlant.Harvested += OnPlantHarvested;
@@ -207,7 +228,7 @@ namespace Game
 
         public bool IsFree()
         {
-            return !_seedInGround && !_unharvestedPlant;
+            return !_seedInGround && !_unharvestedPlant && !_weeds;
         }
 
         public bool HasSeed()
@@ -223,6 +244,31 @@ namespace Game
         public void AddSpeedNutrient()
         {
             _seedInGround.AddSpeedNutrient();
+        }
+
+        public void KillSeed()
+        {
+            _seedInGround.Kill();
+        }
+
+        public void KillWeeds()
+        {
+            Destroy(_weeds);
+            _weeds = null;
+
+            DryUp();
+        }
+
+        public bool HasWeeds()
+        {
+            return _weeds != null;
+        }
+
+        public void OnCorrupted()
+        {
+            KillSeed();
+
+            AttachWeeds(AssetLibrary.Instance.weedsTemplate);
         }
     }
 }

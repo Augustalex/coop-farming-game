@@ -16,12 +16,12 @@ public class SeedGrowth : MonoBehaviour
     public float waterLevels = 4f;
     public float healthLevels = 4f;
 
-
     public Func<bool> CanGrowFunc;
 
     public event Action<Plant> GrownUp;
     public event Action Died;
     public event Action NoWater;
+    public event Action Corrupted;
     public event Action<LevelData> LevelsUpdated;
 
     public struct LevelData
@@ -44,21 +44,38 @@ public class SeedGrowth : MonoBehaviour
 
     private int _waterNutrients = 0;
     private int _speedNutrients = 0;
+    private float _checkCooldown = 0;
 
     public void Update()
     {
         if (_grownUp) return;
 
-        if (_growthTime >= GetTimeToGrow())
+        if (_growthTime > 2)
         {
-            if (CanGrow())
+            if (_checkCooldown > 0)
             {
-                MakeGrownUp();
+                _checkCooldown -= Time.deltaTime;
             }
             else
             {
-                Die();
+                _checkCooldown = 2f;
+                if (!CanGrow())
+                {
+                    Corrupt();
+                }
             }
+        }
+
+        if (_growthTime >= GetTimeToGrow())
+        {
+            // if (CanGrow())
+            // {
+            MakeGrownUp();
+            // }
+            // else
+            // {
+            // Die();
+            // }
         }
         else
         {
@@ -82,6 +99,11 @@ public class SeedGrowth : MonoBehaviour
                 LevelsUpdated?.Invoke(GetLevelData());
             }
         }
+    }
+
+    private void Corrupt()
+    {
+        Corrupted?.Invoke();
     }
 
     public void MakeGrownUp()
@@ -116,6 +138,11 @@ public class SeedGrowth : MonoBehaviour
         // if (_hasSpeedNutrients) return Mathf.Round(healthLevels * .75f);
         if (_speedNutrients > 0) return Mathf.Round(healthLevels * Mathf.Pow(.75f, _speedNutrients));
         return healthLevels;
+    }
+
+    public void Kill()
+    {
+        Die();
     }
 
     private void Die()

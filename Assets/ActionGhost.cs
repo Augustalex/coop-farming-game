@@ -14,6 +14,7 @@ public class ActionGhost : MonoBehaviour
     [System.Serializable]
     public enum GhostToggles
     {
+        Weeds,
         Bush,
         Plant
     };
@@ -53,6 +54,7 @@ public class ActionGhost : MonoBehaviour
         var hits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 2f, Vector3.down), 3f)
             .Where(hit =>
             {
+                if (_toggles.Contains(GhostToggles.Weeds) && hit.collider.CompareTag("Weeds")) return true;
                 if (_toggles.Contains(GhostToggles.Plant) && hit.collider.CompareTag("Goods")) return true;
                 if (_toggles.Contains(GhostToggles.Bush) && hit.collider.CompareTag("Bush")) return true;
                 return false;
@@ -80,11 +82,5 @@ public class ActionGhost : MonoBehaviour
     private void Show()
     {
         _ghost.SetActive(true);
-    }
-
-    private bool CompareToToggles(Collider collider)
-    {
-        return ((_toggles.Contains(GhostToggles.Plant) && collider.CompareTag("Goods"))
-                || (_toggles.Contains(GhostToggles.Bush) && collider.CompareTag("Bush")));
     }
 }

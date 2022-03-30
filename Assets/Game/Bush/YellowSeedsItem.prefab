@@ -256,6 +256,8 @@ GameObject:
   - component: {fileID: 2688703057618835115}
   - component: {fileID: 3843648424455171555}
   - component: {fileID: 4233271466022464535}
+  - component: {fileID: 4944191909897946502}
+  - component: {fileID: 4019653263535038628}
   m_Layer: 7
   m_Name: YellowSeedsItem
   m_TagString: Item
@@ -336,6 +338,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 57e18477d3bad6d4f83734e759d2c43d, type: 3}
+--- !u!114 &4944191909897946502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91963fa992e14f439d4ef6fe0e671062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4019653263535038628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e363617ab58544280b2cfc0c6d629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
+  toggles: 00000000
+  grassConstraints: 
+  soilConstraints: 00000000
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

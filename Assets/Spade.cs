@@ -13,10 +13,10 @@ public class Spade : MonoBehaviour
     void OnUse(Vector3 highlightPosition)
     {
         var rawHits = Physics.OverlapBox(highlightPosition, PlayerGrabber.SelectColumn);
-        var hits = rawHits.Where(hit => hit.GetComponent<SeedSource>()).ToArray();
-        if (hits.Length > 0)
+        var seedSources = rawHits.Where(hit => hit.GetComponent<SeedSource>()).ToArray();
+        if (seedSources.Length > 0)
         {
-            var seedSourceObject = hits[0];
+            var seedSourceObject = seedSources[0];
             var seedSource = seedSourceObject.GetComponent<SeedSource>();
             seedSource.Pick();
 
@@ -24,18 +24,30 @@ public class Spade : MonoBehaviour
         }
         else
         {
-            var rayHits = Physics.OverlapBox(highlightPosition, PlayerGrabber.SelectColumn)
-                .Where(hit => hit.GetComponent<Interactable>()).ToArray();
-            if (rayHits.Length > 0)
+            var soilBlocks = rawHits.Where(hit => hit.GetComponent<SoilBlock>()).ToArray();
+            if (soilBlocks.Length > 0)
             {
-                var raycastHit = rayHits[0];
-                if (raycastHit.CompareTag("Grass"))
+                var soilBLockHit = soilBlocks[0];
+                var soilBlock = soilBLockHit.GetComponent<SoilBlock>();
+                soilBlock.KillWeeds();
+
+                Sounds.Instance.PlayPickBushSound(highlightPosition);
+            }
+            else
+            {
+                var rayHits = Physics.OverlapBox(highlightPosition, PlayerGrabber.SelectColumn)
+                    .Where(hit => hit.GetComponent<Interactable>()).ToArray();
+                if (rayHits.Length > 0)
                 {
-                    var grass = raycastHit.GetComponent<GrassBlock>();
-                    if (grass && grass.HasPlant())
+                    var raycastHit = rayHits[0];
+                    if (raycastHit.CompareTag("Grass"))
                     {
-                        grass.RemovePlant();
-                        Sounds.Instance.PlayRemoveFlowerSound(transform.position);
+                        var grass = raycastHit.GetComponent<GrassBlock>();
+                        if (grass && grass.HasPlant())
+                        {
+                            grass.RemovePlant();
+                            Sounds.Instance.PlayRemoveFlowerSound(transform.position);
+                        }
                     }
                 }
             }

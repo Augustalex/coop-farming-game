@@ -12,10 +12,9 @@ public class RedSeeds : MonoBehaviour
 
     private bool CanGrow()
     {
-        var hits = Physics.OverlapSphere(transform.position, 4f).Where(hit => hit.CompareTag("Element") || hit.CompareTag("Goods"));
+        var hits = Physics.OverlapBox(transform.position, Vector3.one * 1.4f).Where(hit => hit.CompareTag("Element"));
 
-        return hits.All(hit => hit.GetComponent<PlantIdentifier>()?.plantType != PlantIdentifier.PlantType.YellowFlower) &&
-               hits.Count(hit =>
-                   hit.GetComponent<PlantIdentifier>()?.plantType == PlantIdentifier.PlantType.YellowFlower) < 3;
+        return hits.All(hit =>
+            hit.GetComponent<PlantIdentifier>()?.plantType != PlantIdentifier.PlantType.YellowFlower);
     }
 }

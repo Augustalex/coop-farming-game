@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostTemplate: {fileID: 7429101750935116671, guid: aa1fa5807249a9d408f8d7bcff4a1f8b, type: 3}
-  toggles: 0000000001000000
+  toggles: 020000000100000000000000
 --- !u!1 &6350162363288467539
 GameObject:
   m_ObjectHideFlags: 0
