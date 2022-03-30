@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryZone : MonoBehaviour
@@ -13,6 +10,12 @@ public class DeliveryZone : MonoBehaviour
             var deliveryManager = DeliveryManager.Instance;
             if (deliveryManager.Fulfilling(goods.goodsType))
             {
+                var playerItem = other.GetComponent<PlayerItem>();
+                if (playerItem && playerItem.IsGrabbed())
+                {
+                    playerItem.Steal();
+                }
+
                 goods.Consume();
                 deliveryManager.OnDelivery(goods.goodsType);
             }
@@ -27,11 +30,11 @@ public class DeliveryZone : MonoBehaviour
                 if (deliveryManager.Fulfilling(goodsType))
                 {
                     deliveryManager.OnDelivery(goodsType);
-                    
+
                     waterSeedItem.GetComponent<PlayerItem>().Steal();
                     Destroy(waterSeedItem.gameObject);
                 }
             }
         }
     }
-}
+} 
