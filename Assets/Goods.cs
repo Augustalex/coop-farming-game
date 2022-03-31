@@ -18,6 +18,6 @@ public class Goods : MonoBehaviour
 
     public void Consume()
     {
-        Destroy(gameObject, .1f);
+        Destroy(gameObject);
     }
 }

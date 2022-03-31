@@ -21,6 +21,13 @@ public class PlayerGrabber : MonoBehaviour
     );
 
     private PlayerItem _playerItem;
+    private PlayerCrowdSurfer _crowdSurfer;
+    private PlayerCrowdSurfer _liftingUpPlayer;
+
+    private void Start()
+    {
+        _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
+    }
 
     private void Update()
     {
@@ -56,48 +63,74 @@ public class PlayerGrabber : MonoBehaviour
 
     void OnGrab(InputValue value)
     {
+        if (_crowdSurfer.IsLifted()) return;
+
         if (value.isPressed)
         {
-            if (_grabbing)
+            if (_liftingUpPlayer)
             {
-                if (!CanUseWithGrabAction())
-                {
-                    Drop();
-                }
+                Sounds.Instance.PlayWooshSound(body.transform.position);
+                _liftingUpPlayer.Drop();
+                _liftingUpPlayer = null;
             }
             else
             {
-                if (highlight.HasHighlightedItem())
+                if (_grabbing)
                 {
-                    var item = highlight.GetHighlightedItem();
-                    // var hit = selfHits.Length > 0 ? selfHits[0] : highlightHits[0];
-                    _grabbing = item;
-
-                    _playerItem = _grabbing.GetComponent<PlayerItem>();
-                    _playerItem.GrabbedBy(this);
-
-                    _grabbing.transform.SetParent(body.transform);
-                    _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
-
-                    var plant = _grabbing.GetComponent<Plant>();
-                    if (plant)
+                    if (!CanUseWithGrabAction())
                     {
-                        plant.Grabbed();
+                        Drop();
                     }
-
-                    var ghost = _grabbing.GetComponent<ItemGhost>();
-                    if (ghost)
+                }
+                else
+                {
+                    var nearHits = Physics.OverlapSphere(body.transform.position, 1f)
+                        .Where(hit => hit.gameObject != body.gameObject && hit.CompareTag("PlayerBody")).ToArray();
+                    if (nearHits.Length > 0)
                     {
-                        _ghost = ghost;
-                    }
+                        var nearbyPlayer = nearHits[0];
+                        var crowdSurfer = nearbyPlayer.GetComponent<PlayerCrowdSurfer>();
+                        crowdSurfer.LiftedUpByAnotherPlayer(body.gameObject);
 
-                    var smartGhost = _grabbing.GetComponent<SmartGhost>();
-                    if (smartGhost)
+                        _liftingUpPlayer = crowdSurfer;
+
+                        Sounds.Instance.PlayPickupItemSound(body.transform.position);
+                    }
+                    else
                     {
-                        _smartGhots = smartGhost;
-                    }
+                        if (highlight.HasHighlightedItem())
+                        {
+                            var item = highlight.GetHighlightedItem();
+                            // var hit = selfHits.Length > 0 ? selfHits[0] : highlightHits[0];
+                            _grabbing = item;
 
-                    Sounds.Instance.PlayPickupItemSound(transform.position);
+                            _playerItem = _grabbing.GetComponent<PlayerItem>();
+                            _playerItem.GrabbedBy(this);
+
+                            _grabbing.transform.SetParent(body.transform);
+                            _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
+
+                            var plant = _grabbing.GetComponent<Plant>();
+                            if (plant)
+                            {
+                                plant.Grabbed();
+                            }
+
+                            var ghost = _grabbing.GetComponent<ItemGhost>();
+                            if (ghost)
+                            {
+                                _ghost = ghost;
+                            }
+
+                            var smartGhost = _grabbing.GetComponent<SmartGhost>();
+                            if (smartGhost)
+                            {
+                                _smartGhots = smartGhost;
+                            }
+
+                            Sounds.Instance.PlayPickupItemSound(transform.position);
+                        }
+                    }
                 }
             }
         }
@@ -106,12 +139,6 @@ public class PlayerGrabber : MonoBehaviour
     private void Drop()
     {
         if (!_grabbing) return;
-
-        var grabbedPlayer = _grabbing.GetComponent<PlayerController>();
-        if (grabbedPlayer)
-        {
-            grabbedPlayer.PickedUp();
-        }
 
         _grabbing.transform.SetParent(null);
 

@@ -15,6 +15,7 @@ TagManager:
   - River
   - Bush
   - Weeds
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

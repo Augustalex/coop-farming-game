@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
     private Highlight _highlight;
     private float _boostTime;
     private bool _boostThisFrame;
-    private float _originalHeight;
     private Animator _animator;
     private bool _frozen;
     [CanBeNull] private IUIController _uiController;
     private bool _grabThisFrame;
     private float _boostBlockTime;
     private bool _useThisFrame;
+    private PlayerCrowdSurfer _crowdSurfer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         _playerLooker = GetComponentInChildren<PlayerLooker>();
         _highlight = GetComponentInChildren<Highlight>();
         _animator = GetComponentInChildren<Animator>();
+        _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
 
         TargetGroupForPlayers.Instance.AddPlayer(_rigibody.gameObject);
     }
@@ -53,13 +54,15 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMainInput()
     {
+        if (_crowdSurfer.IsLifted()) return;
+
         if (_boostThisFrame && _boostBlockTime <= 0f)
         {
             _rigibody.drag = 1f;
 
             _rigibody.AddForce(_move.normalized * 20f, ForceMode.Impulse);
 
-            Sounds.Instance.PlayWooshSound(transform.position);
+            Sounds.Instance.PlayWooshSound(_rigibody.transform.position);
 
             _boostBlockTime = .8f;
         }
@@ -95,7 +98,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (_rigibody.velocity.magnitude > .5f)
+        var rigibodyVelocity = _rigibody.velocity;
+        var flatVelocity = new Vector2(rigibodyVelocity.x, rigibodyVelocity.z);
+        if (flatVelocity.magnitude > .5f)
         {
             _animator.SetBool("IsWalking", true);
         }
@@ -111,13 +116,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (!_rigibody.isKinematic)
+        if (!_rigibody.isKinematic && _rigibody.position.y < 2f)
         {
             RaycastHit hit;
             if (Physics.Raycast(new Ray(_rigibody.position, Vector3.down), out hit, 2f, ~IgnoreWhenSettingHeight))
             {
-                var position = transform.position;
-                transform.position = new Vector3(
+                var position = _rigibody.position;
+                _rigibody.position = new Vector3(
                     position.x,
                     hit.point.y + .6f,
                     position.z
@@ -184,21 +189,6 @@ public class PlayerController : MonoBehaviour
         }
 
         return nearestPlanet;
-    }
-
-    public void Dropped(Vector3 position)
-    {
-        transform.position = new Vector3(
-            position.x,
-            _originalHeight,
-            position.z
-        );
-        _rigibody.isKinematic = false;
-    }
-
-    public void PickedUp()
-    {
-        _originalHeight = transform.position.y;
     }
 
     public void Freeze()
