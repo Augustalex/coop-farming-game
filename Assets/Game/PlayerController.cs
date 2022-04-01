@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     private float _boostBlockTime;
     private bool _useThisFrame;
     private PlayerCrowdSurfer _crowdSurfer;
+    private bool _targeting;
 
-    // Start is called before the first frame update
     void Start()
     {
         _rigibody = GetComponentInChildren<Rigidbody>();
@@ -68,17 +68,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_move.magnitude < .45f)
-            {
-                _rigibody.drag = 10f;
-            }
-            else
+            if (!_targeting && _move.magnitude > .75f)
             {
                 _rigibody.drag = 7f;
-            }
-
-            if (_move.magnitude > .6f)
-            {
                 var boostFactor = 1f;
 
                 var currentPosition = _rigibody.transform.position;
@@ -96,11 +88,15 @@ public class PlayerController : MonoBehaviour
                 var force = _move * _speed * boostFactor * Time.deltaTime;
                 _rigibody.AddForce(force, ForceMode.Acceleration);
             }
+            else
+            {
+                _rigibody.drag = 10f;
+            }
         }
 
         var rigibodyVelocity = _rigibody.velocity;
         var flatVelocity = new Vector2(rigibodyVelocity.x, rigibodyVelocity.z);
-        if (flatVelocity.magnitude > .5f)
+        if (flatVelocity.magnitude > .6f)
         {
             _animator.SetBool("IsWalking", true);
         }
@@ -109,7 +105,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsWalking", false);
         }
 
-        if (_move.magnitude > .25f)
+        if (_move.magnitude > .2f)
         {
             _playerLooker.OrientWith(_move);
             _highlight.MoveAlong(_move);
@@ -142,9 +138,20 @@ public class PlayerController : MonoBehaviour
         if (_useThisFrame) _uiController.PlayerSubmit();
     }
 
+    public bool IsTargeting()
+    {
+        return _targeting;
+    }
+
     void OnGrab(InputValue value)
     {
         _grabThisFrame = value.isPressed;
+    }
+
+    void OnTarget(InputValue value)
+    {
+        var pressAmount = value.Get<float>();
+        _targeting = pressAmount > .5f;
     }
 
     void OnUse(InputValue value)

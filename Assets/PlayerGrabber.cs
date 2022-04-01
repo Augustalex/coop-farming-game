@@ -50,6 +50,28 @@ public class PlayerGrabber : MonoBehaviour
         }
     }
 
+    public bool ValidLocation(Vector3 position)
+    {
+        if (_liftingUpPlayer) return false;
+
+        if (_playerItem)
+        {
+            var actionGhost = _playerItem.GetComponent<ActionGhost>();
+            if (actionGhost)
+            {
+                return actionGhost.IsValidLocation(position);
+            }
+
+            var smartGhost = _playerItem.GetComponent<SmartGhost>();
+            if (smartGhost)
+            {
+                return smartGhost.IsValidLocation(position);
+            }
+        }
+
+        return false;
+    }
+
     void OnRotate(InputValue value)
     {
         if (value.isPressed)
@@ -127,7 +149,7 @@ public class PlayerGrabber : MonoBehaviour
                             {
                                 _smartGhots = smartGhost;
                             }
-
+                            
                             Sounds.Instance.PlayPickupItemSound(transform.position);
                         }
                     }

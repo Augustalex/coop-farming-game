@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: -8765214202129650205}
   - component: {fileID: 8687542795492952}
   - component: {fileID: -6313406771000936827}
+  - component: {fileID: 7014560713324462558}
   m_Layer: 8
   m_Name: RedSeeds
   m_TagString: Element
@@ -406,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b094caeb7e769784383e311e3e14cbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bushTemplate: {fileID: 0}
+  seedItemTemplate: {fileID: 7429101750935116671, guid: 363f8dbfc1000234cb46bb1d2d18e189, type: 3}
   plantTemplate: {fileID: 7429101750935116671, guid: 3ec33ae168a6d3c40acab30a16256b4f, type: 3}
   dryDeathTime: 60
   waterChargeTime: 60
@@ -439,6 +440,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925c0d00a03569541b5fe5e813a40b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7014560713324462558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afe20dd4de77754db709b00593fdc68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSounds:
+  - {fileID: 8300000, guid: d38b24217b6616b4c8869b9ccb111cdf, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 6949a2180d2b766479155b3c6c256fe2, type: 3}
+  - {fileID: 8300000, guid: c6b9a625232ea2546a652e973ca7e929, type: 3}
+  - {fileID: 8300000, guid: da7cbeffa737e254fbe6087a41b325da, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

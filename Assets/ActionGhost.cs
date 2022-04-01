@@ -51,14 +51,7 @@ public class ActionGhost : MonoBehaviour
 
     private void OnProvoked(Vector3 highlightPosition)
     {
-        var hits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 2f, Vector3.down), 3f)
-            .Where(hit =>
-            {
-                if (_toggles.Contains(GhostToggles.Weeds) && hit.collider.CompareTag("Weeds")) return true;
-                if (_toggles.Contains(GhostToggles.Plant) && hit.collider.CompareTag("Goods")) return true;
-                if (_toggles.Contains(GhostToggles.Bush) && hit.collider.CompareTag("Bush")) return true;
-                return false;
-            }).ToArray(); // We could compare all the toggles here already? A small optimization perhaps.
+        var hits = HitsForPosition(highlightPosition);
         if (hits.Length > 0)
         {
             var raycastHit = hits[0];
@@ -82,5 +75,23 @@ public class ActionGhost : MonoBehaviour
     private void Show()
     {
         _ghost.SetActive(true);
+    }
+
+    public bool IsValidLocation(Vector3 position)
+    {
+        return HitsForPosition(position).Length > 0;
+    }
+
+    private RaycastHit[] HitsForPosition(Vector3 highlightPosition)
+    {
+        var hits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 2f, Vector3.down), 3f)
+            .Where(hit =>
+            {
+                if (_toggles.Contains(GhostToggles.Weeds) && hit.collider.CompareTag("Weeds")) return true;
+                if (_toggles.Contains(GhostToggles.Plant) && hit.collider.CompareTag("Goods")) return true;
+                if (_toggles.Contains(GhostToggles.Bush) && hit.collider.CompareTag("Bush")) return true;
+                return false;
+            }).ToArray(); // We could compare all the toggles here already? A small optimization perhaps.
+        return hits;
     }
 }

@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 7842742580167479170}
   - component: {fileID: 1909992841031350010}
   - component: {fileID: 9097224779919251622}
+  - component: {fileID: 1872935029161277094}
+  - component: {fileID: 1047131292230586079}
   m_Layer: 7
   m_Name: WaterSeedItem
   m_TagString: Item
@@ -146,7 +148,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3843648424455171555
 MonoBehaviour:
@@ -174,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 5fdb33556379ca144b274f09780d2237, type: 3}
+  pickupSound: {fileID: 0}
 --- !u!114 &1909992841031350010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +205,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91963fa992e14f439d4ef6fe0e671062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1872935029161277094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241ed61088f4fb49b5eb4a13382b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1047131292230586079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbedSounds:
+  - {fileID: 8300000, guid: 71b1c64c5b195ec4191e22dd47793f8e, type: 3}
+  - {fileID: 8300000, guid: 835d928a045599e4db155fb0d5134397, type: 3}
+  - {fileID: 8300000, guid: e093375dd27ff704f88488f4e6faa7a2, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: 683a9f1b6a822614499817d141c7c5bb, type: 3}
+  - {fileID: 8300000, guid: 32d55b2856c44374782f071de9b9a631, type: 3}
+  - {fileID: 8300000, guid: 03aa36211fe14184f90df5e6f86635eb, type: 3}
 --- !u!1001 &223693732984429400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,6 +244,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7429101750935116667}
     m_Modifications:
+    - target: {fileID: 1043069675723399224, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210811102397431044, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240855329297245107, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3099303364805831828, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
       propertyPath: m_Name
       value: WaterPlantCube
@@ -216,6 +263,22 @@ PrefabInstance:
     - target: {fileID: 3099303364805831828, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191942405835502701, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148459834004467004, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612037513155021926, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457814077642343769, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6824257647721449119, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
       propertyPath: m_Enabled
@@ -284,3 +347,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7560985253460522690, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
   m_PrefabInstance: {fileID: 223693732984429400}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6480429889996377267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6554326138914232299, guid: e0dcfafc6a0fa1242be570c35aab4b49, type: 3}
+  m_PrefabInstance: {fileID: 223693732984429400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1718799630741415650
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480429889996377267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: c7d98ffdd6df30f4c905c21b78d1a095, type: 3}

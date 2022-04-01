@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: -1752196368553456631}
   - component: {fileID: -4029331544302270267}
   - component: {fileID: -9102617551193409015}
+  - component: {fileID: -562455896570860633}
   m_Layer: 8
   m_Name: YellowSeeds
   m_TagString: Element
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b094caeb7e769784383e311e3e14cbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bushTemplate: {fileID: 0}
+  seedItemTemplate: {fileID: 7429101750935116671, guid: 65f7379bd1d6a254fbaa27285f7947da, type: 3}
   plantTemplate: {fileID: 7429101750935116671, guid: 78542d9fe977b2449b55c88035aa3224, type: 3}
   dryDeathTime: 60
   waterChargeTime: 40
@@ -357,6 +358,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fef981b25403142b3ecf4c9fca34e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-562455896570860633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afe20dd4de77754db709b00593fdc68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSounds:
+  - {fileID: 8300000, guid: e93a87d08854daf4d9c994963fa0ff3d, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 6ca90e96d97a2ba409257db29c6ceaf2, type: 3}
+  - {fileID: 8300000, guid: 154fbe9336f94f842874076f658656f9, type: 3}
+  - {fileID: 8300000, guid: a07d8476ab811ee46b482822152620e8, type: 3}
+  - {fileID: 8300000, guid: 3d9204b225a68a24d82683e9c5fee557, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

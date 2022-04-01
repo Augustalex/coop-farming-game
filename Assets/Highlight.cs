@@ -11,51 +11,48 @@ public class Highlight : MonoBehaviour
 
     public static readonly float HighlightLiftOffset = 1.5f;
     private GameObject _highlightedItem;
+    private PlayerGrabber _playerGrabber;
 
     private void Awake()
     {
         _playerBoody = transform.parent.GetComponentInChildren<PlayerLooker>();
         _meshRenderer = GetComponent<MeshRenderer>();
+        _playerGrabber = GetComponentInParent<PlayerGrabber>();
     }
 
     public void MoveAlong(Vector3 move)
     {
-        var alignedBodyPosition = AlignToGrid(_playerBoody.transform.position);
+        var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
+
         var itemsBeneathPlayerBody = Physics
-            .OverlapBox(alignedBodyPosition, PlayerGrabber.SelectColumn)
+            .OverlapBox(currentPlayerPosition, PlayerGrabber.SelectColumn)
             .Where(ShouldHighlightItem)
             .ToArray();
 
-        var target = itemsBeneathPlayerBody.Length > 0
-            ? alignedBodyPosition
-            : alignedBodyPosition + move.normalized * .75f;
-        
-        // Move highlight to target
-        transform.position = AlignToGrid(target);
-
-        var groundUnderHighlight = Physics.RaycastAll(new Ray(transform.position + Vector3.up, Vector3.down), 3f)
-            .Where(hit => !hit.collider.isTrigger && hit.collider.GetComponent<Interactable>()).ToArray();
-        if (groundUnderHighlight.Length > 0)
+        var shouldHighlightCurrentPosition =
+            itemsBeneathPlayerBody.Length > 0 || _playerGrabber.ValidLocation(currentPlayerPosition);
+        if (shouldHighlightCurrentPosition)
         {
-            var ground = groundUnderHighlight[0].collider.transform.position;
-            var currentPosition = transform.position;
-            transform.position = new Vector3(
-                currentPosition.x,
-                ground.y + .7f,
-                currentPosition.z);
-        }
+            transform.position = AlignToGrid(currentPlayerPosition); // Move highlight to target
 
-        if (itemsBeneathPlayerBody.Length > 0)
-        {
-            var selfHit = itemsBeneathPlayerBody[0];
-            _highlightedItem = selfHit.gameObject;
-            _meshRenderer.enabled = true;
-
-            DisableLifting();
-            EnableLiftingOn(selfHit);
+            if (itemsBeneathPlayerBody.Length > 0)
+            {
+                var selfHit = itemsBeneathPlayerBody[0];
+                _highlightedItem = selfHit.gameObject;
+                _meshRenderer.enabled = true;
+                DisableLifting();
+                EnableLiftingOn(selfHit);
+            }
+            else
+            {
+                // There is probably an available Item action
+            }
         }
         else
         {
+            var aTileAwayFromPlayer = currentPlayerPosition + move.normalized * 1f;
+            transform.position = AlignToGrid(aTileAwayFromPlayer); // Move highlight to target
+
             var itemsUnderHighlight = Physics.OverlapBox(transform.position, PlayerGrabber.SelectColumn)
                 .Where(ShouldHighlightItem)
                 .ToArray();
@@ -76,6 +73,23 @@ public class Highlight : MonoBehaviour
 
                 _meshRenderer.enabled = false;
             }
+        }
+
+        AlignHeightOfHighlight(); // Need to be after the highlight has been repositioned
+    }
+
+    private void AlignHeightOfHighlight()
+    {
+        var groundUnderHighlight = Physics.RaycastAll(new Ray(transform.position + Vector3.up, Vector3.down), 3f)
+            .Where(hit => !hit.collider.isTrigger && hit.collider.GetComponent<Interactable>()).ToArray();
+        if (groundUnderHighlight.Length > 0)
+        {
+            var ground = groundUnderHighlight[0].collider.transform.position;
+            var currentPosition = transform.position;
+            transform.position = new Vector3(
+                currentPosition.x,
+                ground.y + .7f,
+                currentPosition.z);
         }
     }
 

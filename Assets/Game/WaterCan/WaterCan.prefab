@@ -342,6 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostTemplate: {fileID: 7429101750935116671, guid: c73f32df7a35516409a414b912e88297, type: 3}
   toggles: 00000000
+  grassConstraints: 
+  soilConstraints: 02000000
 --- !u!1 &275681565454249234
 GameObject:
   m_ObjectHideFlags: 0

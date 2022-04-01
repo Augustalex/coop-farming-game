@@ -421,6 +421,8 @@ GameObject:
   - component: {fileID: 6893298287656748135}
   - component: {fileID: 4596233157261855599}
   - component: {fileID: 1105990183687808061}
+  - component: {fileID: 8289602925315729767}
+  - component: {fileID: 3151210250113317672}
   m_Layer: 7
   m_Name: YellowPlant
   m_TagString: Goods
@@ -476,7 +478,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &-3592735385005015230
 MonoBehaviour:
@@ -544,6 +546,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 65f7379bd1d6a254fbaa27285f7947da, type: 3}
+--- !u!114 &8289602925315729767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241ed61088f4fb49b5eb4a13382b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3151210250113317672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbedSounds:
+  - {fileID: 8300000, guid: a8b07c3984b1a2d4f89d12008ce30c31, type: 3}
+  - {fileID: 8300000, guid: c18f81fce00c1254eba21917f48ba9f8, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: 741fd271b6e97b1439b658c1d0263995, type: 3}
+  - {fileID: 8300000, guid: 1371972a2ea163646b6ef6b70f0b47cd, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +664,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7429101750935116667}
     m_Modifications:
+    - target: {fileID: 1210811102397431044, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240855329297245107, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3099303364805831828, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
       propertyPath: m_Name
       value: Peep
@@ -660,6 +700,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.009
       objectReference: {fileID: 0}
+    - target: {fileID: 4148459834004467004, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4393870551662364521, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.41251
@@ -679,6 +723,14 @@ PrefabInstance:
     - target: {fileID: 4393870551662364521, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.12331
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612037513155021926, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457814077642343769, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7560985253460522690, guid: b94f96c47b2cc474e9dcb4cd65ebb41e, type: 3}
       propertyPath: m_RootOrder

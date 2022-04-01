@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class SeedGrowth : MonoBehaviour
 {
-    public GameObject bushTemplate;
+    public GameObject seedItemTemplate;
     public GameObject plantTemplate;
     public float dryDeathTime = 60f;
     public float waterChargeTime = 60f;
@@ -21,7 +21,8 @@ public class SeedGrowth : MonoBehaviour
     public event Action<Plant> GrownUp;
     public event Action Died;
     public event Action NoWater;
-    public event Action Corrupted;
+    public event Action Corrupted; // TODO: Deprecate
+    public event Action WasHurt;
     public event Action<LevelData> LevelsUpdated;
 
     public struct LevelData
@@ -104,6 +105,14 @@ public class SeedGrowth : MonoBehaviour
     private void Corrupt()
     {
         Corrupted?.Invoke();
+        Die();
+
+        var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
+        var va = newSeedItem.GetComponent<PlockedVoiceActor>();
+        if (va)
+        {
+            va.OnRelocated();
+        }
     }
 
     public void MakeGrownUp()
@@ -170,6 +179,11 @@ public class SeedGrowth : MonoBehaviour
         return Mathf.RoundToInt((_growthTime / GetTimeToGrow()) * GetHealthLevels());
     }
 
+    public float GrowthTimeOfOneHealthLevel()
+    {
+        return GetTimeToGrow() / GetHealthLevels();
+    }
+
     public float GetTimeToGrow()
     {
         // if (_hasSpeedNutrients) return timeToGrow * .75f;
@@ -211,5 +225,11 @@ public class SeedGrowth : MonoBehaviour
     {
         _speedNutrients += 1;
         // _hasSpeedNutrients = true;
+    }
+
+    public void Hurt()
+    {
+        _growthTime = Mathf.Clamp(_growthTime - GrowthTimeOfOneHealthLevel(), 0, GetTimeToGrow());
+        WasHurt?.Invoke();
     }
 }

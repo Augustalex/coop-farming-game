@@ -17,12 +17,15 @@ public class WaterCanItem : MonoBehaviour
     private UseOnSoil _useOnSoil;
     private UseOnGrass _useOnGrass;
     private float _lastRecharge;
+    private SmartGhost _smartGhost;
 
     void Start()
     {
         _countData = GetComponent<CountData>();
         _useOnSoil = GetComponent<UseOnSoil>();
         _useOnGrass = GetComponent<UseOnGrass>();
+
+        _smartGhost = GetComponent<SmartGhost>();
 
         _playerItem = GetComponent<PlayerItem>();
         _playerItem.UseItem += OnUseItem;
@@ -32,7 +35,7 @@ public class WaterCanItem : MonoBehaviour
 
     private void OnUseItem(Vector3 highlightPosition)
     {
-        if (_countData.count > 0)
+        if (_smartGhost.Activated() && _countData.count > 0)
         {
             var soil = _useOnSoil.HoverOnSoil(highlightPosition);
 

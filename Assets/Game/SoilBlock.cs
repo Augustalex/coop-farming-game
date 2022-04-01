@@ -135,7 +135,7 @@ namespace Game
             _seedInGround.Died += OnSeedsDied;
             _seedInGround.NoWater += OnWaterRanOut;
             _seedInGround.LevelsUpdated += OnLevelsUpdated;
-            _seedInGround.Corrupted += OnCorrupted;
+            // _seedInGround.Corrupted += OnCorrupted; TODO: Remove Weeds
         }
 
         private void OnWaterRanOut()
@@ -161,7 +161,7 @@ namespace Game
             _seedInGround.Died -= OnSeedsDied;
             _seedInGround.NoWater -= OnWaterRanOut;
             _seedInGround.LevelsUpdated -= OnLevelsUpdated;
-            _seedInGround.Corrupted -= OnCorrupted;
+            // _seedInGround.Corrupted -= OnCorrupted; TODO: Remove Weeds
             _seedInGround = null;
         }
 
@@ -269,6 +269,11 @@ namespace Game
             KillSeed();
 
             AttachWeeds(AssetLibrary.Instance.weedsTemplate);
+        }
+
+        public bool IsDry()
+        {
+            return _drySoil.activeSelf;
         }
     }
 }

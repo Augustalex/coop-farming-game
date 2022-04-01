@@ -115,4 +115,9 @@ public class GameManager : MonoSingleton<GameManager>
         fails += 1;
         FailAttemptsChanged?.Invoke(fails);
     }
+
+    public void SpawnCoroutine(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
+    }
 }

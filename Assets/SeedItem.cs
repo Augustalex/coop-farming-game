@@ -10,12 +10,27 @@ public class SeedItem : MonoBehaviour
     public GameObject seedTemplate;
     private UseOnSoil _useOnSoil;
 
+    public AudioClip pickupSound;
+
     void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
+        // GetComponent<PlayerItem>().Grabbed += OnPickedUp;
 
         _useOnSoil = GetComponent<UseOnSoil>();
     }
+
+    // private void OnPickedUp()
+    // {
+    //     if (!pickupSound)
+    //     {
+    //         Sounds.Instance.PlayPickupItemSound(transform.position);
+    //     }
+    //     else
+    //     {
+    //         Sounds.Instance.PlaySound(pickupSound, transform.position, .5f);
+    //     }
+    // }
 
     private void OnUse(Vector3 highlightPosition)
     {
@@ -35,6 +50,7 @@ public class SeedItem : MonoBehaviour
         if (soilBlock.IsFree())
         {
             SeedSoil(soilBlock);
+            Sounds.Instance.PlayPlaceTileSound(soilBlock.transform.position);
         }
     }
 

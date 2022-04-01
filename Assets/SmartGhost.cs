@@ -26,6 +26,8 @@ public class SmartGhost : MonoBehaviour
     public enum SoilConstraints
     {
         FreeSoil,
+        IsDry,
+        HasSeeds
     }
 
 
@@ -47,6 +49,7 @@ public class SmartGhost : MonoBehaviour
     private bool _cachedCanPlace;
 
     private CountData _countData;
+    private bool _canPlace;
 
     void Start()
     {
@@ -78,6 +81,8 @@ public class SmartGhost : MonoBehaviour
 
     public void OnMove(Vector3 highlightPosition)
     {
+        // WARNING: This method has to keep in sync with "IsValidLocation"
+
         var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
             .Where(hit => hit.collider.CompareTag("Bush") || hit.collider.GetComponent<Interactable>()).ToArray();
         if (hits.Length > 0)
@@ -97,16 +102,41 @@ public class SmartGhost : MonoBehaviour
                 var hitCollider = raycastHit.collider;
                 if (CompareToToggles(hitCollider) && PassesConstraints(hitCollider))
                 {
+                    _canPlace = true;
                     _ghostController.CanPlace();
                 }
                 else
                 {
+                    _canPlace = false;
                     _ghostController.CanNotPlace();
                 }
             }
 
             _ghost.transform.position = highlightPosition;
         }
+    }
+
+    public bool Activated()
+    {
+        return _canPlace;
+    }
+
+    public bool IsValidLocation(Vector3 position)
+    {
+        var hits = Physics.RaycastAll(new Ray(position, Vector3.down), 3f)
+            .Where(hit => hit.collider.CompareTag("Bush") || hit.collider.GetComponent<Interactable>()).ToArray();
+        if (hits.Length <= 0) return false;
+
+        var raycastHit = hits[0];
+        var hasItemsToPlaceOrNoCounter = !_countData || _countData.count > 0;
+        var canPlace = hasItemsToPlaceOrNoCounter && CheckIfCanPlacedRecently();
+        if (!canPlace)
+        {
+            return false;
+        }
+
+        var hitCollider = raycastHit.collider;
+        return CompareToToggles(hitCollider) && PassesConstraints(hitCollider);
     }
 
     private bool PassesConstraints(Collider hitCollider)
@@ -122,6 +152,22 @@ public class SmartGhost : MonoBehaviour
         if (_soilConstraints.Contains(SoilConstraints.FreeSoil))
         {
             if (!hitCollider.GetComponent<SoilBlock>().IsFree())
+            {
+                return false;
+            }
+        }
+
+        if (_soilConstraints.Contains(SoilConstraints.IsDry))
+        {
+            if (!hitCollider.GetComponent<SoilBlock>().IsDry())
+            {
+                return false;
+            }
+        }
+
+        if (_soilConstraints.Contains(SoilConstraints.HasSeeds))
+        {
+            if (!hitCollider.GetComponent<SoilBlock>().HasSeed())
             {
                 return false;
             }
@@ -161,8 +207,9 @@ public class SmartGhost : MonoBehaviour
                 || (_toggles.Contains(GhostToggles.Soil) && collider.CompareTag("Soil")))
                || (_toggles.Contains(GhostToggles.Bush) && collider.CompareTag("Bush"));
     }
-    
-    void OnDestroy() {
-        Destroy(_ghost);   
+
+    void OnDestroy()
+    {
+        Destroy(_ghost);
     }
 }

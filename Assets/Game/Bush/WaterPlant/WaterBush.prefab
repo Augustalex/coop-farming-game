@@ -376,6 +376,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 01b9cae0cd68d3e4f95a3326890d1068, type: 3}
+  minAmount: 1
+  maxAmount: 1
 --- !u!65 &7081048416489276560
 BoxCollider:
   m_ObjectHideFlags: 0

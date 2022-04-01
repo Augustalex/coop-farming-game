@@ -339,6 +339,8 @@ GameObject:
   - component: {fileID: 1757530632943730759}
   - component: {fileID: -1679903442019754206}
   - component: {fileID: 6131200556964967837}
+  - component: {fileID: 4897816547898970239}
+  - component: {fileID: 3905772330328961096}
   m_Layer: 7
   m_Name: RedSeed Item
   m_TagString: Item
@@ -393,7 +395,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3843648424455171555
 MonoBehaviour:
@@ -421,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: b6b11cb915c88c549bfd11bafaaa2e9c, type: 3}
+  pickupSound: {fileID: 0}
 --- !u!114 &-1679903442019754206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +452,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91963fa992e14f439d4ef6fe0e671062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4897816547898970239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241ed61088f4fb49b5eb4a13382b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3905772330328961096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbedSounds:
+  - {fileID: 8300000, guid: e578d09ba2a35c346bfe9a1bb37ef215, type: 3}
+  - {fileID: 8300000, guid: a90e9672881247b48bfc9ea631c75bcc, type: 3}
+  - {fileID: 8300000, guid: 8ca600a88c3e0db45b8b6a08065bd63e, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: ec2f6043682ce1b4f94c01c00461e39a, type: 3}
+  - {fileID: 8300000, guid: f3dda974ae6621e4c9c16b7f433a7944, type: 3}
+  - {fileID: 8300000, guid: 93c62a65ae8d6804d8a95a664a5403dc, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6824257647721449119, guid: 93bef391d538f3041a84fe1e1c871a55, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7560985253460522690, guid: 93bef391d538f3041a84fe1e1c871a55, type: 3}
       propertyPath: m_RootOrder
