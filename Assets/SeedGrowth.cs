@@ -20,6 +20,7 @@ public class SeedGrowth : MonoBehaviour
 
     public event Action<Plant> GrownUp;
     public event Action Died;
+    public event Action Relocated;
     public event Action NoWater;
     public event Action Corrupted; // TODO: Deprecate
     public event Action WasHurt;
@@ -111,22 +112,24 @@ public class SeedGrowth : MonoBehaviour
 
     private void TooThirsty()
     {
-        Destroy(gameObject);
-
         var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
 
         var wild = newSeedItem.GetComponent<WildCube>();
         wild.WantsWater();
+
+        Relocated?.Invoke();
+        Destroy(gameObject);
     }
 
     private void Relocate()
     {
-        Destroy(gameObject);
-
         var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
 
         var wild = newSeedItem.GetComponent<WildCube>();
         wild.Relocate();
+
+        Relocated?.Invoke();
+        Destroy(gameObject);
     }
 
     public void MakeGrownUp()
@@ -207,7 +210,14 @@ public class SeedGrowth : MonoBehaviour
 
     public int GetWaterLevel()
     {
-        return Mathf.RoundToInt(Mathf.Abs(_waterLevel) / (GetWaterChargeTime() / GetWaterLevels()));
+        if (_waterLevel >= 0)
+        {
+            return Mathf.RoundToInt(Mathf.Abs(_waterLevel) / (GetWaterChargeTime() / GetWaterLevels()));
+        }
+        else
+        {
+            return Mathf.RoundToInt(Mathf.Abs(_waterLevel) / (dryDeathTime / GetWaterLevels()));
+        }
     }
 
     public float GetWaterChargeTime()

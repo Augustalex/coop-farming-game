@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsWalking", false);
         }
 
-        if (_move.magnitude > .2f)
+        if (_move.magnitude > .4f)
         {
             _playerLooker.OrientWith(_move);
             _highlight.MoveAlong(_move);

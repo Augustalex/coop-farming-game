@@ -114,6 +114,10 @@ public class SmartGhost : MonoBehaviour
 
             _ghost.transform.position = highlightPosition;
         }
+        else
+        {
+            Hide();
+        }
     }
 
     public bool Activated()

@@ -133,6 +133,7 @@ namespace Game
 
             _seedInGround.GrownUp += OnSeedsGrownUp;
             _seedInGround.Died += OnSeedsDied;
+            _seedInGround.Relocated += OnSeedsDied;
             _seedInGround.NoWater += OnWaterRanOut;
             _seedInGround.LevelsUpdated += OnLevelsUpdated;
             // _seedInGround.Corrupted += OnCorrupted; TODO: Remove Weeds
@@ -159,6 +160,7 @@ namespace Game
         {
             _seedInGround.GrownUp -= OnSeedsGrownUp;
             _seedInGround.Died -= OnSeedsDied;
+            _seedInGround.Relocated -= OnSeedsDied;
             _seedInGround.NoWater -= OnWaterRanOut;
             _seedInGround.LevelsUpdated -= OnLevelsUpdated;
             // _seedInGround.Corrupted -= OnCorrupted; TODO: Remove Weeds

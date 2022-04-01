@@ -21,7 +21,7 @@ public class PlayerToolUser : MonoBehaviour
         }
     }
 
-    void OnGrab(InputValue value)
+    void OnGrabUse(InputValue value)
     {
         if (value.isPressed)
         {

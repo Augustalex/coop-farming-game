@@ -70,7 +70,7 @@ public class WildCube : MonoBehaviour
     {
         if (_wantsWaterCooldown > 0)
         {
-            var directionToTarget = (_body.position - _target.transform.position).normalized;
+            var directionToTarget = (_target.transform.position - _body.position).normalized;
             return new Vector3(
                 directionToTarget.x,
                 0,
@@ -90,7 +90,7 @@ public class WildCube : MonoBehaviour
 
     public void WantsWater()
     {
-        var rivers = Physics.OverlapSphere(_body.position, 10f).Where(hit => hit.CompareTag("River"))
+        var rivers = Physics.OverlapSphere(_body.position, 30f).Where(hit => hit.CompareTag("River"))
             .OrderBy(_ => Random.value - .5f);
         if (rivers.Any())
         {
