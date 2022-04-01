@@ -91,7 +91,8 @@ public class SeedGrowth : MonoBehaviour
 
             if (_waterLevel < -dryDeathTime)
             {
-                Die();
+                Corrupt();
+                // Die(); 
             }
             else
             {
@@ -108,11 +109,14 @@ public class SeedGrowth : MonoBehaviour
         Die();
 
         var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
-        var va = newSeedItem.GetComponent<PlockedVoiceActor>();
+        var va = newSeedItem.GetComponent<CubeVoiceActor>();
         if (va)
         {
             va.OnRelocated();
         }
+
+        var wild = newSeedItem.GetComponent<WildCube>();
+        wild.WantsWater();
     }
 
     public void MakeGrownUp()

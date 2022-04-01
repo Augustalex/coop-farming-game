@@ -231,12 +231,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedSounds:
   - {fileID: 8300000, guid: 71b1c64c5b195ec4191e22dd47793f8e, type: 3}
-  - {fileID: 8300000, guid: 835d928a045599e4db155fb0d5134397, type: 3}
   - {fileID: 8300000, guid: e093375dd27ff704f88488f4e6faa7a2, type: 3}
+  - {fileID: 8300000, guid: 835d928a045599e4db155fb0d5134397, type: 3}
   droppedSounds:
   - {fileID: 8300000, guid: 683a9f1b6a822614499817d141c7c5bb, type: 3}
   - {fileID: 8300000, guid: 32d55b2856c44374782f071de9b9a631, type: 3}
   - {fileID: 8300000, guid: 03aa36211fe14184f90df5e6f86635eb, type: 3}
+  annoyedSounds:
+  - {fileID: 8300000, guid: 4db43cb4851969d49be764e5d0930e5b, type: 3}
+  - {fileID: 8300000, guid: 629f642516a38344ba89ace1db1f58d0, type: 3}
+  - {fileID: 8300000, guid: bb850b632d7278a4f872d755d2989ca0, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: c5661397d50cb904793132d1a7d55dec, type: 3}
 --- !u!1001 &223693732984429400
 PrefabInstance:
   m_ObjectHideFlags: 0

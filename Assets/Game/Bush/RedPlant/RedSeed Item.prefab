@@ -484,6 +484,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec2f6043682ce1b4f94c01c00461e39a, type: 3}
   - {fileID: 8300000, guid: f3dda974ae6621e4c9c16b7f433a7944, type: 3}
   - {fileID: 8300000, guid: 93c62a65ae8d6804d8a95a664a5403dc, type: 3}
+  annoyedSounds:
+  - {fileID: 8300000, guid: 6949a2180d2b766479155b3c6c256fe2, type: 3}
+  - {fileID: 8300000, guid: c6b9a625232ea2546a652e973ca7e929, type: 3}
+  - {fileID: 8300000, guid: da7cbeffa737e254fbe6087a41b325da, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d38b24217b6616b4c8869b9ccb111cdf, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

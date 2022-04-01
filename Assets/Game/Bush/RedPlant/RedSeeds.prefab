@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: -8765214202129650205}
   - component: {fileID: 8687542795492952}
   - component: {fileID: -6313406771000936827}
-  - component: {fileID: 7014560713324462558}
+  - component: {fileID: 1991678621758021045}
   m_Layer: 8
   m_Name: RedSeeds
   m_TagString: Element
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925c0d00a03569541b5fe5e813a40b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7014560713324462558
+--- !u!114 &1991678621758021045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -449,15 +449,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7429101750935116671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1afe20dd4de77754db709b00593fdc68, type: 3}
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSounds:
-  - {fileID: 8300000, guid: d38b24217b6616b4c8869b9ccb111cdf, type: 3}
-  sounds:
+  grabbedSounds:
+  - {fileID: 8300000, guid: e578d09ba2a35c346bfe9a1bb37ef215, type: 3}
+  - {fileID: 8300000, guid: a90e9672881247b48bfc9ea631c75bcc, type: 3}
+  - {fileID: 8300000, guid: 8ca600a88c3e0db45b8b6a08065bd63e, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: ec2f6043682ce1b4f94c01c00461e39a, type: 3}
+  - {fileID: 8300000, guid: f3dda974ae6621e4c9c16b7f433a7944, type: 3}
+  - {fileID: 8300000, guid: 93c62a65ae8d6804d8a95a664a5403dc, type: 3}
+  annoyedSounds:
   - {fileID: 8300000, guid: 6949a2180d2b766479155b3c6c256fe2, type: 3}
   - {fileID: 8300000, guid: c6b9a625232ea2546a652e973ca7e929, type: 3}
   - {fileID: 8300000, guid: da7cbeffa737e254fbe6087a41b325da, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d38b24217b6616b4c8869b9ccb111cdf, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

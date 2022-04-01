@@ -1717,6 +1717,8 @@ GameObject:
   - component: {fileID: 6893298287656748135}
   - component: {fileID: 7619923373823858537}
   - component: {fileID: 6330002826473666766}
+  - component: {fileID: 7079202079245170079}
+  - component: {fileID: 7697191986971250491}
   m_Layer: 7
   m_Name: RedBerryPlant
   m_TagString: Goods
@@ -1858,6 +1860,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 363f8dbfc1000234cb46bb1d2d18e189, type: 3}
+  minAmount: 2
+  maxAmount: 3
+--- !u!114 &7079202079245170079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241ed61088f4fb49b5eb4a13382b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7697191986971250491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbedSounds:
+  - {fileID: 8300000, guid: e578d09ba2a35c346bfe9a1bb37ef215, type: 3}
+  - {fileID: 8300000, guid: a90e9672881247b48bfc9ea631c75bcc, type: 3}
+  - {fileID: 8300000, guid: 8ca600a88c3e0db45b8b6a08065bd63e, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: ec2f6043682ce1b4f94c01c00461e39a, type: 3}
+  - {fileID: 8300000, guid: f3dda974ae6621e4c9c16b7f433a7944, type: 3}
+  - {fileID: 8300000, guid: 93c62a65ae8d6804d8a95a664a5403dc, type: 3}
+  annoyedSounds:
+  - {fileID: 8300000, guid: 6949a2180d2b766479155b3c6c256fe2, type: 3}
+  - {fileID: 8300000, guid: c6b9a625232ea2546a652e973ca7e929, type: 3}
+  - {fileID: 8300000, guid: da7cbeffa737e254fbe6087a41b325da, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d38b24217b6616b4c8869b9ccb111cdf, type: 3}
 --- !u!1 &7897935018727578614
 GameObject:
   m_ObjectHideFlags: 0

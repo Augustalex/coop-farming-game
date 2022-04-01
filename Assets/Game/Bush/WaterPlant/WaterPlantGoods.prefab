@@ -178,6 +178,8 @@ GameObject:
   - component: {fileID: 6893298287656748135}
   - component: {fileID: 7619923373823858537}
   - component: {fileID: -3984715046780273546}
+  - component: {fileID: 7263335773336540653}
+  - component: {fileID: 1206689108872146861}
   m_Layer: 7
   m_Name: WaterPlantGoods
   m_TagString: Goods
@@ -216,8 +218,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9426178, y: 1.003882, z: 1.0213963}
-  m_Center: {x: -0.03956431, y: 0.38938123, z: 0.0053804517}
+  m_Size: {x: 0.7, y: 0.51122975, z: 0.7}
+  m_Center: {x: 0, y: 0.094385155, z: 0}
 --- !u!54 &2688703057618835115
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -300,6 +302,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 01b9cae0cd68d3e4f95a3326890d1068, type: 3}
+  minAmount: 2
+  maxAmount: 3
+--- !u!114 &7263335773336540653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7241ed61088f4fb49b5eb4a13382b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1206689108872146861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429101750935116671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cd9ed0c149dd146894fd85d026b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbedSounds:
+  - {fileID: 8300000, guid: 71b1c64c5b195ec4191e22dd47793f8e, type: 3}
+  - {fileID: 8300000, guid: e093375dd27ff704f88488f4e6faa7a2, type: 3}
+  - {fileID: 8300000, guid: 835d928a045599e4db155fb0d5134397, type: 3}
+  droppedSounds:
+  - {fileID: 8300000, guid: 683a9f1b6a822614499817d141c7c5bb, type: 3}
+  - {fileID: 8300000, guid: 32d55b2856c44374782f071de9b9a631, type: 3}
+  - {fileID: 8300000, guid: 03aa36211fe14184f90df5e6f86635eb, type: 3}
+  annoyedSounds:
+  - {fileID: 8300000, guid: 4db43cb4851969d49be764e5d0930e5b, type: 3}
+  - {fileID: 8300000, guid: 629f642516a38344ba89ace1db1f58d0, type: 3}
+  - {fileID: 8300000, guid: bb850b632d7278a4f872d755d2989ca0, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: c5661397d50cb904793132d1a7d55dec, type: 3}
 --- !u!1 &7562642891624423926
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
 {
     public LayerMask IgnoreWhenSettingHeight;
 
+    public event Action Dashed;
+    
     private Vector3 _move;
     private Rigidbody _rigibody;
     private float _speed = 1200f;
@@ -64,7 +67,8 @@ public class PlayerController : MonoBehaviour
 
             Sounds.Instance.PlayWooshSound(_rigibody.transform.position);
 
-            _boostBlockTime = .8f;
+            _boostBlockTime = .7f;
+            Dashed?.Invoke();
         }
         else
         {

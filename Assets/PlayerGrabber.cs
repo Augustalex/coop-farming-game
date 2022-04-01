@@ -149,7 +149,7 @@ public class PlayerGrabber : MonoBehaviour
                             {
                                 _smartGhots = smartGhost;
                             }
-                            
+
                             Sounds.Instance.PlayPickupItemSound(transform.position);
                         }
                     }

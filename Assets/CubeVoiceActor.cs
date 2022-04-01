@@ -3,26 +3,55 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
-public class PlockedVoiceActor : MonoBehaviour
+public class CubeVoiceActor : MonoBehaviour
 {
     public AudioClip[] grabbedSounds;
     public AudioClip[] droppedSounds;
+    public AudioClip[] annoyedSounds;
+    public AudioClip[] deathSounds;
 
     void Start()
     {
-        var item = GetComponent<PlayerItem>();
-        item.Grabbed += OnGrabbed;
-        item.Dropped += OnDropped;
+        var seedGrowth = GetComponent<SeedGrowth>();
+        if (seedGrowth)
+        {
+            seedGrowth.Died += OnDeath;
+            seedGrowth.WasHurt += OnHurt;
+        }
 
-        // GetComponent<WildCube>().Jumped += OnJumped;
+        var item = GetComponent<PlayerItem>();
+        if (item)
+        {
+            item.Grabbed += OnGrabbed;
+            item.Dropped += OnDropped;
+        }
+
+        var wildCube = GetComponent<WildCube>();
+        if (wildCube)
+        {
+            // wildCube.Jumped += OnJumped;
+            wildCube.Evaded += OnJumped;
+        }
 
         OnSpawned();
     }
 
+    private void OnDeath()
+    {
+        var sound = deathSounds[Random.Range(0, deathSounds.Length)];
+        Sounds.Instance.PlaySound(sound, transform.position, .8f);
+    }
+
+    private void OnHurt()
+    {
+        var sound = annoyedSounds[Random.Range(0, annoyedSounds.Length)];
+        Sounds.Instance.PlaySound(sound, transform.position, .8f);
+    }
+
     private void OnJumped()
     {
-        if (Random.value < .02f) return;
-        OnDropped();
+        if (Random.value < .25f) return;
+        OnHurt();
     }
 
     public void OnGrabbed()

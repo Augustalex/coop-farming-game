@@ -29,13 +29,14 @@ public class Highlight : MonoBehaviour
             .Where(ShouldHighlightItem)
             .ToArray();
 
+        var canSelectItemUnderPlayer = !_playerGrabber.HasItem() && itemsBeneathPlayerBody.Length > 0;
         var shouldHighlightCurrentPosition =
-            itemsBeneathPlayerBody.Length > 0 || _playerGrabber.ValidLocation(currentPlayerPosition);
+            canSelectItemUnderPlayer || _playerGrabber.ValidLocation(currentPlayerPosition);
         if (shouldHighlightCurrentPosition)
         {
             transform.position = AlignToGrid(currentPlayerPosition); // Move highlight to target
 
-            if (itemsBeneathPlayerBody.Length > 0)
+            if (canSelectItemUnderPlayer)
             {
                 var selfHit = itemsBeneathPlayerBody[0];
                 _highlightedItem = selfHit.gameObject;
@@ -45,6 +46,7 @@ public class Highlight : MonoBehaviour
             }
             else
             {
+                DisableLifting();
                 // There is probably an available Item action
             }
         }

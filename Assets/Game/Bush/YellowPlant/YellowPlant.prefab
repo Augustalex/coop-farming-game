@@ -546,6 +546,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedTemplate: {fileID: 7429101750935116671, guid: 65f7379bd1d6a254fbaa27285f7947da, type: 3}
+  minAmount: 2
+  maxAmount: 3
 --- !u!114 &8289602925315729767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +578,13 @@ MonoBehaviour:
   droppedSounds:
   - {fileID: 8300000, guid: 741fd271b6e97b1439b658c1d0263995, type: 3}
   - {fileID: 8300000, guid: 1371972a2ea163646b6ef6b70f0b47cd, type: 3}
+  annoyedSounds:
+  - {fileID: 8300000, guid: 6ca90e96d97a2ba409257db29c6ceaf2, type: 3}
+  - {fileID: 8300000, guid: 154fbe9336f94f842874076f658656f9, type: 3}
+  - {fileID: 8300000, guid: a07d8476ab811ee46b482822152620e8, type: 3}
+  - {fileID: 8300000, guid: 3d9204b225a68a24d82683e9c5fee557, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: e93a87d08854daf4d9c994963fa0ff3d, type: 3}
 --- !u!1 &8929502867449592236
 GameObject:
   m_ObjectHideFlags: 0

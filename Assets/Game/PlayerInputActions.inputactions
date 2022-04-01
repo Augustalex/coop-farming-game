@@ -313,7 +313,7 @@
                 {
                     "name": "",
                     "id": "2f033c02-14f2-4d01-8922-c619a32929fb",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -335,10 +335,21 @@
                 {
                     "name": "",
                     "id": "7db9497b-de5e-4584-a253-f36d4679b1e1",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fcd3ce9-719f-4db0-ad98-540fdcd2d44e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -361,17 +372,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Boost",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "662a3cc9-02e4-4560-bbfe-1d098d0bc20b",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -405,6 +405,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93bc3772-dfa8-4b87-a931-c82e903e9bce",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Target",
                     "isComposite": false,
                     "isPartOfComposite": false
