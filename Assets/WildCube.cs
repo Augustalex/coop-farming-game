@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Game;
 using UnityEngine;
@@ -18,6 +16,8 @@ public class WildCube : MonoBehaviour
 
     public event Action Jumped;
     public event Action Evaded;
+    public event Action Relocated;
+    public event Action Thirsty;
 
     void Awake()
     {
@@ -99,6 +99,8 @@ public class WildCube : MonoBehaviour
         }
 
         _wantsWaterCooldown = 20f;
+
+        Thirsty?.Invoke();
     }
 
     public void RunAwayFromDash(Vector3 playerPosition)
@@ -107,5 +109,11 @@ public class WildCube : MonoBehaviour
         var flatDirection = new Vector3(direction.x, 0, direction.z);
         Jump(flatDirection);
         Evaded?.Invoke();
+    }
+
+    public void Relocate()
+    {
+        Jump(GetJumpDirection());
+        Relocated?.Invoke();
     }
 }

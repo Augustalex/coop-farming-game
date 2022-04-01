@@ -62,7 +62,7 @@ public class SeedGrowth : MonoBehaviour
                 _checkCooldown = 2f;
                 if (!CanGrow())
                 {
-                    Corrupt();
+                    Relocate();
                 }
             }
         }
@@ -91,7 +91,7 @@ public class SeedGrowth : MonoBehaviour
 
             if (_waterLevel < -dryDeathTime)
             {
-                Corrupt();
+                TooThirsty();
                 // Die(); 
             }
             else
@@ -107,16 +107,26 @@ public class SeedGrowth : MonoBehaviour
     {
         Corrupted?.Invoke();
         Die();
+    }
+
+    private void TooThirsty()
+    {
+        Destroy(gameObject);
 
         var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
-        var va = newSeedItem.GetComponent<CubeVoiceActor>();
-        if (va)
-        {
-            va.OnRelocated();
-        }
 
         var wild = newSeedItem.GetComponent<WildCube>();
         wild.WantsWater();
+    }
+
+    private void Relocate()
+    {
+        Destroy(gameObject);
+
+        var newSeedItem = Instantiate(seedItemTemplate, transform.position + Vector3.up, Quaternion.identity, null);
+
+        var wild = newSeedItem.GetComponent<WildCube>();
+        wild.Relocate();
     }
 
     public void MakeGrownUp()

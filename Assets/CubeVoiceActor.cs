@@ -10,7 +10,7 @@ public class CubeVoiceActor : MonoBehaviour
     public AudioClip[] annoyedSounds;
     public AudioClip[] deathSounds;
 
-    void Start()
+    void Awake()
     {
         var seedGrowth = GetComponent<SeedGrowth>();
         if (seedGrowth)
@@ -31,12 +31,14 @@ public class CubeVoiceActor : MonoBehaviour
         {
             // wildCube.Jumped += OnJumped;
             wildCube.Evaded += OnJumped;
+            wildCube.Relocated += OnRelocated;
+            wildCube.Thirsty += OnDeath;
         }
 
         OnSpawned();
     }
 
-    private void OnDeath()
+    public void OnDeath()
     {
         var sound = deathSounds[Random.Range(0, deathSounds.Length)];
         Sounds.Instance.PlaySound(sound, transform.position, .8f);
