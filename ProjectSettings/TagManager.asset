@@ -17,6 +17,7 @@ TagManager:
   - Weeds
   - PlayerBody
   - Fence
+  - Sprinkler
   layers:
   - Default
   - TransparentFX

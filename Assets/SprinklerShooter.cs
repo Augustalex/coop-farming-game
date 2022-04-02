@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game;
@@ -5,14 +6,61 @@ using UnityEngine;
 
 public class SprinklerShooter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private const float MaxWater = 180f;
+    private float _water = 120f;
+    private bool _running;
+    private ParticleSystem _particleSystem;
+
+    public event Action<float> Watered;
+
+    private void Awake()
     {
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (_running)
+        {
+            if (_water < 0)
+            {
+                StopSprinkler();
+            }
+            else
+            {
+                _water -= Time.deltaTime;
+            }
+        }
+        else if (_water > 0)
+        {
+            StartSprinkler();
+        }
+    }
+
+    private void StartSprinkler()
+    {
+        _running = true;
+        _particleSystem.Play();
+    }
+
+    private void StopSprinkler()
+    {
+        _running = false;
+        _particleSystem.Stop();
+    }
+
+    public void Water(float waterPercentage)
+    {
+        _water += MaxWater * .25f * waterPercentage;
+    }
+
+    public float GetMaxWaterTime()
+    {
+        return MaxWater;
+    }
+
+    public float GetWaterTime()
+    {
+        return _water;
     }
 }

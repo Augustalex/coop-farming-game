@@ -18,6 +18,7 @@ public class WaterCanItem : MonoBehaviour
     private UseOnGrass _useOnGrass;
     private float _lastRecharge;
     private SmartGhost _smartGhost;
+    private ActionGhost _actionGhost;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class WaterCanItem : MonoBehaviour
         _useOnGrass = GetComponent<UseOnGrass>();
 
         _smartGhost = GetComponent<SmartGhost>();
+        _actionGhost = GetComponent<ActionGhost>();
 
         _playerItem = GetComponent<PlayerItem>();
         _playerItem.UseItem += OnUseItem;
@@ -33,9 +35,23 @@ public class WaterCanItem : MonoBehaviour
         noWaterStyle.SetActive(false);
     }
 
+    void Update()
+    {
+        if (_smartGhost.Activated())
+        {
+            _actionGhost.Deactivate();
+        }
+        else
+        {
+            _actionGhost.Activate();
+        }
+    }
+
     private void OnUseItem(Vector3 highlightPosition)
     {
-        if (_smartGhost.Activated() && _countData.count > 0)
+        if (_countData.count == 0) return;
+
+        if (_smartGhost.Activated())
         {
             var soil = _useOnSoil.HoverOnSoil(highlightPosition);
 
@@ -60,7 +76,14 @@ public class WaterCanItem : MonoBehaviour
         }
         else
         {
-            Sounds.Instance.PlayFailedWaterSound(transform.position);
+            if (_actionGhost.IsValidLocation(highlightPosition))
+            {
+                var hits = _actionGhost.HitsForPosition(highlightPosition);
+                var hit = hits[0];
+                var sprinkler = hit.GetComponent<SprinklerShooter>();
+                sprinkler.Water(ConsumeOneWater());
+                Sounds.Instance.PlayWaterSound(transform.position);
+            }
         }
     }
 
@@ -88,6 +111,11 @@ public class WaterCanItem : MonoBehaviour
         }
     }
 
+    public float GetWaterPercentage()
+    {
+        return _countData.count / _countData.max;
+    }
+
     public void OnWaterZone()
     {
         if (Time.time - _lastRecharge < 1f) return;
@@ -110,5 +138,22 @@ public class WaterCanItem : MonoBehaviour
     {
         noWaterStyle.SetActive(false);
         hasWaterStyle.SetActive(true);
+    }
+
+    public float ConsumeAllExcessWater()
+    {
+        var percentage = GetWaterPercentage();
+        _countData.count = 0;
+        SetHasNoWater();
+
+        return percentage;
+    }
+
+    public float ConsumeOneWater()
+    {
+        if (_countData.count == 0) return 0f;
+        UseWater();
+
+        return 1f;
     }
 }

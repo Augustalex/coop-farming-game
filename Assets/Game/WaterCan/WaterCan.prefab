@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 2571259785155567607}
   - component: {fileID: 1094338577539240421}
   - component: {fileID: 3915995631803401756}
+  - component: {fileID: 3003145031578112514}
   m_Layer: 7
   m_Name: WaterCan
   m_TagString: Item
@@ -344,6 +345,20 @@ MonoBehaviour:
   toggles: 00000000
   grassConstraints: 
   soilConstraints: 02000000
+--- !u!114 &3003145031578112514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275681565271703014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2c3dac9e516464e8c7ff7423a92233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: c73f32df7a35516409a414b912e88297, type: 3}
+  toggles: 05000000
 --- !u!1 &275681565454249234
 GameObject:
   m_ObjectHideFlags: 0

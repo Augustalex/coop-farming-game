@@ -18,7 +18,8 @@ public class ActionGhost : MonoBehaviour
         Bush,
         Plant,
         Tile,
-        Fence
+        Fence,
+        WaterUtility
     };
 
     public GhostToggles[] toggles; // Cannot be updated at runtime
@@ -57,7 +58,7 @@ public class ActionGhost : MonoBehaviour
     private void OnProvoked(Vector3 highlightPosition)
     {
         if (_deactivated) return;
-        
+
         var hits = HitsForPosition(highlightPosition);
         if (hits.Length > 0)
         {
@@ -87,7 +88,7 @@ public class ActionGhost : MonoBehaviour
     public bool IsValidLocation(Vector3 position)
     {
         if (_deactivated) return false;
-        
+
         return HitsForPosition(position).Length > 0;
     }
 
@@ -101,6 +102,7 @@ public class ActionGhost : MonoBehaviour
                 if (_toggles.Contains(GhostToggles.Bush) && hit.CompareTag("Bush")) return true;
                 if (_toggles.Contains(GhostToggles.Tile) && hit.CompareTag("Tile")) return true;
                 if (_toggles.Contains(GhostToggles.Fence) && hit.CompareTag("Fence")) return true;
+                if (_toggles.Contains(GhostToggles.WaterUtility) && hit.CompareTag("Sprinkler")) return true;
                 return false;
             }).ToArray(); // We could compare all the toggles here already? A small optimization perhaps.
         return hits;
@@ -109,12 +111,10 @@ public class ActionGhost : MonoBehaviour
     public void Deactivate()
     {
         _deactivated = true;
-        Hide();
     }
 
     public void Activate()
     {
         _deactivated = false;
-        Show();
     }
 }
