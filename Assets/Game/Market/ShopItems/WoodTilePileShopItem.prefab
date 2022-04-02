@@ -390,6 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4290975437621296292}
   - component: {fileID: 4057985390490945662}
+  - component: {fileID: 1329723412967119178}
   m_Layer: 0
   m_Name: WoodTilePileShopItem
   m_TagString: Untagged
@@ -427,6 +428,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 200
   itemTemplate: {fileID: 4290975437621296295, guid: 083c8f1e3671c6a4b826e1275cca9a29, type: 3}
+--- !u!114 &1329723412967119178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290975437621296295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f2d8560d46a984abea43c11d367a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4496109887641480481
 GameObject:
   m_ObjectHideFlags: 0

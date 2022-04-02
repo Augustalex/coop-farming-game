@@ -5,6 +5,7 @@ namespace Game
     public class Sounds : MonoSingleton<Sounds>
     {
         public AudioClip poof;
+        public AudioClip poofLoud;
         public AudioClip horn;
         private const float HornVolume = .6f;
 
@@ -144,6 +145,16 @@ namespace Game
         public void PlayDestroyTileSound(Vector3 transformPosition)
         {
             PlaySound(poof, transformPosition, 1f);
+        }
+
+        public void PlayTouchdownSound(Vector3 transformPosition)
+        {
+            PlaySound(poofLoud, transformPosition, 1f);
+        }
+
+        public void PlayPlayerJoinedSound(Vector3 transformPosition)
+        {
+            PlaySound(plop2, transformPosition, .175f);
         }
     }
 }

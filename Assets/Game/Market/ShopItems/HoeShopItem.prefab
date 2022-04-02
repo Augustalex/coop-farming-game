@@ -205,6 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6519536565555837009}
   - component: {fileID: 6214309663663002678}
+  - component: {fileID: 4702523865394272684}
   m_Layer: 0
   m_Name: HoeShopItem
   m_TagString: Untagged
@@ -242,6 +243,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 100
   itemTemplate: {fileID: 2459656585022862705, guid: 6957390d4d7fbbd49a11dc5c791efb1c, type: 3}
+--- !u!114 &4702523865394272684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519536565555837008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f2d8560d46a984abea43c11d367a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7200873256952893843
 GameObject:
   m_ObjectHideFlags: 0

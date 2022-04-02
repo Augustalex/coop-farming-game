@@ -12,7 +12,7 @@ public class MarketItemPicker : MonoBehaviour, IUIController
 
     public event Action Submitted;
 
-    private List<ShopItem> _shopItems;
+    private List<UIMenuItem> _shopItems;
     private int _index;
     private float _moveFreeze;
     private CursorAnimation _cursor;
@@ -64,18 +64,20 @@ public class MarketItemPicker : MonoBehaviour, IUIController
 
     public void PlayerSubmit()
     {
-        var shopItem = _shopItems[_index];
+        var menuItem = _shopItems[_index];
 
         var gameManager = GameManager.Instance;
-        if (gameManager.money < shopItem.cost) return;
-
-        _shopItems.RemoveAt(_index);
         _index = 0;
 
-        gameManager.UseMoney(shopItem.cost);
-        var item = Instantiate(shopItem.itemTemplate);
-        item.transform.position = spawnLocation.transform.position;
-        item.transform.rotation = spawnLocation.transform.rotation;
+        var shopItem = menuItem.GetComponent<ShopItem>();
+        if (shopItem)
+        {
+            if (gameManager.money < shopItem.cost) return;
+            gameManager.UseMoney(shopItem.cost);
+            var item = Instantiate(shopItem.itemTemplate);
+            item.transform.position = spawnLocation.transform.position;
+            item.transform.rotation = spawnLocation.transform.rotation;
+        }
 
         Submitted?.Invoke();
 
@@ -85,7 +87,7 @@ public class MarketItemPicker : MonoBehaviour, IUIController
     private void ReloadPapers()
     {
         _index = 0;
-        _shopItems = GetComponentsInChildren<ShopItem>().ToList();
+        _shopItems = GetComponentsInChildren<UIMenuItem>().ToList();
     }
 
     public void MoveReset()

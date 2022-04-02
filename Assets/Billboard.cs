@@ -16,6 +16,7 @@ public class Billboard : MonoBehaviour
         _jobPicker = GetComponent<BillboardJobPicker>();
 
         _jobPicker.Submitted += EndInteraction;
+        _jobPicker.Exited += EndInteraction;
     }
 
     private void EndInteraction()
@@ -38,22 +39,23 @@ public class Billboard : MonoBehaviour
         GetComponent<PlayerInteractable>().OnInteract += Interact;
     }
 
-    private void Interact()
+    private void Interact(PlayerController controller)
     {
         if (_on)
         {
-            EndInteraction();
+            // EndInteraction(); Now ended through the exit sign
         }
         else
         {
             _on = true;
 
-
+            
             foreach (var playerController in FindObjectsOfType<PlayerController>())
             {
                 playerController.Freeze();
-                playerController.SetUIController(_jobPicker);
             }
+            
+            controller.SetUIController(_jobPicker);
 
             GameManager.Instance.FocusCamera(_camera);
 

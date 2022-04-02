@@ -7,13 +7,14 @@ using UnityEngine;
 
 public class BillboardJobPicker : MonoBehaviour, IUIController
 {
-    private List<JobPaperRoot> _papers;
+    private List<UIMenuItem> _papers;
     private int _index;
 
     public GameObject cursor;
     private float _moveFreeze;
 
     public event Action Submitted;
+    public event Action Exited;
 
     private void Awake()
     {
@@ -59,16 +60,27 @@ public class BillboardJobPicker : MonoBehaviour, IUIController
 
     public void PlayerSubmit()
     {
-        if (DeliveryManager.Instance.hasDelivery) return;
-        
         var paper = _papers[_index];
-        _papers.RemoveAt(_index);
         _index = 0;
-        
-        var job = paper.GetJob();
-        paper.SetupWithRandomJob();
 
-        DeliveryManager.Instance.StartDelivery(DeliveryManager.FromJob(job));
+        var jobPaper = paper.GetComponent<JobPaperRoot>();
+        if (jobPaper)
+        {
+            if (!DeliveryManager.Instance.hasDelivery)
+            {
+                var job = jobPaper.GetJob();
+                jobPaper.SetupWithRandomJob();
+                DeliveryManager.Instance.StartDelivery(DeliveryManager.FromJob(job));
+            }
+        }
+        else
+        {
+            var exitSign = paper.GetComponent<ExitSign>();
+            if (exitSign)
+            {
+                // Exited?.Invoke(); // TODO Not needed?
+            }
+        }
 
         Submitted?.Invoke();
 
@@ -78,7 +90,7 @@ public class BillboardJobPicker : MonoBehaviour, IUIController
     private void ReloadPapers()
     {
         _index = 0;
-        _papers = GetComponentsInChildren<JobPaperRoot>().ToList();
+        _papers = GetComponentsInChildren<UIMenuItem>().ToList();
     }
 
     public void MoveReset()

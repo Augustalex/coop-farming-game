@@ -21,6 +21,7 @@ public class SmartGhost : MonoBehaviour
     public enum GrassConstraints
     {
         NoPlants,
+        ByRiver
     }
 
     public enum SoilConstraints
@@ -148,6 +149,17 @@ public class SmartGhost : MonoBehaviour
         if (_grassConstraints.Contains(GrassConstraints.NoPlants))
         {
             if (hitCollider.GetComponent<GrassBlock>().HasPlant())
+            {
+                return false;
+            }
+        }
+
+        if (_grassConstraints.Contains(GrassConstraints.ByRiver))
+        {
+            var waterHits = Physics.OverlapSphere(hitCollider.gameObject.transform.position, .6f)
+                .Where(hit => hit.CompareTag("River"))
+                .ToArray();
+            if (waterHits.Length == 0)
             {
                 return false;
             }

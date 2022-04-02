@@ -6,13 +6,14 @@ using Game;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask IgnoreWhenSettingHeight;
 
     public event Action Dashed;
-    
+
     private Vector3 _move;
     private Rigidbody _rigibody;
     private float _speed = 1200f;
@@ -29,7 +30,11 @@ public class PlayerController : MonoBehaviour
     private PlayerCrowdSurfer _crowdSurfer;
     private bool _targeting;
 
-    void Start()
+    public bool _isIntro = true;
+    private bool _falling;
+    private float _fallingCooldown;
+
+    private void Awake()
     {
         _rigibody = GetComponentInChildren<Rigidbody>();
         _playerLooker = GetComponentInChildren<PlayerLooker>();
@@ -37,6 +42,13 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
 
+        _rigibody.position += Vector3.up * 42f + Random.insideUnitSphere * 5f;
+        _falling = true;
+        _fallingCooldown = 3f;
+    }
+
+    void Start()
+    {
         TargetGroupForPlayers.Instance.AddPlayer(_rigibody.gameObject);
     }
 
@@ -51,12 +63,18 @@ public class PlayerController : MonoBehaviour
             HandleMainInput();
         }
 
-        _grabThisFrame = false;
-        _useThisFrame = false;
+        ClearInputTriggers();
     }
 
     private void HandleMainInput()
     {
+        if (_falling)
+        {
+            _rigibody.AddForce(Vector3.down * Time.deltaTime * 5f, ForceMode.Acceleration);
+            _animator.SetBool("IsWalking", false);
+            return;
+        }
+
         if (_crowdSurfer.IsLifted()) return;
 
         if (_boostThisFrame && _boostBlockTime <= 0f)
@@ -83,7 +101,8 @@ public class PlayerController : MonoBehaviour
                 if (hits.Length > 0)
                 {
                     var tile = ClosestHit(hits);
-                    _rigibody.AddForce((tile.transform.position - currentPosition).normalized * 900f * Time.deltaTime,
+                    _rigibody.AddForce(
+                        (tile.transform.position - currentPosition).normalized * 900f * Time.deltaTime,
                         ForceMode.Acceleration);
 
                     boostFactor = 1.3f;
@@ -131,7 +150,6 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_boostBlockTime > 0f) _boostBlockTime -= Time.deltaTime;
-        _boostThisFrame = false;
     }
 
     private void HandleUIInput()
@@ -139,7 +157,7 @@ public class PlayerController : MonoBehaviour
         if (_move.magnitude > .4f) _uiController.Move(_move);
         else _uiController.MoveReset();
 
-        if (_useThisFrame) _uiController.PlayerSubmit();
+        if (_grabThisFrame) _uiController.PlayerSubmit();
     }
 
     public bool IsTargeting()
@@ -149,7 +167,14 @@ public class PlayerController : MonoBehaviour
 
     void OnGrab(InputValue value)
     {
-        _grabThisFrame = value.isPressed;
+        if (IntroManager.Instance.isIntro)
+        {
+            IntroManager.Instance.EndIntro();
+        }
+        else
+        {
+            _grabThisFrame = value.isPressed;
+        }
     }
 
     void OnTarget(InputValue value)
@@ -216,10 +241,29 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetBool("IsWalking", false);
         _uiController = uiController;
+        
+        ClearInputTriggers();
+    }
+
+    private void ClearInputTriggers()
+    {
+        _grabThisFrame = false;
+        _useThisFrame = false;
+        _boostThisFrame = false;
     }
 
     public void ClearUIController()
     {
         _uiController = null;
+    }
+
+    public bool IsFalling()
+    {
+        return _falling;
+    }
+
+    public void StopFalling()
+    {
+        _falling = false;
     }
 }

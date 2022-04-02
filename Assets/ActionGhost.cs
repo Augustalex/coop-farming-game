@@ -16,7 +16,8 @@ public class ActionGhost : MonoBehaviour
     {
         Weeds,
         Bush,
-        Plant
+        Plant,
+        Tile
     };
 
     public GhostToggles[] toggles; // Cannot be updated at runtime
@@ -90,6 +91,7 @@ public class ActionGhost : MonoBehaviour
                 if (_toggles.Contains(GhostToggles.Weeds) && hit.collider.CompareTag("Weeds")) return true;
                 if (_toggles.Contains(GhostToggles.Plant) && hit.collider.CompareTag("Goods")) return true;
                 if (_toggles.Contains(GhostToggles.Bush) && hit.collider.CompareTag("Bush")) return true;
+                if (_toggles.Contains(GhostToggles.Bush) && hit.collider.CompareTag("Tile")) return true;
                 return false;
             }).ToArray(); // We could compare all the toggles here already? A small optimization perhaps.
         return hits;

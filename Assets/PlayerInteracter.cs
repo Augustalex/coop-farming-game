@@ -8,10 +8,12 @@ public class PlayerInteracter : MonoBehaviour
 {
     public GameObject highlight;
     private PlayerGrabber _grabber;
+    private PlayerController _playerController;
 
     void Start()
     { 
-        _grabber = GetComponentInChildren<PlayerGrabber>();
+        _grabber = GetComponent<PlayerGrabber>();
+        _playerController = GetComponent<PlayerController>();
     }
     
     void OnGrab(InputValue value)
@@ -25,7 +27,7 @@ public class PlayerInteracter : MonoBehaviour
                 if (hits.Length > 0)
                 {
                     var hit = hits[0];
-                    hit.GetComponent<PlayerInteractable>().Interact();
+                    hit.GetComponent<PlayerInteractable>().Interact(_playerController);
                 }
             }
         }

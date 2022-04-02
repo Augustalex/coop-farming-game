@@ -200,6 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 275681565271703015}
   - component: {fileID: -9011517016359661329}
+  - component: {fileID: 2736308456548147494}
   m_Layer: 0
   m_Name: WaterCanShopItem
   m_TagString: Untagged
@@ -241,6 +242,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 100
   itemTemplate: {fileID: 275681565271703014, guid: 0a79b0c45305d4c49a93c42473f283ce, type: 3}
+--- !u!114 &2736308456548147494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275681565271703014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f2d8560d46a984abea43c11d367a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &275681565454249234
 GameObject:
   m_ObjectHideFlags: 0

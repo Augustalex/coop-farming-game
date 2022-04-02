@@ -19,6 +19,9 @@ public class DashScare : MonoBehaviour
         var cubes = Physics.OverlapSphere(_body.transform.position, 4f).Where(hit => hit.GetComponent<WildCube>());
         foreach (var cube in cubes)
         {
+            var plant = cube.GetComponent<Plant>();
+            if (plant && plant.InSoil()) continue;
+
             cube.GetComponent<WildCube>().RunAwayFromDash(_body.transform.position);
         }
     }

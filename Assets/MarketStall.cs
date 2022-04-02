@@ -33,7 +33,7 @@ public class MarketStall : MonoBehaviour
         GameManager.Instance.ResetCameraFocus();
 
         _itemPicker.DeactivateUI();
-        
+
         Toggled?.Invoke(_on);
     }
 
@@ -42,7 +42,7 @@ public class MarketStall : MonoBehaviour
         GetComponent<PlayerInteractable>().OnInteract += Interact;
     }
 
-    private void Interact()
+    private void Interact(PlayerController controller)
     {
         if (_on)
         {
@@ -52,17 +52,17 @@ public class MarketStall : MonoBehaviour
         {
             _on = true;
 
-
             foreach (var playerController in FindObjectsOfType<PlayerController>())
             {
                 playerController.Freeze();
-                playerController.SetUIController(_itemPicker);
             }
+
+            controller.SetUIController(_itemPicker);
 
             GameManager.Instance.FocusCamera(_camera);
 
             _itemPicker.ActivateUI();
-            
+
             Toggled?.Invoke(_on);
         }
     }
