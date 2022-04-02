@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf3f2ff2949403ab6d705be54de34ee, type: 3}
+  m_Name: FenceBuildItem
+  m_EditorClassIdentifier: 
+  template: {fileID: 1862527166168028363, guid: fadfc9f4613003b49a5c4216fbf70c1e, type: 3}
+  itemGhostConfiguration: {fileID: 11400000, guid: 2d1e0342d576519449e6c3671c6dd94a, type: 2}
+  cost: 20

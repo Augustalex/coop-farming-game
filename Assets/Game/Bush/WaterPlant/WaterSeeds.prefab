@@ -162,9 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seedItemTemplate: {fileID: 7429101750935116671, guid: 01b9cae0cd68d3e4f95a3326890d1068, type: 3}
   plantTemplate: {fileID: 7429101750935116671, guid: 98f5fd1efb0a4254085655b6f0a39b7e, type: 3}
-  dryDeathTime: 10
-  waterChargeTime: 30
-  timeToGrow: 60
+  dryDeathTime: 15
+  waterChargeTime: 60
+  timeToGrow: 200
   waterLevels: 4
   healthLevels: 4
 --- !u!114 &8687542795492952

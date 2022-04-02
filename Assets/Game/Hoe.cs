@@ -17,6 +17,11 @@ namespace Game
 
         public void OnUse(Vector3 highlightPosition)
         {
+            TryHoeGround(highlightPosition);
+        }
+
+        private void TryHoeGround(Vector3 highlightPosition)
+        {
             var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
                 .Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
             if (hits.Length > 0)

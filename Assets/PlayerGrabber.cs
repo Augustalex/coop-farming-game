@@ -80,6 +80,30 @@ public class PlayerGrabber : MonoBehaviour
             {
                 _ghost.Rotate();
             }
+
+            if (_playerItem)
+            {
+                var smartItemGhost = _playerItem.GetComponent<SmartItemGhost>();
+                if (smartItemGhost)
+                {
+                    smartItemGhost.Rotate();
+                }
+            }
+        }
+    }
+
+    void OnCycle(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            if (_playerItem)
+            {
+                var hammer = _playerItem.GetComponent<AllRoundHammer>();
+                if (hammer)
+                {
+                    hammer.Cycle();
+                }
+            }
         }
     }
 

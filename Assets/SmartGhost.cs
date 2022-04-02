@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game;
+using Game.Ghost;
 using UnityEngine;
 
 public class SmartGhost : MonoBehaviour
@@ -66,8 +67,6 @@ public class SmartGhost : MonoBehaviour
         _playerItem.Grabbed += OnGrabbed;
 
         _countData = GetComponent<CountData>();
-
-        Hide();
     }
 
     private void OnGrabbed()

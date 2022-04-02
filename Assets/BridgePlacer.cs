@@ -21,7 +21,6 @@ public class BridgePlacer : MonoBehaviour
     public void OnUse(Vector3 highlightPosition)
     {
         // TODO: Add so that you can punch players into the ground
-        // TODO: Add so you can pick players up
 
         var rawHits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 1f, Vector3.down), 4f);
         if (!rawHits.Any(hit => hit.collider.CompareTag("Item")))

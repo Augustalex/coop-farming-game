@@ -16,6 +16,7 @@ TagManager:
   - Bush
   - Weeds
   - PlayerBody
+  - Fence
   layers:
   - Default
   - TransparentFX
@@ -26,9 +27,9 @@ TagManager:
   - Player
   - PlayerItems
   - Seeds
-  - 
-  - 
-  - 
+  - Soil
+  - WaterParticlesEmitter
+  - WaterParticles
   - 
   - 
   - 

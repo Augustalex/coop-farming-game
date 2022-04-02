@@ -277,5 +277,10 @@ namespace Game
         {
             return _drySoil.activeSelf;
         }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            Water();
+        }
     }
 }

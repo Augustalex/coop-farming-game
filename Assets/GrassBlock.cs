@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrassBlock : MonoBehaviour
 {
     private GameObject _plant;
+    private GameObject _item;
 
     public void Plant(GameObject template)
     {
@@ -15,6 +16,11 @@ public class GrassBlock : MonoBehaviour
         {
             flowerGrowth.Died += () => _plant = null;
         }
+    }
+
+    public void PlaceItem(GameObject item)
+    {
+        _item = item;
     }
 
     public bool HasPlant()
@@ -31,5 +37,15 @@ public class GrassBlock : MonoBehaviour
     public GameObject GetPlant()
     {
         return _plant;
+    }
+
+    public bool IsFree()
+    {
+        return !HasPlant() && !HasItem();
+    }
+
+    private bool HasItem()
+    {
+        return _item != null;
     }
 }
