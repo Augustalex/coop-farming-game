@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _move;
     private Rigidbody _rigibody;
-    private float _speed = 1350f;
+    private float _speed = 1250f;
     private PlayerLooker _playerLooker;
     private Highlight _highlight;
     private float _boostTime;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
 
-        _rigibody.position += Vector3.up * 42f + Random.insideUnitSphere * 5f;
+        _rigibody.position += Vector3.up * 28f + Random.insideUnitSphere * 4f;
         _falling = true;
         _fallingCooldown = 3f;
     }
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_falling)
         {
-            _rigibody.AddForce(Vector3.down * Time.deltaTime * 5f, ForceMode.Acceleration);
+            _rigibody.AddForce(Vector3.down * Time.deltaTime * 2f, ForceMode.Acceleration);
             _animator.SetBool("IsWalking", false);
             return;
         }
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             _rigibody.drag = 1f;
 
-            _rigibody.AddForce(_move.normalized * 24f, ForceMode.Impulse);
+            _rigibody.AddForce(_move.normalized * 22f, ForceMode.Impulse);
 
             Sounds.Instance.PlayWooshSound(_rigibody.transform.position);
 

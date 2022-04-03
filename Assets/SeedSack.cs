@@ -65,7 +65,7 @@ public class SeedSack : MonoBehaviour
             var seedItem = other.GetComponent<SeedItem>();
             if (seedItem)
             {
-                if (_seeds.Count == 0 || _seeds.Peek().GetComponent<SeedItem>().CompareToSeedItem(seedItem))
+                if (_seeds.Count == 0 ||  _seeds.Peek().GetComponent<SeedItem>().CompareToSeedItem(seedItem))
                 {
                     if (_seeds.Count == 0)
                     {
@@ -73,11 +73,11 @@ public class SeedSack : MonoBehaviour
                             {seedItem.GetComponentInChildren<MeshRenderer>().material};
                     }
 
-                    var playerItem = seedItem.GetComponent<PlayerItem>();
-                    if (playerItem.IsGrabbed())
-                    {
-                        playerItem.Steal();
-                    }
+                    // var playerItem = seedItem.GetComponent<PlayerItem>();
+                    // if (playerItem.IsGrabbed())
+                    // {
+                    //     playerItem.Steal();
+                    // }
 
                     var item = seedItem.gameObject;
                     item.SetActive(false);

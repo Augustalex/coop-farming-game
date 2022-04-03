@@ -64,11 +64,11 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
         return deliveryRequest.requests.Sum(request =>
         {
             if (request.goodsType == Goods.GoodsType.YellowFlower)
-                return request.need * 10;
-            if (request.goodsType == Goods.GoodsType.RedBerry)
                 return request.need * 20;
-            if (request.goodsType == Goods.GoodsType.WaterPlant)
+            if (request.goodsType == Goods.GoodsType.RedBerry)
                 return request.need * 40;
+            if (request.goodsType == Goods.GoodsType.WaterPlant)
+                return request.need * 60;
             if (request.goodsType == Goods.GoodsType.RodPlant)
                 return request.need * 20;
             return request.need * 20;

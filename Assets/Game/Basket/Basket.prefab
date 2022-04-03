@@ -667,6 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemLabel: {fileID: 5811385241601436948}
+  carryWaterItems: 0
 --- !u!65 &2507415696407783052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -993,6 +994,10 @@ PrefabInstance:
     - target: {fileID: 1118551326958536617, guid: 0451f2db114185045b1de0362b072d59, type: 3}
       propertyPath: m_Name
       value: Info
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950931075979223536, guid: 0451f2db114185045b1de0362b072d59, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0451f2db114185045b1de0362b072d59, type: 3}

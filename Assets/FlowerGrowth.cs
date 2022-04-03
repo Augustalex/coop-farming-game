@@ -55,19 +55,26 @@ public class FlowerGrowth : MonoBehaviour
         var currentStage = stages[_stage];
         if (_progress >= 1f)
         {
-            currentStage.item.SetActive(false);
-
-            _progress = 0;
-            _stage -= 1;
-            GameManager.Instance.DownPrestige(1);
-
             if (_stage == 0)
             {
                 Die();
             }
             else
             {
-                stages[_stage].item.SetActive(true);
+                currentStage.item.SetActive(false);
+
+                _progress = 0;
+                _stage -= 1;
+                GameManager.Instance.DownPrestige(1);
+
+                if (_stage == 0)
+                {
+                    Die();
+                }
+                else
+                {
+                    stages[_stage].item.SetActive(true);
+                }
             }
         }
         else

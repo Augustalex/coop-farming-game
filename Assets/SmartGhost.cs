@@ -22,6 +22,7 @@ public class SmartGhost : MonoBehaviour
     public enum GrassConstraints
     {
         NoPlants,
+        HasPlants,
         ByRiver
     }
 
@@ -147,7 +148,17 @@ public class SmartGhost : MonoBehaviour
     {
         if (_grassConstraints.Contains(GrassConstraints.NoPlants))
         {
-            if (hitCollider.GetComponent<GrassBlock>().HasPlant())
+            var grassBlock = hitCollider.GetComponent<GrassBlock>();
+            if (grassBlock && grassBlock.HasPlant())
+            {
+                return false;
+            }
+        }
+
+        if (_grassConstraints.Contains(GrassConstraints.HasPlants))
+        {
+            var grassBlock = hitCollider.GetComponent<GrassBlock>();
+            if (grassBlock && !grassBlock.HasPlant())
             {
                 return false;
             }
@@ -155,7 +166,7 @@ public class SmartGhost : MonoBehaviour
 
         if (_grassConstraints.Contains(GrassConstraints.ByRiver))
         {
-            var waterHits = Physics.OverlapSphere(hitCollider.gameObject.transform.position, .6f)
+            var waterHits = Physics.OverlapSphere(hitCollider.gameObject.transform.position, 1f)
                 .Where(hit => hit.CompareTag("River"))
                 .ToArray();
             if (waterHits.Length == 0)
@@ -166,7 +177,8 @@ public class SmartGhost : MonoBehaviour
 
         if (_soilConstraints.Contains(SoilConstraints.FreeSoil))
         {
-            if (!hitCollider.GetComponent<SoilBlock>().IsFree())
+            var soilBlock = hitCollider.GetComponent<SoilBlock>();
+            if (soilBlock && !soilBlock.IsFree())
             {
                 return false;
             }
@@ -174,7 +186,8 @@ public class SmartGhost : MonoBehaviour
 
         if (_soilConstraints.Contains(SoilConstraints.IsDry))
         {
-            if (!hitCollider.GetComponent<SoilBlock>().IsDry())
+            var soilBlock = hitCollider.GetComponent<SoilBlock>();
+            if (soilBlock && !soilBlock.IsDry())
             {
                 return false;
             }
@@ -182,7 +195,8 @@ public class SmartGhost : MonoBehaviour
 
         if (_soilConstraints.Contains(SoilConstraints.HasSeeds))
         {
-            if (!hitCollider.GetComponent<SoilBlock>().HasSeed())
+            var soilBlock = hitCollider.GetComponent<SoilBlock>();
+            if (soilBlock && !soilBlock.HasSeed())
             {
                 return false;
             }

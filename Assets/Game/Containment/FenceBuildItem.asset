@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 1862527166168028363, guid: fadfc9f4613003b49a5c4216fbf70c1e, type: 3}
   itemGhostConfiguration: {fileID: 11400000, guid: 2d1e0342d576519449e6c3671c6dd94a, type: 2}
-  cost: 20
+  cost: 10

@@ -134,7 +134,7 @@ public class PlayerGrabber : MonoBehaviour
                 }
                 else
                 {
-                    var nearHits = Physics.OverlapSphere(body.transform.position, 1f)
+                    var nearHits = Physics.OverlapSphere(body.transform.position, .65f)
                         .Where(hit => hit.gameObject != body.gameObject && hit.CompareTag("PlayerBody")).ToArray();
                     if (nearHits.Length > 0)
                     {
@@ -239,7 +239,6 @@ public class PlayerGrabber : MonoBehaviour
         var highlightPosition = highlight.transform.position;
         var hits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 2f, Vector3.down), 3f)
             .Where(hit => hit.collider.GetComponent<PlayerItem>());
-        Debug.Log(hits.Count());
         if (hits.Any()) return false;
 
         return ValidLocation(highlightPosition);

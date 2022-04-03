@@ -107,7 +107,6 @@ public class AllRoundHammer : MonoBehaviour
 
         if (_itemIndex == items.Length)
         {
-            Debug.Log("DEMOLISH ON!");
             _demolishMode = true;
             _ghost.Deactivate();
             _demolishActionGhost.Activate();
@@ -116,14 +115,12 @@ public class AllRoundHammer : MonoBehaviour
         }
         else if (_itemIndex > items.Length)
         {
-            Debug.Log("DEMOLISH OFF!");
             _demolishMode = false;
             _itemIndex = 0;
         }
 
         if (_itemIndex < items.Length)
         {
-            Debug.Log("NEXT ITEM");
             _currentItem = items[_itemIndex];
             ApplyItem(_currentItem);
 

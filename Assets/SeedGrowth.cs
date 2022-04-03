@@ -255,5 +255,10 @@ public class SeedGrowth : MonoBehaviour
     {
         _growthTime = Mathf.Clamp(_growthTime - GrowthTimeOfOneHealthLevel(), 0, GetTimeToGrow());
         WasHurt?.Invoke();
+
+        if (_growthTime == 0)
+        {
+            Kill();
+        }
     }
 }

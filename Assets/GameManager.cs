@@ -22,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public event Action<int> PrestigeChanged;
     public event Action<int> StarLevelChanged;
+    public event Action GameStarted;
     public event Action<int> FailAttemptsChanged;
 
     private void Update()
@@ -55,6 +56,11 @@ public class GameManager : MonoSingleton<GameManager>
                 money += 100;
             }
         }
+    }
+
+    public void StartGame()
+    {
+        GameStarted?.Invoke();
     }
 
     public void FocusCamera(CinemachineVirtualCamera virtualCamera)

@@ -17,6 +17,11 @@ public class JobGenerator : MonoBehaviour
     {
         GameManager.Instance.StarLevelChanged += UpdateJobCount;
 
+        GameManager.Instance.GameStarted += OnGameStarted;
+    }
+
+    private void OnGameStarted()
+    {
         for (int i = 0; i < _maxJobs; i++)
         {
             CreateJobPaper(i);

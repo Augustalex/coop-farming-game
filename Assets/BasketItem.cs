@@ -114,11 +114,11 @@ public class BasketItem : MonoBehaviour
                                 {waterSeedItem.materialLabel};
                         }
 
-                        var playerItem = waterSeedItem.GetComponent<PlayerItem>();
-                        if (playerItem.IsGrabbed())
-                        {
-                            playerItem.Steal();
-                        }
+                        // var playerItem = waterSeedItem.GetComponent<PlayerItem>();
+                        // if (playerItem.IsGrabbed())
+                        // {
+                        //     playerItem.Steal();
+                        // }
 
                         var item = waterSeedItem.gameObject;
                         item.SetActive(false);
@@ -146,11 +146,11 @@ public class BasketItem : MonoBehaviour
                                 {plantItem.GetPlantIdentifier().materialLabel};
                         }
 
-                        var playerItem = plantItem.GetComponent<PlayerItem>();
-                        if (playerItem.IsGrabbed())
-                        {
-                            playerItem.Steal();
-                        }
+                        // var playerItem = plantItem.GetComponent<PlayerItem>();
+                        // if (playerItem.IsGrabbed())
+                        // {
+                        //     playerItem.Steal();
+                        // }
 
                         if (plantItem.InSoil())
                         {

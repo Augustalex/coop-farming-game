@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class IntroManager : MonoSingleton<IntroManager>
 {
+    public GameObject introPaper;
     public CinemachineVirtualCamera startCamera;
     public bool isIntro = true;
 
@@ -13,5 +14,8 @@ public class IntroManager : MonoSingleton<IntroManager>
     {
         isIntro = false;
         startCamera.Priority = 0;
+        Destroy(introPaper);
+
+        GameManager.Instance.StartGame();
     }
 }

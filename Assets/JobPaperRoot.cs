@@ -37,7 +37,6 @@ public class JobPaperRoot : MonoBehaviour
     {
         if (waterJob)
         {
-            Debug.Log("ROD JOB!");
             SetupForJob(
                 new Job
                 {
