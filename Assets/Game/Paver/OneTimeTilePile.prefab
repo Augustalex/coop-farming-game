@@ -121,7 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
   toggles: 01000000
-  constraints: 00000000
+  grassConstraints: 00000000
+  soilConstraints: 
 --- !u!1001 &3340334530633135292
 PrefabInstance:
   m_ObjectHideFlags: 0

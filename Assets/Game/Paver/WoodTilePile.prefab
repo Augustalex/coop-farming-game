@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6113168987967774540}
   - component: {fileID: 1256167254}
   - component: {fileID: 8933406208985095334}
+  - component: {fileID: -748470196668992949}
   m_Layer: 7
   m_Name: WoodTilePile
   m_TagString: Item
@@ -106,6 +107,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 10
   max: 0
+--- !u!114 &-748470196668992949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290975437621296295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e363617ab58544280b2cfc0c6d629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostTemplate: {fileID: 7429101750935116671, guid: 4e58c847576f76e42a59ea32ecf0ebbe, type: 3}
+  toggles: 01000000
+  grassConstraints: 00000000
+  soilConstraints: 
 --- !u!1001 &3340334530633135292
 PrefabInstance:
   m_ObjectHideFlags: 0

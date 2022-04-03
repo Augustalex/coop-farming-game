@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SeedGrowth : MonoBehaviour
 {
@@ -256,9 +257,9 @@ public class SeedGrowth : MonoBehaviour
         _growthTime = Mathf.Clamp(_growthTime - GrowthTimeOfOneHealthLevel(), 0, GetTimeToGrow());
         WasHurt?.Invoke();
 
-        if (_growthTime == 0)
+        if (_growthTime == 0 && Random.value < .25f)
         {
-            Kill();
+            Relocate();
         }
     }
 }
