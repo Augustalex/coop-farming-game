@@ -9,7 +9,6 @@ public class Spade : MonoBehaviour
     private void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
-        GetComponent<PlayerItem>().UseItem += OnUse;
 
         _actionGhost = GetComponent<ActionGhost>();
     }

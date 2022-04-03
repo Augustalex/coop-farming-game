@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.Configuration;
 using Game;
 using UnityEngine;
 
@@ -23,22 +24,132 @@ public class Highlight : MonoBehaviour
     public void MoveAlong(Vector3 move)
     {
         var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
+        var toTry = new[]
+        {
+            currentPlayerPosition,
+            currentPlayerPosition + move.normalized * 1.5f,
+            currentPlayerPosition + Vector3.forward,
+            currentPlayerPosition + Vector3.right,
+            currentPlayerPosition + Vector3.left,
+            currentPlayerPosition + Vector3.back
+        };
 
-        var itemsBeneathPlayerBody = Physics
-            .OverlapBox(currentPlayerPosition, PlayerGrabber.SelectColumn)
+        if (!TryAll(toTry))
+        {
+            _highlightedItem = null;
+            DisableLifting();
+
+            _meshRenderer.enabled = false;
+        }
+
+
+        // var itemsBeneathPlayerBody = Physics
+        //     .OverlapBox(currentPlayerPosition, PlayerGrabber.SelectColumn)
+        //     .Where(ShouldHighlightItem)
+        //     .ToArray();
+        //
+        // var canSelectItemUnderPlayer = !_playerGrabber.HasItem() && itemsBeneathPlayerBody.Length > 0;
+        // var shouldHighlightCurrentPosition =
+        //     canSelectItemUnderPlayer || _playerGrabber.ValidLocation(currentPlayerPosition);
+        // if (shouldHighlightCurrentPosition)
+        // {
+        //     transform.position = AlignToGrid(currentPlayerPosition); // Move highlight to target
+        //
+        //     if (canSelectItemUnderPlayer)
+        //     {
+        //         var selfHit = itemsBeneathPlayerBody[0];
+        //         _highlightedItem = selfHit.gameObject;
+        //         _meshRenderer.enabled = true;
+        //         DisableLifting();
+        //         EnableLiftingOn(selfHit);
+        //     }
+        //     else
+        //     {
+        //         DisableLifting();
+        //         // There is probably an available Item action
+        //     }
+        // }
+        // else
+        // {
+        //     var aTileAwayFromPlayer = currentPlayerPosition + move.normalized * 1f;
+        //     transform.position = AlignToGrid(aTileAwayFromPlayer); // Move highlight to target
+        //
+        //     var itemsUnderHighlight = Physics.OverlapBox(transform.position, PlayerGrabber.SelectColumn)
+        //         .Where(ShouldHighlightItem)
+        //         .ToArray();
+        //     if (itemsUnderHighlight.Length > 0)
+        //     {
+        //         var boxHit = itemsUnderHighlight[0];
+        //         _highlightedItem = boxHit.gameObject;
+        //
+        //         DisableLifting();
+        //         EnableLiftingOn(boxHit);
+        //
+        //         _meshRenderer.enabled = true;
+        //     }
+        //     else
+        //     {
+        //         _highlightedItem = null;
+        //         DisableLifting();
+        //
+        //         _meshRenderer.enabled = false;
+        //     }
+        // }
+
+        AlignHeightOfHighlight(); // Need to be after the highlight has been repositioned
+    }
+
+    private void OnDrawGizmos()
+    {
+        // var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
+        // var toTry = new[]
+        // {
+        //     currentPlayerPosition,
+        //     currentPlayerPosition + _lastMove.normalized * 1.5f,
+        //     currentPlayerPosition + Vector3.forward,
+        //     currentPlayerPosition + Vector3.right,
+        //     currentPlayerPosition + Vector3.left,
+        //     currentPlayerPosition + Vector3.back
+        // };
+        //
+        // foreach (var vector3 in toTry)
+        // {
+        //     Gizmos.DrawWireCube(AlignToGrid(vector3), Vector3.one * .8f);
+        // }
+    }
+
+    private bool TryAll(Vector3[] toTry)
+    {
+        foreach (var newPosition in toTry)
+        {
+            if (TryHighlight(newPosition))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool TryHighlight(Vector3 position)
+    {
+        // transform.position = AlignToGrid(position); // Move highlight to target
+
+        var itemsUnderHighlight = Physics.OverlapBox(position, PlayerGrabber.SelectColumn)
             .Where(ShouldHighlightItem)
             .ToArray();
-
-        var canSelectItemUnderPlayer = !_playerGrabber.HasItem() && itemsBeneathPlayerBody.Length > 0;
+        var canSelectItemUnderPlayer = !_playerGrabber.HasItem() && itemsUnderHighlight.Length > 0;
+        var validLocation = _playerGrabber.ValidLocation(position);
         var shouldHighlightCurrentPosition =
-            canSelectItemUnderPlayer || _playerGrabber.ValidLocation(currentPlayerPosition);
+            canSelectItemUnderPlayer || validLocation;
+
         if (shouldHighlightCurrentPosition)
         {
-            transform.position = AlignToGrid(currentPlayerPosition); // Move highlight to target
+            transform.position = AlignToGrid(position); // Move highlight to target
 
             if (canSelectItemUnderPlayer)
             {
-                var selfHit = itemsBeneathPlayerBody[0];
+                var selfHit = itemsUnderHighlight[0];
                 _highlightedItem = selfHit.gameObject;
                 _meshRenderer.enabled = true;
                 DisableLifting();
@@ -47,37 +158,13 @@ public class Highlight : MonoBehaviour
             else
             {
                 DisableLifting();
-                // There is probably an available Item action
+                // There is probably an available Item action - that is why we dont need to lift any item
             }
-        }
-        else
-        {
-            var aTileAwayFromPlayer = currentPlayerPosition + move.normalized * 1f;
-            transform.position = AlignToGrid(aTileAwayFromPlayer); // Move highlight to target
 
-            var itemsUnderHighlight = Physics.OverlapBox(transform.position, PlayerGrabber.SelectColumn)
-                .Where(ShouldHighlightItem)
-                .ToArray();
-            if (itemsUnderHighlight.Length > 0)
-            {
-                var boxHit = itemsUnderHighlight[0];
-                _highlightedItem = boxHit.gameObject;
-
-                DisableLifting();
-                EnableLiftingOn(boxHit);
-
-                _meshRenderer.enabled = true;
-            }
-            else
-            {
-                _highlightedItem = null;
-                DisableLifting();
-
-                _meshRenderer.enabled = false;
-            }
+            return true;
         }
 
-        AlignHeightOfHighlight(); // Need to be after the highlight has been repositioned
+        return false;
     }
 
     private void AlignHeightOfHighlight()

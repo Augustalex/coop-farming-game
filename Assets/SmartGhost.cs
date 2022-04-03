@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game;
-using Game.Ghost;
 using UnityEngine;
 
 public class SmartGhost : MonoBehaviour
@@ -32,7 +31,6 @@ public class SmartGhost : MonoBehaviour
         IsDry,
         HasSeeds
     }
-
 
     public GhostToggles[] toggles; // Cannot be updated at runtime
     private HashSet<GhostToggles> _toggles;
@@ -84,8 +82,7 @@ public class SmartGhost : MonoBehaviour
     {
         // WARNING: This method has to keep in sync with "IsValidLocation"
 
-        var hits = Physics.RaycastAll(new Ray(highlightPosition, Vector3.down), 3f)
-            .Where(hit => hit.collider.CompareTag("Bush") || hit.collider.GetComponent<Interactable>()).ToArray();
+        var hits = SearchForHits(highlightPosition).ToArray();
         if (hits.Length > 0)
         {
             var raycastHit = hits[0];
@@ -100,7 +97,7 @@ public class SmartGhost : MonoBehaviour
             {
                 Show();
 
-                var hitCollider = raycastHit.collider;
+                var hitCollider = raycastHit;
                 if (CompareToToggles(hitCollider) && PassesConstraints(hitCollider))
                 {
                     _canPlace = true;
@@ -128,8 +125,7 @@ public class SmartGhost : MonoBehaviour
 
     public bool IsValidLocation(Vector3 position)
     {
-        var hits = Physics.RaycastAll(new Ray(position, Vector3.down), 3f)
-            .Where(hit => hit.collider.CompareTag("Bush") || hit.collider.GetComponent<Interactable>()).ToArray();
+        var hits = SearchForHits(position).ToArray();
         if (hits.Length <= 0) return false;
 
         var raycastHit = hits[0];
@@ -140,8 +136,14 @@ public class SmartGhost : MonoBehaviour
             return false;
         }
 
-        var hitCollider = raycastHit.collider;
+        var hitCollider = raycastHit;
         return CompareToToggles(hitCollider) && PassesConstraints(hitCollider);
+    }
+
+    private static IEnumerable<Collider> SearchForHits(Vector3 position)
+    {
+        return Physics.OverlapBox(position, PlayerGrabber.SelectColumn)
+            .Where(hit => hit.CompareTag("Bush") || hit.GetComponent<Interactable>());
     }
 
     private bool PassesConstraints(Collider hitCollider)

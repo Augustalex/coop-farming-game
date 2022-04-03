@@ -59,13 +59,19 @@ public class PlayerGrabber : MonoBehaviour
             var actionGhost = _playerItem.GetComponent<ActionGhost>();
             if (actionGhost)
             {
-                return actionGhost.IsValidLocation(position);
+                if (actionGhost.IsValidLocation(position))
+                {
+                    return true;
+                }
             }
 
             var smartGhost = _playerItem.GetComponent<SmartGhost>();
             if (smartGhost)
             {
-                return smartGhost.IsValidLocation(position);
+                if (smartGhost.IsValidLocation(position))
+                {
+                    return true;
+                }
             }
         }
 

@@ -11,6 +11,7 @@ namespace Game
 
         public int minAmount = 2;
         public int maxAmount = 3;
+        private Bush _bush;
 
         void Start()
         {
@@ -18,15 +19,24 @@ namespace Game
             {
                 seedTemplate = AssetLibrary.Instance.seedItemTemplate;
             }
+
+            _bush = GetComponent<Bush>();
         }
 
         public void Pick()
         {
-            if (_used) return;
+            if (_bush)
+            {
+                _bush.Harvest();
+            }
+            else
+            {
+                if (_used) return;
 
-            _used = true;
-            GameManager.Instance.SpawnCoroutine(SpawnSeeds());
-            Destroy(gameObject);
+                _used = true;
+                GameManager.Instance.SpawnCoroutine(SpawnSeeds());
+                Destroy(gameObject);
+            }
         }
 
         private IEnumerator SpawnSeeds()

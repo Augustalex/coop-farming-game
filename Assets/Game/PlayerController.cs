@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         _rigibody.position += Vector3.up * 28f + Random.insideUnitSphere * 4f;
         _falling = true;
-        _fallingCooldown = 3f;
+        _fallingCooldown = 6f;
     }
 
     void Start()

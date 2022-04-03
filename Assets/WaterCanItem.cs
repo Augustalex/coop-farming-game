@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,10 @@ public class WaterCanItem : MonoBehaviour
         _useOnGrass = GetComponent<UseOnGrass>();
 
         _smartGhost = GetComponent<SmartGhost>();
+        if (_smartGhost)
+        {
+            _smartGhost
+        }
         _actionGhost = GetComponent<ActionGhost>();
 
         _playerItem = GetComponent<PlayerItem>();
