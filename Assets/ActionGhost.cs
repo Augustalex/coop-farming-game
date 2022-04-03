@@ -110,6 +110,7 @@ public class ActionGhost : MonoBehaviour
 
     public void Deactivate()
     {
+        if (!_deactivated) Hide();
         _deactivated = true;
     }
 
