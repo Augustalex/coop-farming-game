@@ -11,8 +11,6 @@ public class SprinklerShooter : MonoBehaviour
     private bool _running;
     private ParticleSystem _particleSystem;
 
-    public event Action<float> Watered;
-
     private void Awake()
     {
         _particleSystem = GetComponentInChildren<ParticleSystem>();
@@ -31,7 +29,8 @@ public class SprinklerShooter : MonoBehaviour
                 _water -= Time.deltaTime;
             }
         }
-        else if (_water > 0)
+
+        if (!_particleSystem.isPlaying && _water > 0)
         {
             StartSprinkler();
         }

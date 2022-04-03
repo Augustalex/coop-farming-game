@@ -22,7 +22,11 @@ public class DashScare : MonoBehaviour
             var plant = cube.GetComponent<Plant>();
             if (plant && plant.InSoil()) continue;
 
-            cube.GetComponent<WildCube>().RunAwayFromDash(_body.transform.position);
+            var playerItem = cube.GetComponent<PlayerItem>();
+            if (playerItem && playerItem.IsGrabbed()) continue;
+
+            var wildCube = cube.GetComponent<WildCube>();
+            wildCube.RunAwayFromDash(_body.transform.position);
         }
     }
 }

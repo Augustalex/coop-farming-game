@@ -46,7 +46,7 @@ public class MarketStall : MonoBehaviour
     {
         if (_on)
         {
-            EndInteraction();
+            // EndInteraction(); Interaction is ended by selecting an item - or selecting the exit sign
         }
         else
         {

@@ -18,6 +18,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public bool cheatUpgrade;
     public bool failNow;
+    private bool _mMode;
 
     public event Action<int> PrestigeChanged;
     public event Action<int> StarLevelChanged;
@@ -35,6 +36,24 @@ public class GameManager : MonoSingleton<GameManager>
         {
             failNow = false;
             RegisterFail();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            _mMode = !_mMode;
+        }
+
+        if (_mMode)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                UpPrestige(10);
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                money += 100;
+            }
         }
     }
 

@@ -40,7 +40,7 @@ namespace Game
                 var seeds = Instantiate(routineSeedTemplate);
                 seeds.transform.position = originPosition + Vector3.up * .5f;
                 var body = seeds.GetComponent<Rigidbody>();
-                body.AddForce(Vector3.up * 2f + Random.insideUnitSphere * 2f, ForceMode.Impulse);
+                body.AddForce(Vector3.up + Random.insideUnitSphere * 1.5f, ForceMode.Impulse);
 
                 yield return new WaitForSeconds(.9f);
             }

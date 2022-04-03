@@ -59,18 +59,30 @@ public class BasketItem : MonoBehaviour
                 {
                     var item = _plants.Pop();
                     _countData.count = _plants.Count;
-
-                    item.SetActive(true);
-                    item.transform.position = hit.transform.position + Vector3.up * 1f;
-
-                    Sounds.Instance.PlayUseBucketSound(transform.position);
-
                     if (_plants.Count == 0)
                     {
                         itemLabel.materials = new[] {_emptyMaterial};
                     }
 
-                    _droppedRecently.Add(new Tuple<GameObject, float>(item, Time.time + 5f));
+                    Sounds.Instance.PlayUseBucketSound(transform.position);
+
+                    if (item)
+                    {
+                        item.SetActive(true);
+                        item.transform.position = hit.transform.position + Vector3.up * 1f;
+
+
+                        if (_plants.Count == 0)
+                        {
+                            itemLabel.materials = new[] {_emptyMaterial};
+                        }
+
+                        _droppedRecently.Add(new Tuple<GameObject, float>(item, Time.time + 5f));
+                    }
+                    else
+                    {
+                        Debug.Log("Item from bucket was already destroyed when dropped");
+                    }
                 }
             }
         }

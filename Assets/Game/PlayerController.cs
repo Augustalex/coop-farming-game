@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _move;
     private Rigidbody _rigibody;
-    private float _speed = 1200f;
+    private float _speed = 1350f;
     private PlayerLooker _playerLooker;
     private Highlight _highlight;
     private float _boostTime;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             _rigibody.drag = 1f;
 
-            _rigibody.AddForce(_move.normalized * 20f, ForceMode.Impulse);
+            _rigibody.AddForce(_move.normalized * 24f, ForceMode.Impulse);
 
             Sounds.Instance.PlayWooshSound(_rigibody.transform.position);
 

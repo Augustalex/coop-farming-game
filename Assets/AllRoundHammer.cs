@@ -49,28 +49,35 @@ public class AllRoundHammer : MonoBehaviour
         }
         else if (_ghost.IsValidLocation(highlightPosition))
         {
-            var rawHits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 1f, Vector3.down), 4f);
-            if (rawHits.Any(hit => hit.collider.CompareTag("Item"))) return;
+            if (_currentItem.cost <= GameManager.Instance.money)
+            {
+                var rawHits = Physics.RaycastAll(new Ray(highlightPosition + Vector3.up * 1f, Vector3.down), 4f);
+                if (rawHits.Any(hit => hit.collider.CompareTag("Item"))) return;
 
-            var hits = rawHits.Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
-            if (hits.Length == 0) return;
+                var hits = rawHits.Where(hit => hit.collider.GetComponent<Interactable>()).ToArray();
+                if (hits.Length == 0) return;
 
-            var colliderTransform = hits[0].collider.transform;
+                var colliderTransform = hits[0].collider.transform;
 
-            var ghostRotationEuler = _ghost.GhostTransform().rotation.eulerAngles;
-            var currentRotationEuler = transform.rotation.eulerAngles;
+                var ghostRotationEuler = _ghost.GhostTransform().rotation.eulerAngles;
+                var currentRotationEuler = transform.rotation.eulerAngles;
 
-            var tile = Instantiate(
-                _currentItem.template,
-                colliderTransform.position + Vector3.up * .5f,
-                Quaternion.Euler(
-                    currentRotationEuler.x,
-                    ghostRotationEuler.y,
-                    currentRotationEuler.z
-                ),
-                colliderTransform.parent
-            );
-            tile.GetComponent<ConstructedItem>().Construct();
+                var tile = Instantiate(
+                    _currentItem.template,
+                    colliderTransform.position + Vector3.up * .5f,
+                    Quaternion.Euler(
+                        currentRotationEuler.x,
+                        ghostRotationEuler.y,
+                        currentRotationEuler.z
+                    ),
+                    colliderTransform.parent
+                );
+
+                tile.GetComponent<ConstructedItem>().Construct();
+                GameManager.Instance.UseMoney(_currentItem.cost);
+                Sounds.Instance.PlayPlaceTileSound(highlightPosition);
+                Sounds.Instance.PlayTinyBuySound(highlightPosition);
+            }
         }
     }
 

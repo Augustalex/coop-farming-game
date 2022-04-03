@@ -64,6 +64,7 @@ public class MarketItemPicker : MonoBehaviour, IUIController
 
     public void PlayerSubmit()
     {
+        //TODO START DELAY
         var menuItem = _shopItems[_index];
 
         var gameManager = GameManager.Instance;

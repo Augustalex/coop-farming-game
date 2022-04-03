@@ -24,7 +24,7 @@ public class PlayerGrabber : MonoBehaviour
     private PlayerCrowdSurfer _crowdSurfer;
     private PlayerCrowdSurfer _liftingUpPlayer;
 
-    private void Start()
+    private void Awake()
     {
         _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
     }

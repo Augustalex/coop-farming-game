@@ -4,16 +4,34 @@ using UnityEngine;
 
 public class Spade : MonoBehaviour
 {
+    private ActionGhost _actionGhost;
+
     private void Start()
     {
         GetComponent<PlayerItem>().UseItem += OnUse;
         GetComponent<PlayerItem>().UseItem += OnUse;
+
+        _actionGhost = GetComponent<ActionGhost>();
     }
 
     void OnUse(Vector3 highlightPosition)
     {
-        var rawHits = Physics.OverlapBox(highlightPosition, PlayerGrabber.SelectColumn);
-        var seedSources = rawHits.Where(hit => hit.GetComponent<SeedSource>()).ToArray();
+        if (_actionGhost.IsValidLocation(highlightPosition))
+        {
+            var hits = _actionGhost.HitsForPosition(highlightPosition);
+
+            HandleHits(highlightPosition, hits);
+        }
+        else
+        {
+            var rawHits = Physics.OverlapBox(highlightPosition, PlayerGrabber.SelectColumn);
+            HandleHits(highlightPosition, rawHits);
+        }
+    }
+
+    private void HandleHits(Vector3 highlightPosition, Collider[] hits)
+    {
+        var seedSources = hits.Where(hit => hit.GetComponent<SeedSource>()).ToArray();
         if (seedSources.Length > 0)
         {
             var seedSourceObject = seedSources[0];
@@ -24,7 +42,7 @@ public class Spade : MonoBehaviour
         }
         else
         {
-            var soilBlocks = rawHits.Where(hit => hit.GetComponent<SoilBlock>()).ToArray();
+            var soilBlocks = hits.Where(hit => hit.GetComponent<SoilBlock>()).ToArray();
             if (soilBlocks.Length > 0)
             {
                 var soilBLockHit = soilBlocks[0];

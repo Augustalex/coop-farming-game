@@ -156,5 +156,10 @@ namespace Game
         {
             PlaySound(plop2, transformPosition, .175f);
         }
+
+        public void PlayTinyBuySound(Vector3 highlightPosition)
+        {
+            PlaySound(kaching, highlightPosition, .25f);
+        }
     }
 }
