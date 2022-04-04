@@ -30,7 +30,6 @@ public class WaterCanItem : MonoBehaviour
         _smartGhost = GetComponent<SmartGhost>();
         if (_smartGhost)
         {
-            _smartGhost
         }
         _actionGhost = GetComponent<ActionGhost>();
 

@@ -262,4 +262,9 @@ public class SeedGrowth : MonoBehaviour
             Relocate();
         }
     }
+
+    public bool NeedsWater()
+    {
+        return _waterLevel < waterChargeTime * .85f;
+    }
 }

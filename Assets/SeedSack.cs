@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(UseOnSoil))]
 [RequireComponent(typeof(CountData))]
@@ -35,24 +36,31 @@ public class SeedSack : MonoBehaviour
                 if (soilBlock.IsFree())
                 {
                     var item = _seeds.Pop();
-                    _countData.count = _seeds.Count;
-
-                    item.SetActive(true);
-
-                    item.GetComponent<SeedItem>().OnUseOnSoil(soilBlock);
-
-                    Sounds.Instance.PlayUseBucketSound(transform.position);
-
-                    if (_seeds.Count == 0)
+                    if (item)
                     {
-                        itemLabel.materials = new[] {_emptyMaterial};
+                        item.SetActive(true);
+                        item.GetComponent<SeedItem>().OnUseOnSoil(soilBlock);
                     }
+
+                    UpdateCount();
                 }
             }
         }
         else
         {
             Sounds.Instance.PlayFailedToUseBucketSound(transform.position);
+        }
+    }
+
+    public void UpdateCount()
+    {
+        _countData.count = _seeds.Count;
+
+        Sounds.Instance.PlayUseBucketSound(transform.position);
+
+        if (_seeds.Count == 0)
+        {
+            itemLabel.materials = new[] {_emptyMaterial};
         }
     }
 
@@ -65,7 +73,13 @@ public class SeedSack : MonoBehaviour
             var seedItem = other.GetComponent<SeedItem>();
             if (seedItem)
             {
-                if (_seeds.Count == 0 ||  _seeds.Peek().GetComponent<SeedItem>().CompareToSeedItem(seedItem))
+                var topSeedItem = _seeds.Peek();
+                if (!topSeedItem) // if Item has been destroyed for some reason
+                {
+                    _seeds.Pop();
+                    UpdateCount();
+                }
+                else if (_seeds.Count == 0 || topSeedItem.GetComponent<SeedItem>().CompareToSeedItem(seedItem))
                 {
                     if (_seeds.Count == 0)
                     {

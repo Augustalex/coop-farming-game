@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public bool _isIntro = true;
     private bool _falling;
     private float _fallingCooldown;
+    private Vector3 _lastHighMove;
 
     private void Awake()
     {
@@ -130,10 +131,11 @@ public class PlayerController : MonoBehaviour
 
         if (_move.magnitude > .4f)
         {
+            _lastHighMove = _move;
             _playerLooker.OrientWith(_move);
-            _highlight.MoveAlong(_move);
         }
 
+        _highlight.MoveAlong(_lastHighMove);
 
         if (!_rigibody.isKinematic && _rigibody.position.y < 2f)
         {
@@ -241,7 +243,7 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetBool("IsWalking", false);
         _uiController = uiController;
-        
+
         ClearInputTriggers();
     }
 

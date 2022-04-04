@@ -282,5 +282,15 @@ namespace Game
         {
             Water();
         }
+
+        public bool NeedsWater()
+        {
+            if (_seedInGround)
+            {
+                return _seedInGround.NeedsWater();
+            }
+
+            return false;
+        }
     }
 }

@@ -23,23 +23,48 @@ public class Highlight : MonoBehaviour
 
     public void MoveAlong(Vector3 move)
     {
-        var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
-        var toTry = new[]
+        if (_playerGrabber.HasItem() && _playerGrabber.GetItem().IsMagnetic())
         {
-            currentPlayerPosition,
-            currentPlayerPosition + move.normalized * 1.5f,
-            currentPlayerPosition + Vector3.forward,
-            currentPlayerPosition + Vector3.right,
-            currentPlayerPosition + Vector3.left,
-            currentPlayerPosition + Vector3.back
-        };
+            var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
+            var toTry = new[]
+            {
+                currentPlayerPosition,
+                currentPlayerPosition + move.normalized * 1.5f,
+                currentPlayerPosition + (Vector3.left + Vector3.forward).normalized * 1.5f,
+                currentPlayerPosition + Vector3.forward,
+                currentPlayerPosition + (Vector3.forward + Vector3.right).normalized * 1.5f,
+                currentPlayerPosition + Vector3.right,
+                currentPlayerPosition + (Vector3.right + Vector3.back).normalized * 1.5f,
+                currentPlayerPosition + Vector3.back,
+                currentPlayerPosition + Vector3.left,
+                currentPlayerPosition + (Vector3.back + Vector3.left).normalized * 1.5f,
+            };
 
-        if (!TryAll(toTry))
+            if (!TryAll(toTry))
+            {
+                _highlightedItem = null;
+                DisableLifting();
+
+                _meshRenderer.enabled = false;
+            }
+        }
+        else
         {
-            _highlightedItem = null;
-            DisableLifting();
+            var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
+            var toTry = new[]
+            {
+                currentPlayerPosition,
+                currentPlayerPosition + move.normalized * 1.5f
+            };
 
-            _meshRenderer.enabled = false;
+            if (!TryAll(toTry))
+            {
+                transform.position = AlignToGrid(_playerBoody.transform.position);
+                _highlightedItem = null;
+                DisableLifting();
+
+                _meshRenderer.enabled = false;
+            }
         }
 
 
@@ -122,7 +147,7 @@ public class Highlight : MonoBehaviour
     {
         foreach (var newPosition in toTry)
         {
-            if (TryHighlight(newPosition))
+            if (TryHighlight(AlignToGrid(newPosition)))
             {
                 return true;
             }

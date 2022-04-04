@@ -29,7 +29,8 @@ public class SmartGhost : MonoBehaviour
     {
         FreeSoil,
         IsDry,
-        HasSeeds
+        HasSeeds,
+        NeedsWater
     }
 
     public GhostToggles[] toggles; // Cannot be updated at runtime
@@ -199,6 +200,15 @@ public class SmartGhost : MonoBehaviour
         {
             var soilBlock = hitCollider.GetComponent<SoilBlock>();
             if (soilBlock && !soilBlock.HasSeed())
+            {
+                return false;
+            }
+        }
+        
+        if (_soilConstraints.Contains(SoilConstraints.NeedsWater))
+        {
+            var soilBlock = hitCollider.GetComponent<SoilBlock>();
+            if (soilBlock && !soilBlock.NeedsWater())
             {
                 return false;
             }

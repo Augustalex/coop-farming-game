@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerItem : MonoBehaviour
 {
+    public bool magnetic;
+
     public event Action<Vector3> UseItem;
     public event Action Dropped;
     public event Action Grabbed;
@@ -123,5 +125,10 @@ public class PlayerItem : MonoBehaviour
 
         _grabber = null;
         Dropped?.Invoke();
+    }
+
+    public bool IsMagnetic()
+    {
+        return magnetic;
     }
 }

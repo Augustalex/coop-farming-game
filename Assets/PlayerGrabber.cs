@@ -256,4 +256,9 @@ public class PlayerGrabber : MonoBehaviour
     {
         Drop();
     }
+
+    public PlayerItem GetItem()
+    {
+        return _playerItem;
+    }
 }
