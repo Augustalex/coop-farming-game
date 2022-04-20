@@ -23,31 +23,33 @@ public class PlayerGrabber : MonoBehaviour
     private PlayerItem _playerItem;
     private PlayerCrowdSurfer _crowdSurfer;
     private PlayerCrowdSurfer _liftingUpPlayer;
+    private ItemHolderRoot _itemHolderRoot;
 
     private void Awake()
     {
+        _itemHolderRoot = GetComponentInChildren<ItemHolderRoot>();
         _crowdSurfer = GetComponentInChildren<PlayerCrowdSurfer>();
     }
 
     private void Update()
     {
-        if (_ghost)
-        {
-            var highlightPosition = highlight.transform.position;
-            _ghost.Move(highlightPosition);
-        }
-
-        if (_smartGhots)
-        {
-            var highlightPosition = highlight.transform.position;
-            _smartGhots.OnMove(highlightPosition);
-        }
-
-        if (_playerItem)
-        {
-            var highlightPosition = highlight.transform.position;
-            _playerItem.Provoke(highlightPosition);
-        }
+        // if (_ghost)
+        // {
+        //     var highlightPosition = highlight.transform.position;
+        //     _ghost.Move(highlightPosition);
+        // }
+        //
+        // if (_smartGhots)
+        // {
+        //     var highlightPosition = highlight.transform.position;
+        //     _smartGhots.OnMove(highlightPosition);
+        // }
+        //
+        // if (_playerItem)
+        // {
+        //     var highlightPosition = highlight.transform.position;
+        //     _playerItem.Provoke(highlightPosition);
+        // }
     }
 
     public bool ValidLocation(Vector3 position)
@@ -173,8 +175,20 @@ public class PlayerGrabber : MonoBehaviour
         _playerItem = _grabbing.GetComponent<PlayerItem>();
         _playerItem.GrabbedBy(this);
 
-        _grabbing.transform.SetParent(body.transform);
-        _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
+        var overridePosition = _grabbing.GetComponent<PlayerGrabberOverridePosition>();
+        if (overridePosition)
+        {
+            _grabbing.transform.rotation = _itemHolderRoot.transform.rotation;
+            _grabbing.transform.position = _itemHolderRoot.transform.position;
+            _grabbing.transform.SetParent(_itemHolderRoot.transform);
+            
+            // _grabbing.transform.SetParent(body.transform);
+        }
+        else
+        {
+            _grabbing.transform.SetParent(body.transform);
+            _grabbing.transform.position = body.transform.position + Vector3.up * 1.25f;
+        }
 
         var plant = _grabbing.GetComponent<Plant>();
         if (plant)

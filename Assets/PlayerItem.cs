@@ -46,6 +46,8 @@ public class PlayerItem : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (IsGrabbed()) return;
+        
         var currentPosition = transform.position;
         var liftHeightOffset = GetLiftHeightOffset();
         transform.position = new Vector3(
