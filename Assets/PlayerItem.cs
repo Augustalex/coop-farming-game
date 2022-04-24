@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerItem : MonoBehaviour
 {
+    public bool liftOnGrab = true;
+    
     public bool magnetic;
 
     public event Action<Vector3> UseItem;
@@ -27,7 +29,8 @@ public class PlayerItem : MonoBehaviour
     public enum LifterIdentifier
     {
         Highlight,
-        Grabber
+        Grabber,
+        NonPlayer
     }
 
     public struct LiftUpData
@@ -38,6 +41,8 @@ public class PlayerItem : MonoBehaviour
 
     private List<LiftUpData> _lifters = new List<LiftUpData>();
     private Rigidbody _body;
+    private bool _frozen;
+    private Transform _positionBy;
 
     void Start()
     {
@@ -46,8 +51,8 @@ public class PlayerItem : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (IsGrabbed()) return;
-        
+        if (!liftOnGrab && IsGrabbed()) return;
+
         var currentPosition = transform.position;
         var liftHeightOffset = GetLiftHeightOffset();
         transform.position = new Vector3(
@@ -104,7 +109,7 @@ public class PlayerItem : MonoBehaviour
 
     public bool IsGrabbed()
     {
-        return _grabber != null;
+        return _grabber != null || _frozen;
     }
 
     public void Steal()
@@ -121,6 +126,14 @@ public class PlayerItem : MonoBehaviour
         Grabbed?.Invoke();
     }
 
+    public void GrabbedByNonPlayer(Transform positionBy)
+    {
+        _positionBy = positionBy;
+        LiftUp(LifterIdentifier.NonPlayer, 0f);
+
+        Grabbed?.Invoke();
+    }
+
     public void WasDropped()
     {
         StopLifting(LifterIdentifier.Grabber);
@@ -132,5 +145,10 @@ public class PlayerItem : MonoBehaviour
     public bool IsMagnetic()
     {
         return magnetic;
+    }
+
+    public void Freeze()
+    {
+        _frozen = true;
     }
 }

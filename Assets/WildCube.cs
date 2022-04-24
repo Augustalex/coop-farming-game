@@ -105,6 +105,8 @@ public class WildCube : MonoBehaviour
 
     public void RunAwayFromDash(Vector3 playerPosition)
     {
+        if (_playerItem.IsGrabbed()) return;
+
         var direction = (_body.position - playerPosition).normalized;
         var flatDirection = new Vector3(direction.x, 0, direction.z);
         Jump(flatDirection);

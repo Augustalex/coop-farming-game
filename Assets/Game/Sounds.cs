@@ -25,6 +25,7 @@ namespace Game
 
         public AudioClip wosh;
         private const float WoshVolume = .8f;
+        private const float SwingVolume = 1f;
 
         public void PlayHoeSound(Vector3 position)
         {
@@ -60,7 +61,7 @@ namespace Game
         {
             PlaySound(blublub, transformPosition);
         }
-        
+
         public void PlayWooshSound(Vector3 transformPosition)
         {
             PlaySound(wosh, transformPosition, WoshVolume);
@@ -160,6 +161,11 @@ namespace Game
         public void PlayTinyBuySound(Vector3 highlightPosition)
         {
             PlaySound(kaching, highlightPosition, .25f);
+        }
+
+        public void PlaySwingSound(Vector3 transformPosition)
+        {
+            PlaySound(wosh, transformPosition, SwingVolume);
         }
     }
 }

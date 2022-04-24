@@ -327,7 +327,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0257b33920b47774cbbfb6c8787b1f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
+  liftOnGrab: 1
+  magnetic: 0
+  itemType: 2
 --- !u!114 &4233271466022464535
 MonoBehaviour:
   m_ObjectHideFlags: 0

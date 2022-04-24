@@ -1,17 +1,21 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BugNet : MonoBehaviour
 {
     private Animator _animator;
     private static readonly int Holding = Animator.StringToHash("Holding");
     private static readonly int Swing = Animator.StringToHash("Swing");
+    private CatcherNet _catcherNet;
+    private float _swingUntil;
+    private readonly List<SeedItem> _seedsCaught = new List<SeedItem>();
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _catcherNet = GetComponentInChildren<CatcherNet>();
     }
 
     private void Start()
@@ -34,16 +38,41 @@ public class BugNet : MonoBehaviour
 
     public void OnUse(Vector3 highlightPosition)
     {
-        _animator.SetTrigger(Swing);
-    }
+        if (Time.time < _swingUntil) return;
 
+        _animator.SetTrigger(Swing);
+        _swingUntil = Time.time + 1;
+        Sounds.Instance.PlaySwingSound(_catcherNet.transform.position);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (Time.time > _swingUntil) return;
+
         var seedItem = other.GetComponent<SeedItem>();
         if (seedItem)
         {
-            Destroy(seedItem.gameObject);
+            if (_seedsCaught.Count == 0 || _seedsCaught[0].CompareToSeedItem(seedItem))
+            {
+                var seedItemTransform = seedItem.transform;
+                seedItemTransform.SetParent(_catcherNet.transform);
+                seedItemTransform.localPosition = Vector3.zero + Random.insideUnitSphere * .3f;
+                seedItemTransform.rotation = Random.rotation;
+
+                seedItem.GetComponent<PlayerItem>().GrabbedByNonPlayer(_catcherNet.transform);
+
+                _seedsCaught.Add(seedItem);
+
+                Sounds.Instance.PlayUseBucketSound(_catcherNet.transform.position);
+            }
+            else
+            {
+                var wildCube = seedItem.GetComponent<WildCube>();
+                if (wildCube)
+                {
+                    wildCube.RunAwayFromDash(_catcherNet.transform.position);
+                }
+            }
         }
     }
 }
