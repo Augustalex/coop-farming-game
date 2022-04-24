@@ -26,7 +26,9 @@ public class OverheadProximityText : MonoBehaviour
         if (_playerItem)
         {
             _playerItem.Grabbed += Hide;
+
             _playerItem.Dropped += Show;
+            _playerItem.Escaped += Show;
         }
 
         _camera = GameManager.Instance.mainVirtualCamera;

@@ -46,7 +46,10 @@ namespace Game
         void Start()
         {
             _playerItem = GetComponent<PlayerItem>();
+
             _playerItem.Dropped += OnDrop;
+            _playerItem.Escaped += OnDrop;
+
             _playerItem.Grabbed += OnGrabbed;
             _playerItem.Provoked += OnMove;
 

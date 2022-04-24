@@ -63,7 +63,10 @@ public class SmartGhost : MonoBehaviour
         _soilConstraints = new HashSet<SoilConstraints>(soilConstraints);
 
         _playerItem = GetComponent<PlayerItem>();
+
         _playerItem.Dropped += OnDrop;
+        _playerItem.Escaped += OnDrop;
+
         _playerItem.Grabbed += OnGrabbed;
 
         _countData = GetComponent<CountData>();
@@ -204,7 +207,7 @@ public class SmartGhost : MonoBehaviour
                 return false;
             }
         }
-        
+
         if (_soilConstraints.Contains(SoilConstraints.NeedsWater))
         {
             var soilBlock = hitCollider.GetComponent<SoilBlock>();

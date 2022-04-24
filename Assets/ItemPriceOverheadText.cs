@@ -17,7 +17,9 @@ public class ItemPriceOverheadText : MonoBehaviour
         _playerItem = GetComponentInParent<PlayerItem>();
 
         _playerItem.Grabbed += OnGrabbed;
+        
         _playerItem.Dropped += OnDropped;
+        _playerItem.Escaped += OnDropped;
     }
 
     private void OnDropped()

@@ -36,7 +36,10 @@ public class ActionGhost : MonoBehaviour
         _toggles = new HashSet<GhostToggles>(toggles);
 
         _playerItem = GetComponent<PlayerItem>();
+        
         _playerItem.Dropped += OnDrop;
+        _playerItem.Escaped += OnDrop;
+        
         _playerItem.Grabbed += OnGrabbed;
         _playerItem.Provoked += OnProvoked;
 

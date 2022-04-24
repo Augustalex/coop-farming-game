@@ -8,12 +8,13 @@ using UnityEngine;
 public class PlayerItem : MonoBehaviour
 {
     public bool liftOnGrab = true;
-    
+
     public bool magnetic;
 
     public event Action<Vector3> UseItem;
     public event Action Dropped;
     public event Action Grabbed;
+    public event Action Escaped;
     public event Action<Vector3> Provoked;
 
     public enum ItemType
@@ -42,7 +43,7 @@ public class PlayerItem : MonoBehaviour
     private List<LiftUpData> _lifters = new List<LiftUpData>();
     private Rigidbody _body;
     private bool _frozen;
-    private Transform _positionBy;
+    private GameObject _grabbedByNonPlayer;
 
     void Start()
     {
@@ -109,7 +110,7 @@ public class PlayerItem : MonoBehaviour
 
     public bool IsGrabbed()
     {
-        return _grabber != null || _frozen;
+        return _grabber != null || _grabbedByNonPlayer != null;
     }
 
     public void Steal()
@@ -126,29 +127,43 @@ public class PlayerItem : MonoBehaviour
         Grabbed?.Invoke();
     }
 
-    public void GrabbedByNonPlayer(Transform positionBy)
+    public void GrabbedByNonPlayer(GameObject nonPlayer)
     {
-        _positionBy = positionBy;
+        _grabbedByNonPlayer = nonPlayer;
         LiftUp(LifterIdentifier.NonPlayer, 0f);
 
         Grabbed?.Invoke();
     }
 
+    public void Escape()
+    {
+        DropAndStopLifting();
+        Escaped?.Invoke();   
+    }
+
     public void WasDropped()
     {
-        StopLifting(LifterIdentifier.Grabber);
-
-        _grabber = null;
+        DropAndStopLifting();
         Dropped?.Invoke();
+    }
+
+    private void DropAndStopLifting()
+    {
+        if (_grabbedByNonPlayer != null)
+        {
+            _grabbedByNonPlayer = null;
+            StopLifting(LifterIdentifier.NonPlayer);
+        }
+
+        if (_grabber != null)
+        {
+            _grabber = null;
+            StopLifting(LifterIdentifier.Grabber);
+        }
     }
 
     public bool IsMagnetic()
     {
         return magnetic;
-    }
-
-    public void Freeze()
-    {
-        _frozen = true;
     }
 }

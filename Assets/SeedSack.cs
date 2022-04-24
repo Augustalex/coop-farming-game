@@ -68,37 +68,40 @@ public class SeedSack : MonoBehaviour
     {
         if (_seeds.Contains(other.gameObject)) return;
 
-        if (other.CompareTag("Item"))
+        if (!other.CompareTag("Item")) return;
+
+        var seedItem = other.GetComponent<SeedItem>();
+        if (!seedItem) return;
+
+        var playerItem = seedItem.GetComponent<PlayerItem>();
+        if (!playerItem || playerItem.IsGrabbed()) return;
+
+        if (!IsSameAsOtherSeedsCaught(seedItem)) return;
+
+        ClearAlreadyDeletedSeeds();
+        GrabSeed(seedItem);
+    }
+
+    private void GrabSeed(SeedItem seedItem)
+    {
+        AddSeed(seedItem);
+
+        Sounds.Instance.PlayAddedToSeedSack(transform.position);
+    }
+
+    private void AddSeed(SeedItem seedItem)
+    {
+        if (_seeds.Count == 0)
         {
-            var seedItem = other.GetComponent<SeedItem>();
-            if (seedItem)
-            {
-                ClearAlreadyDeletedSeeds();
-
-                if (IsSameAsOtherSeedsCaught(seedItem))
-                {
-                    if (_seeds.Count == 0)
-                    {
-                        itemLabel.materials = new[]
-                            {seedItem.GetComponentInChildren<MeshRenderer>().material};
-                    }
-
-                    // var playerItem = seedItem.GetComponent<PlayerItem>();
-                    // if (playerItem.IsGrabbed())
-                    // {
-                    //     playerItem.Steal();
-                    // }
-
-                    var item = seedItem.gameObject;
-                    item.SetActive(false);
-
-                    _seeds.Push(item);
-                    _countData.count = _seeds.Count;
-
-                    Sounds.Instance.PlayAddedToSeedSack(transform.position);
-                }
-            }
+            itemLabel.materials = new[]
+                {seedItem.GetComponentInChildren<MeshRenderer>().material};
         }
+
+        var item = seedItem.gameObject;
+        item.SetActive(false);
+
+        _seeds.Push(item);
+        _countData.count = _seeds.Count;
     }
 
     private bool IsSameAsOtherSeedsCaught(SeedItem seedItem)
@@ -127,5 +130,25 @@ public class SeedSack : MonoBehaviour
         }
 
         // Done removing deleted game objects - or top game object is alive - or stack is empty
+    }
+
+    public void TransferSeeds(Stack<SeedItem> seedsCaught)
+    {
+        ClearAlreadyDeletedSeeds();
+        while (seedsCaught.Count > 0)
+        {
+            AddSeed(seedsCaught.Pop());
+        }
+
+        StartCoroutine(PlayDoubleAddSound());
+    }
+
+    private IEnumerator PlayDoubleAddSound()
+    {
+        var transformPosition = transform.position;
+
+        Sounds.Instance.PlayAddedToSeedSack(transformPosition);
+        yield return new WaitForSeconds(.5f);
+        Sounds.Instance.PlayAddedToSeedSack(transformPosition);
     }
 }

@@ -21,7 +21,9 @@ public class CubeVoiceActor : MonoBehaviour
         if (item)
         {
             item.Grabbed += OnGrabbed;
+            
             item.Dropped += OnDropped;
+            item.Escaped += OnRelocated;
         }
 
         var wildCube = GetComponent<WildCube>();
