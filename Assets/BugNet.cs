@@ -52,18 +52,23 @@ public class BugNet : MonoBehaviour
         var seedItem = other.GetComponent<SeedItem>();
         if (seedItem)
         {
-            if (_seedsCaught.Count == 0 || _seedsCaught[0].CompareToSeedItem(seedItem))
+            var sameTypeAsOnesAlreadyCaught = _seedsCaught.Count > 0 && _seedsCaught[0].CompareToSeedItem(seedItem);
+            if (_seedsCaught.Count == 0 || sameTypeAsOnesAlreadyCaught)
             {
-                var seedItemTransform = seedItem.transform;
-                seedItemTransform.SetParent(_catcherNet.transform);
-                seedItemTransform.localPosition = Vector3.zero + Random.insideUnitSphere * .3f;
-                seedItemTransform.rotation = Random.rotation;
+                var alreadyCaught = _seedsCaught.Contains(seedItem);
+                if (!alreadyCaught)
+                {
+                    var seedItemTransform = seedItem.transform;
+                    seedItemTransform.SetParent(_catcherNet.transform);
+                    seedItemTransform.localPosition = Vector3.zero + Random.insideUnitSphere * .3f;
+                    seedItemTransform.rotation = Random.rotation;
 
-                seedItem.GetComponent<PlayerItem>().GrabbedByNonPlayer(_catcherNet.transform);
+                    seedItem.GetComponent<PlayerItem>().GrabbedByNonPlayer(_catcherNet.transform);
 
-                _seedsCaught.Add(seedItem);
+                    _seedsCaught.Add(seedItem);
 
-                Sounds.Instance.PlayUseBucketSound(_catcherNet.transform.position);
+                    Sounds.Instance.PlayUseBucketSound(_catcherNet.transform.position);
+                }
             }
             else
             {
