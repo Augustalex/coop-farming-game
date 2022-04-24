@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
@@ -34,7 +32,11 @@ public class CubeVoiceActor : MonoBehaviour
             wildCube.Relocated += OnRelocated;
             wildCube.Thirsty += OnDeath;
         }
+    }
 
+    void Start()
+    {
+        if (Time.time < 5) return; // Do not make sounds for things spawned when game is just started
         OnSpawned();
     }
 

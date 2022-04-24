@@ -73,13 +73,9 @@ public class SeedSack : MonoBehaviour
             var seedItem = other.GetComponent<SeedItem>();
             if (seedItem)
             {
-                var topSeedItem = _seeds.Peek();
-                if (!topSeedItem) // if Item has been destroyed for some reason
-                {
-                    _seeds.Pop();
-                    UpdateCount();
-                }
-                else if (_seeds.Count == 0 || topSeedItem.GetComponent<SeedItem>().CompareToSeedItem(seedItem))
+                ClearAlreadyDeletedSeeds();
+
+                if (IsSameAsOtherSeedsCaught(seedItem))
                 {
                     if (_seeds.Count == 0)
                     {
@@ -103,5 +99,33 @@ public class SeedSack : MonoBehaviour
                 }
             }
         }
+    }
+
+    private bool IsSameAsOtherSeedsCaught(SeedItem seedItem)
+    {
+        if (_seeds.Count == 0) return true;
+
+        var topSeedItem = _seeds.Peek();
+        return topSeedItem.GetComponent<SeedItem>().CompareToSeedItem(seedItem);
+    }
+
+    private void ClearAlreadyDeletedSeeds()
+    {
+        var testing = true;
+        while (testing && _seeds.Count > 0)
+        {
+            var topSeedItem = _seeds.Peek();
+            if (topSeedItem == null) // Item has been destroyed for some reason
+            {
+                _seeds.Pop();
+                UpdateCount();
+            }
+            else
+            {
+                testing = false;
+            }
+        }
+
+        // Done removing deleted game objects - or top game object is alive - or stack is empty
     }
 }
