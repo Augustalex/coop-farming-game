@@ -1,28 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Game;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(UseOnSoil))]
 [RequireComponent(typeof(CountData))]
 public class SeedSack : MonoBehaviour
 {
-    private readonly Stack<GameObject> _seeds = new Stack<GameObject>();
-
     public MeshRenderer itemLabel;
-    private Material _emptyMaterial;
+    private readonly Stack<GameObject> _seeds = new Stack<GameObject>();
     private CountData _countData;
+    private Material _emptyMaterial;
     private UseOnSoil _useOnSoil;
 
-    void Start()
+    private void Start()
     {
         _countData = GetComponent<CountData>();
         _useOnSoil = GetComponent<UseOnSoil>();
         _emptyMaterial = itemLabel.material;
 
         GetComponent<PlayerItem>().UseItem += OnUse;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (CanTransferSeed(other.gameObject))
+        {
+            ClearAlreadyDeletedSeeds();
+
+            var seedItem = other.GetComponent<SeedItem>();
+            GrabSeed(seedItem);
+        }
     }
 
     public void OnUse(Vector3 highlightPosition)
@@ -58,28 +66,7 @@ public class SeedSack : MonoBehaviour
 
         Sounds.Instance.PlayUseBucketSound(transform.position);
 
-        if (_seeds.Count == 0)
-        {
-            itemLabel.materials = new[] {_emptyMaterial};
-        }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (_seeds.Contains(other.gameObject)) return;
-
-        if (!other.CompareTag("Item")) return;
-
-        var seedItem = other.GetComponent<SeedItem>();
-        if (!seedItem) return;
-
-        var playerItem = seedItem.GetComponent<PlayerItem>();
-        if (!playerItem || playerItem.IsGrabbed()) return;
-
-        if (!IsSameAsOtherSeedsCaught(seedItem)) return;
-
-        ClearAlreadyDeletedSeeds();
-        GrabSeed(seedItem);
+        if (_seeds.Count == 0) itemLabel.materials = new[] {_emptyMaterial};
     }
 
     private void GrabSeed(SeedItem seedItem)
@@ -92,10 +79,8 @@ public class SeedSack : MonoBehaviour
     private void AddSeed(SeedItem seedItem)
     {
         if (_seeds.Count == 0)
-        {
             itemLabel.materials = new[]
                 {seedItem.GetComponentInChildren<MeshRenderer>().material};
-        }
 
         var item = seedItem.gameObject;
         item.SetActive(false);
@@ -135,10 +120,7 @@ public class SeedSack : MonoBehaviour
     public void TransferSeeds(Stack<SeedItem> seedsCaught)
     {
         ClearAlreadyDeletedSeeds();
-        while (seedsCaught.Count > 0)
-        {
-            AddSeed(seedsCaught.Pop());
-        }
+        while (seedsCaught.Count > 0) AddSeed(seedsCaught.Pop());
 
         StartCoroutine(PlayDoubleAddSound());
     }
@@ -150,5 +132,22 @@ public class SeedSack : MonoBehaviour
         Sounds.Instance.PlayAddedToSeedSack(transformPosition);
         yield return new WaitForSeconds(.5f);
         Sounds.Instance.PlayAddedToSeedSack(transformPosition);
+    }
+
+    public bool CanTransferSeed(GameObject seed)
+    {
+        if (_seeds.Contains(seed)) return false;
+
+        if (!seed.CompareTag("Item")) return false;
+
+        var seedItem = seed.GetComponent<SeedItem>();
+        if (!seedItem) return false;
+
+        var playerItem = seedItem.GetComponent<PlayerItem>();
+        if (!playerItem || playerItem.IsGrabbed()) return false;
+
+        if (!IsSameAsOtherSeedsCaught(seedItem)) return false;
+
+        return true;
     }
 }
