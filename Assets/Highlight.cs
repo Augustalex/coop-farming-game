@@ -26,19 +26,23 @@ public class Highlight : MonoBehaviour
         if (_playerGrabber.HasItem() && _playerGrabber.GetItem().IsMagnetic())
         {
             var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
-            var toTry = new[]
+            var gen = new Func<float, Vector3[]>((float distanceFactor) =>
             {
-                currentPlayerPosition,
-                currentPlayerPosition + move.normalized * 1.5f,
-                currentPlayerPosition + (Vector3.left + Vector3.forward).normalized * 1.5f,
-                currentPlayerPosition + Vector3.forward,
-                currentPlayerPosition + (Vector3.forward + Vector3.right).normalized * 1.5f,
-                currentPlayerPosition + Vector3.right,
-                currentPlayerPosition + (Vector3.right + Vector3.back).normalized * 1.5f,
-                currentPlayerPosition + Vector3.back,
-                currentPlayerPosition + Vector3.left,
-                currentPlayerPosition + (Vector3.back + Vector3.left).normalized * 1.5f,
-            };
+                return new[]
+                {
+                    currentPlayerPosition,
+                    currentPlayerPosition + move.normalized * distanceFactor,
+                    currentPlayerPosition + (Vector3.left + Vector3.forward).normalized * distanceFactor,
+                    currentPlayerPosition + Vector3.forward,
+                    currentPlayerPosition + (Vector3.forward + Vector3.right).normalized * distanceFactor,
+                    currentPlayerPosition + Vector3.right,
+                    currentPlayerPosition + (Vector3.right + Vector3.back).normalized * distanceFactor,
+                    currentPlayerPosition + Vector3.back,
+                    currentPlayerPosition + Vector3.left,
+                    currentPlayerPosition + (Vector3.back + Vector3.left).normalized * distanceFactor,
+                };
+            });
+            var toTry = new []{currentPlayerPosition}.Concat(gen(.5f)).Concat(gen(.75f)).Concat(gen(1f)).Concat(gen(1.25f)).Concat(gen(1.5f)).ToArray();
 
             if (!TryAll(toTry))
             {
@@ -51,11 +55,14 @@ public class Highlight : MonoBehaviour
         else
         {
             var currentPlayerPosition = AlignToGrid(_playerBoody.transform.position);
-            var toTry = new[]
+            var gen = new Func<float, Vector3[]>((float distanceFactor) =>
             {
-                currentPlayerPosition,
-                currentPlayerPosition + move.normalized * 1.5f
-            };
+                return new[]
+                {
+                    currentPlayerPosition + move.normalized * distanceFactor
+                };
+            });
+            var toTry = new []{currentPlayerPosition}.Concat(gen(.5f)).Concat(gen(.75f)).Concat(gen(1f)).Concat(gen(1.25f)).Concat(gen(1.5f)).ToArray();
 
             if (!TryAll(toTry))
             {

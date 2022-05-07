@@ -11,8 +11,12 @@ public class DeliveryManager : MonoSingleton<DeliveryManager>
     public DeliveryRequest deliveryRequest;
     public bool hasDelivery = false;
 
+    public bool activated = true;
+
     private void Update()
     {
+        if (!activated) return;
+        
         if (hasDelivery)
         {
             var timeLeftOfDelivery =

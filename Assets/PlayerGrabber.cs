@@ -33,23 +33,23 @@ public class PlayerGrabber : MonoBehaviour
 
     private void Update()
     {
-        // if (_ghost)
-        // {
-        //     var highlightPosition = highlight.transform.position;
-        //     _ghost.Move(highlightPosition);
-        // }
-        //
-        // if (_smartGhots)
-        // {
-        //     var highlightPosition = highlight.transform.position;
-        //     _smartGhots.OnMove(highlightPosition);
-        // }
-        //
-        // if (_playerItem)
-        // {
-        //     var highlightPosition = highlight.transform.position;
-        //     _playerItem.Provoke(highlightPosition);
-        // }
+        if (_ghost)
+        {
+            var highlightPosition = highlight.transform.position;
+            _ghost.Move(highlightPosition);
+        }
+        
+        if (_smartGhots)
+        {
+            var highlightPosition = highlight.transform.position;
+            _smartGhots.OnMove(highlightPosition);
+        }
+        
+        if (_playerItem)
+        {
+            var highlightPosition = highlight.transform.position;
+            _playerItem.Provoke(highlightPosition);
+        }
     }
 
     public bool ValidLocation(Vector3 position)

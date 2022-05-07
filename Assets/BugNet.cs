@@ -5,7 +5,7 @@ using UnityEngine;
 public class BugNet : MonoBehaviour
 {
     private const float SwingCatchTimeframe = .3f;
-    private const float SwingCooldownTime = 1.5f;
+    private const float SwingCooldownTime = .8f;
     private static readonly int Holding = Animator.StringToHash("Holding");
     private static readonly int Swing = Animator.StringToHash("Swing");
     private readonly Stack<SeedItem> _seedsCaught = new Stack<SeedItem>();
